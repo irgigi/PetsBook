@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		866BC8A82B67D33B007F3836 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8A72B67D33B007F3836 /* AppDelegate.swift */; };
 		866BC8AA2B67D33B007F3836 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8A92B67D33B007F3836 /* SceneDelegate.swift */; };
-		866BC8AC2B67D33B007F3836 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8AB2B67D33B007F3836 /* ViewController.swift */; };
-		866BC8AF2B67D33B007F3836 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 866BC8AD2B67D33B007F3836 /* Main.storyboard */; };
+		866BC8AC2B67D33B007F3836 /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8AB2B67D33B007F3836 /* LogoViewController.swift */; };
 		866BC8B12B67D33F007F3836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 866BC8B02B67D33F007F3836 /* Assets.xcassets */; };
 		866BC8B42B67D33F007F3836 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */; };
+		866BC8BC2B67F243007F3836 /* RegViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8BB2B67F243007F3836 /* RegViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		866BC8A42B67D33B007F3836 /* PetsBookApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetsBookApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		866BC8A72B67D33B007F3836 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		866BC8A92B67D33B007F3836 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		866BC8AB2B67D33B007F3836 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		866BC8AE2B67D33B007F3836 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		866BC8AB2B67D33B007F3836 /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoViewController.swift; sourceTree = "<group>"; };
 		866BC8B02B67D33F007F3836 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		866BC8B32B67D33F007F3836 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		866BC8B52B67D33F007F3836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		866BC8BB2B67F243007F3836 /* RegViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +40,7 @@
 		866BC89B2B67D33B007F3836 = {
 			isa = PBXGroup;
 			children = (
+				866BC8BF2B67F403007F3836 /* Sets */,
 				866BC8A62B67D33B007F3836 /* PetsBookApp */,
 				866BC8A52B67D33B007F3836 /* Products */,
 			);
@@ -58,13 +59,20 @@
 			children = (
 				866BC8A72B67D33B007F3836 /* AppDelegate.swift */,
 				866BC8A92B67D33B007F3836 /* SceneDelegate.swift */,
-				866BC8AB2B67D33B007F3836 /* ViewController.swift */,
-				866BC8AD2B67D33B007F3836 /* Main.storyboard */,
+				866BC8AB2B67D33B007F3836 /* LogoViewController.swift */,
+				866BC8BB2B67F243007F3836 /* RegViewController.swift */,
 				866BC8B02B67D33F007F3836 /* Assets.xcassets */,
 				866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */,
 				866BC8B52B67D33F007F3836 /* Info.plist */,
 			);
 			path = PetsBookApp;
+			sourceTree = "<group>";
+		};
+		866BC8BF2B67F403007F3836 /* Sets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +135,6 @@
 			files = (
 				866BC8B42B67D33F007F3836 /* LaunchScreen.storyboard in Resources */,
 				866BC8B12B67D33F007F3836 /* Assets.xcassets in Resources */,
-				866BC8AF2B67D33B007F3836 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +145,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				866BC8AC2B67D33B007F3836 /* ViewController.swift in Sources */,
+				866BC8AC2B67D33B007F3836 /* LogoViewController.swift in Sources */,
 				866BC8A82B67D33B007F3836 /* AppDelegate.swift in Sources */,
 				866BC8AA2B67D33B007F3836 /* SceneDelegate.swift in Sources */,
+				866BC8BC2B67F243007F3836 /* RegViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		866BC8AD2B67D33B007F3836 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				866BC8AE2B67D33B007F3836 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -297,9 +297,8 @@
 				INFOPLIST_FILE = PetsBookApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -325,9 +324,8 @@
 				INFOPLIST_FILE = PetsBookApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

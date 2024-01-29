@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "petsbook.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
