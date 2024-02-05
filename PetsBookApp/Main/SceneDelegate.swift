@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         let logoVC = UINavigationController(rootViewController: LogoViewController())
-        let regVC = UINavigationController(rootViewController: RegViewController())
+       // let regVC = UINavigationController(rootViewController: RegViewController())
         window.rootViewController = logoVC
         window.makeKeyAndVisible()
         self.window = window

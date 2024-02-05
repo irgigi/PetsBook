@@ -7,11 +7,14 @@ import UIKit
 
 class RegViewController: UIViewController {
     
+    private let authService = AuthService()
+    var completionHandler: (() -> Bool)?
+    
     lazy var headTextLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.textColor = .systemBrown
-        label.text = "РЕГИСТРАЦИЯ"
+        //label.text = "РЕГИСТРАЦИЯ"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -22,7 +25,9 @@ class RegViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = .systemBrown
-        label.text = "Придумайте логин и пароль"
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        //label.text = "Напишите ваш e-mail и придумайте пароль"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -48,7 +53,7 @@ class RegViewController: UIViewController {
         
         //text.backgroundColor = .systemGray6
         text.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        text.placeholder = "login"
+        text.placeholder = "email"
         //text.text = "felix04"
         //text.textColor = UIColor.black
         //text.tintColor = UIColor(named: "MyColor")
@@ -93,7 +98,7 @@ class RegViewController: UIViewController {
     
     lazy var regButton: UIButton = {
         let button = UIButton()
-        button.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
+        //button.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
         button.backgroundColor = .systemBrown
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(goToAccauntView), for: .touchUpInside)
@@ -108,11 +113,64 @@ class RegViewController: UIViewController {
         } else {
             view.backgroundColor = .white
         }
+        if let comp = completionHandler {
+            let isReg = comp()
+            if isReg {
+                headTextLabel.text = "РЕГИСТРАЦИЯ"
+                descriptionLabel.text = "Напишите ваш e-mail и придумайте пароль"
+                regButton.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
+            } else {
+                headTextLabel.text = "ВХОД"
+                descriptionLabel.text = "Введите ваш e-mail и пароль"
+                regButton.setTitle("ВОЙТИ", for: .normal)
+            }
+        }
+        
         setupUI()
     }
     
     @objc func goToAccauntView() {
         
+        guard let login = loginField.text, let password = passwordField.text else {
+            
+            return
+            
+        }
+        
+        if let comp = completionHandler {
+            if comp() {
+                
+                if !authService.isValidEmail(login) || !authService.isValidPassword(password) {
+                    showAllert(message: "Ошибка ввода email или пароля (не менее 6 символов)")
+                    return
+                }
+                
+                authService.signUpUser(email: login, password: password) { [weak self] result in
+                    switch result {
+                    case .success(let user):
+                        print("\(user) зарегистрирован")
+                        self?.showProfileViewController(user: user)
+                    case .failure:
+                        self?.showAllert(message: "Этот пользователь уже зарегистрирован!")
+                    }
+                }
+                
+            } else {
+                
+                authService.loginUser(email: login, password: password) { [weak self] result in
+                    
+                    switch result {
+                    case .success(let user):
+                        print("\(user) загружен")
+                        self?.showProfileViewController(user: user)
+                    case .failure:
+                        self?.showAllert(message: "Этот пользователь не найден!")
+                    }
+                }
+                
+            }
+        }
+
     }
     
     private func setupUI() {
@@ -164,5 +222,12 @@ class RegViewController: UIViewController {
             
         ])
         
+    }
+}
+
+private extension RegViewController {
+    func showProfileViewController(user: FireBaseUser) {
+        let profileViewController = ProfileViewController(user: user)
+        navigationController?.pushViewController(profileViewController, animated: true)
     }
 }

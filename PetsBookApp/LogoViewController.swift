@@ -12,6 +12,7 @@ class LogoViewController: UIViewController {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
+
     
     lazy var regButton: UIButton = {
         let button = UIButton()
@@ -27,6 +28,7 @@ class LogoViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Уже есть аккаунт", for: .normal)
         button.setTitleColor(.systemBrown, for: .normal)
+        button.addTarget(self, action: #selector(goToLogView), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -50,6 +52,18 @@ class LogoViewController: UIViewController {
     
     @objc func goToRegView() {
         let regViewController = RegViewController()
+        regViewController.completionHandler = {
+            return true
+        }
+        navigationController?.navigationBar.tintColor = .systemBrown
+        navigationController?.pushViewController(regViewController, animated: true)
+    }
+    
+    @objc func goToLogView() {
+        let regViewController = RegViewController()
+        regViewController.completionHandler = {
+            return false
+        }
         navigationController?.navigationBar.tintColor = .systemBrown
         navigationController?.pushViewController(regViewController, animated: true)
     }
