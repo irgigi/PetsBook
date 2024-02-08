@@ -10,7 +10,7 @@ class PhotosTableViewCell: UITableViewCell {
     
 
     //let data = PostModel.make()
-    
+    private var events = [Event]()
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -71,7 +71,7 @@ extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 1 {
-            return 1 //data.count
+            return events.count //data.count
         }
         return 1
     }

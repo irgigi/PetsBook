@@ -11,6 +11,8 @@ struct FireBaseUser {
 
 final class AuthService {
     
+    let userService = UserService()
+    
 //MARK: - валидация логина и пароля
     
     func isValidEmail(_ email: String) -> Bool {
@@ -39,20 +41,26 @@ final class AuthService {
             }
         }
     }
+    //MARK: - вход пользователя
     
     func loginUser (email: String, password: String, completion: @escaping (Result<FireBaseUser, Error>) -> Void) {
         
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+        Auth.auth().signIn(withEmail: email, password: password) { [self] result, error in
             if let error = error {
                 completion(.failure(error))
                 print(error.localizedDescription)
             }
             
             if let authResult = result {
+                userService.getUserUID = {
+                    return authResult.user.uid
+                }
                 completion(.success(FireBaseUser(user: authResult.user)))
             }
         }
     }
+    
+    //MARK: - выход пользователя
     
     func logoutUser(completion: @escaping (Result<Void, Error>) -> Void) {
         
@@ -64,4 +72,12 @@ final class AuthService {
         }
         
     }
+    
+    //MARK: - получить пользователя
+    
+    func getUser(email: String, password: String, completion: @escaping (Result<FireBaseUser, Error>) -> Void) {
+        
+    }
+    
+    
 }

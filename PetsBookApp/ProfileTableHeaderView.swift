@@ -13,19 +13,20 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     private var statusText:String
     //private var inspector = LoginInspector()
     
-    
     // MARK: - Subviews
     
-    let imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "none_ava")
+        //image.image = UIImage(named: "none_ava")
         image.contentMode = .scaleToFill
         image.clipsToBounds = true
-        
+        image.isUserInteractionEnabled = true
         //создание круглой рамки
         image.layer.cornerRadius = 60
         image.layer.borderWidth = 3.0
         image.layer.borderColor = UIColor.white.cgColor
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        image.addGestureRecognizer(tapGestureRecognizer)
         
         return image
     }()
@@ -118,6 +119,16 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         statusText = textField.text ?? ""
         
     }
+    
+    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
+        NotificationCenter.default.post(name: NSNotification.Name("ImageTapped"), object: nil)
+    }
+    
+    func setImage(_ image: UIImage?) {
+        imageView.image = image
+        setNeedsLayout()
+    }
+    
     
     @objc func buttonPressed(_ sender: UIButton) {
        

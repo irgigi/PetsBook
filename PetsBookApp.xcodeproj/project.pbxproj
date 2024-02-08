@@ -37,6 +37,7 @@
 		862A0EAA2B6BAB40007F7096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 862A0EA92B6BAB40007F7096 /* GoogleService-Info.plist */; };
 		862A0EAD2B6BAD60007F7096 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862A0EAC2B6BAD60007F7096 /* AuthService.swift */; };
 		862A0EB12B6BE24A007F7096 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862A0EB02B6BE24A007F7096 /* UIViewController+Extension.swift */; };
+		8658668E2B74C9B100B94BEA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658668D2B74C9B100B94BEA /* UserService.swift */; };
 		866BC8A82B67D33B007F3836 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8A72B67D33B007F3836 /* AppDelegate.swift */; };
 		866BC8AA2B67D33B007F3836 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8A92B67D33B007F3836 /* SceneDelegate.swift */; };
 		866BC8AC2B67D33B007F3836 /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8AB2B67D33B007F3836 /* LogoViewController.swift */; };
@@ -58,6 +59,7 @@
 		862A0EA92B6BAB40007F7096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		862A0EAC2B6BAD60007F7096 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		862A0EB02B6BE24A007F7096 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		8658668D2B74C9B100B94BEA /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		866BC8A42B67D33B007F3836 /* PetsBookApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetsBookApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		866BC8A72B67D33B007F3836 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		866BC8A92B67D33B007F3836 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				862A0EAC2B6BAD60007F7096 /* AuthService.swift */,
+				8658668D2B74C9B100B94BEA /* UserService.swift */,
 				86AAA0202B6F4F4C0098E32F /* FirestoreService.swift */,
 			);
 			path = Services;
@@ -304,6 +307,7 @@
 				866BC8AA2B67D33B007F3836 /* SceneDelegate.swift in Sources */,
 				86AAA0272B6F6CFA0098E32F /* PostTableViewCell.swift in Sources */,
 				86BABF942B710B9B004908EC /* CollectionViewCell.swift in Sources */,
+				8658668E2B74C9B100B94BEA /* UserService.swift in Sources */,
 				86BABF902B710A54004908EC /* PhotosViewController.swift in Sources */,
 				86AAA0232B6F6C490098E32F /* ProfileViewController.swift in Sources */,
 				866BC8BC2B67F243007F3836 /* RegViewController.swift in Sources */,
@@ -453,6 +457,9 @@
 				DEVELOPMENT_TEAM = U76NSM2984;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PetsBookApp/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Для выбора изображений из галереи необходим доступ к вашим фотографиям";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Для выбора изображений из галереи необходим доступ к вашим фотографиям";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Для выбора изображений из галереи необходим доступ к вашим фотографиям";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -480,6 +487,9 @@
 				DEVELOPMENT_TEAM = U76NSM2984;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PetsBookApp/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Для выбора изображений из галереи необходим доступ к вашим фотографиям";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Для выбора изображений из галереи необходим доступ к вашим фотографиям";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Для выбора изображений из галереи необходим доступ к вашим фотографиям";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";

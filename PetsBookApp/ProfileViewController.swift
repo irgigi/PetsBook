@@ -4,13 +4,17 @@
 
 
 import UIKit
+import Photos
 
 class ProfileViewController: UIViewController {
     
 
 
     let profileTableHeaderView = ProfileTableHeaderView()
-    let firestoreService = FirestoreService()
+    private let firestoreService = FirestoreService()
+    private let authService = AuthService()
+    private let userService = UserService()
+    private var userID: String?
     
     
     enum CellReuseID: String {
@@ -25,7 +29,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Data
     
    // fileprivate let data = PostModel.make()
-    private var events = [Event]()
+    private var userUID = [UserUID]()
     
     
     // MARK: - table
@@ -65,21 +69,45 @@ class ProfileViewController: UIViewController {
     
     init(user: FireBaseUser) {
         super.init(nibName: nil, bundle: nil)
+        userID = user.user.uid
+        if let id = userID {
+            
+    // переменная для хранения id user
+            let userSFB = UserUID(userUID: id)
+            
+    // если в бд есть пользователь, то загружаем его данные; если нет - то создаем данные в бд
+            userService.fetchDocument { [self] users in
+                for user in users {
+                    if userSFB.userUID == user.userUID {
+                        print("load info")
+                    } else {
+                        userService.addUser(userSFB) { info in
+                            print("user DONE")
+                        }
+                    }
+                }
+            }
+            
+            
+            firestoreService.loadImage(eventID: id) { [weak self] image in
+                self?.profileTableHeaderView.imageView.image = image
+            }
+        }
         profileTableHeaderView.nameLabel.text = user.user.email
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    /*
     private func initialFetchEvents() {
         firestoreService.fetchDocument { [weak self] events in
             self?.reloadTableView(with: events)
         }
     }
-    
-    private func reloadTableView(with events: [Event]) {
-        self.events = events
+    */
+    private func reloadTableView(with userUID: [UserUID]) {
+        self.userUID = userUID
         tableView.reloadData()
     }
     
@@ -91,11 +119,14 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .lightGray
         title = "Profile"
-       
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: NSNotification.Name("ImageTapped"), object: nil)
+        
         tableView.addSubview(profileTableHeaderView)
         view.addSubview(tableView)
-        initialFetchEvents()
+        //initialFetchEvents()
         setupConstraints()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +138,31 @@ class ProfileViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+//MARK: -methods
+    
+    @objc func imageTapped() {
+        presentImagePicker()
+    }
+    
+    func presentImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true)
+    }
+    
+
+    //MARK: - вспомогательные методы
+    
+    func resizeImage(_ image: UIImage, targetSize: CGSize) -> UIImage {
+        let render = UIGraphicsImageRenderer(size: targetSize)
+        let resizedImage = render.image { (context) in
+            image.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+        return resizedImage
+    }
+    
     
 //MARK: - layout
     
@@ -187,6 +243,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 fatalError("could not dequeueReusableCell")
             }
             //cell.update(data[indexPath.row])
+            //cell.update(event[indexPath.row])
             return cell
             
         }
@@ -245,5 +302,30 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
        
     }
     
+    
+}
+
+extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let picImage = info[.originalImage] as? UIImage {
+            profileTableHeaderView.setImage(picImage)
+            if let id = userID {
+                firestoreService.loadImage(eventID: id) { [weak self] image in
+                    self?.profileTableHeaderView.imageView.image = image
+                }
+            }
+
+            firestoreService.addImage(picImage) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("DONE!")
+                }
+            }
+            
+        }
+        picker.dismiss(animated: true)
+    }
     
 }

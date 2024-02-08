@@ -54,7 +54,7 @@ class RegViewController: UIViewController {
         //text.backgroundColor = .systemGray6
         text.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         text.placeholder = "email"
-        //text.text = "felix04"
+        text.text = "test@mail.ru"
         //text.textColor = UIColor.black
         //text.tintColor = UIColor(named: "MyColor")
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
@@ -77,7 +77,7 @@ class RegViewController: UIViewController {
         //text.backgroundColor = .systemGray6
         text.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         text.placeholder = "password"
-        //text.text = "1507"
+        text.text = "123456"
         //text.textColor = UIColor.black
         //text.tintColor = UIColor(named: "MyColor")
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))

@@ -133,6 +133,16 @@ class PostTableViewCell: UITableViewCell {
         
         }
   */
+    
+    func update(_ model: Event) {
+        autorLabel.text = model.author
+        if let im = model.image {
+            imagePost.image = UIImage(named: im)
+        }
+        descriptionLabel.text = model.description
+        
+    }
+    
     func consraintInCell() {
         
         autorLabel.translatesAutoresizingMaskIntoConstraints = false
