@@ -35,7 +35,7 @@ class LogoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        tabBarController?.tabBar.isHidden = true
         if traitCollection.userInterfaceStyle == .dark {
             view.backgroundColor = .darkGray
             if let thisImage = UIImage(named: "petsbook_dark") {
@@ -48,6 +48,12 @@ class LogoViewController: UIViewController {
             }
         }
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+        navigationItem.setHidesBackButton(true, animated: false)
     }
     
     @objc func goToRegView() {

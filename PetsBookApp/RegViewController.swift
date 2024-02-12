@@ -227,7 +227,15 @@ class RegViewController: UIViewController {
 
 private extension RegViewController {
     func showProfileViewController(user: FireBaseUser) {
-        let profileViewController = ProfileViewController(user: user)
-        navigationController?.pushViewController(profileViewController, animated: true)
+        let profileVC = ProfileViewController(user: user)
+        for vc in tabBarController?.viewControllers ?? [] {
+            if vc == profileVC {
+                return
+            } else {
+                profileVC.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
+                tabBarController?.viewControllers?.append(profileVC)
+            }
+        }
+        navigationController?.pushViewController(profileVC, animated: true)
     }
 }

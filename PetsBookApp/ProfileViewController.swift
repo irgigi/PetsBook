@@ -7,15 +7,17 @@ import UIKit
 import Photos
 
 class ProfileViewController: UIViewController {
-    
-
 
     let profileTableHeaderView = ProfileTableHeaderView()
+    let logoViewController = LogoViewController()
     private let firestoreService = FirestoreService()
     private let authService = AuthService()
     private let userService = UserService()
     private var userID: String?
+    private var status: (() -> String)?
+    private var statusText: String?
     
+    private var aboutUser = [UserStatus]()
     
     enum CellReuseID: String {
         case base = "BaseTableViewCell_ReuseID"
@@ -30,6 +32,7 @@ class ProfileViewController: UIViewController {
     
    // fileprivate let data = PostModel.make()
     private var userUID = [UserUID]()
+    private var userStatus = [UserStatus]()
     
     
     // MARK: - table
@@ -70,24 +73,39 @@ class ProfileViewController: UIViewController {
     init(user: FireBaseUser) {
         super.init(nibName: nil, bundle: nil)
         userID = user.user.uid
+        
         if let id = userID {
             
+            userService.fetchAboutUser { [self] aboutUser in
+                let info = aboutUser.contains { $0.user == id }
+                if info {
+                    initialFetch()
+                    
+                }
+            }
+            
+            
+            
+
+            
     // переменная для хранения id user
-            let userSFB = UserUID(userUID: id)
+           // let userSFB = UserUID(userUID: id)
             
     // если в бд есть пользователь, то загружаем его данные; если нет - то создаем данные в бд
-            userService.fetchDocument { [self] users in
+            /*
+            userService.fetchDocument { [weak self] users in
                 for user in users {
-                    if userSFB.userUID == user.userUID {
+                    if id == user.user {
                         print("load info")
                     } else {
-                        userService.addUser(userSFB) { info in
+                        let newUser = UserUID(userUID: id)
+                        self?.userService.addUser(newUser) { info in
                             print("user DONE")
                         }
                     }
                 }
             }
-            
+            */
             
             firestoreService.loadImage(eventID: id) { [weak self] image in
                 self?.profileTableHeaderView.imageView.image = image
@@ -99,15 +117,22 @@ class ProfileViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
+    
     private func initialFetchEvents() {
-        firestoreService.fetchDocument { [weak self] events in
-            self?.reloadTableView(with: events)
+        userService.addObserverForEvents { [weak self] info in
+            self?.reloadTableView(with: info)
         }
     }
-    */
-    private func reloadTableView(with userUID: [UserUID]) {
-        self.userUID = userUID
+    
+    private func initialFetch() {
+        userService.fetchAboutUser { [weak self] info in
+            self?.reloadTableView(with: info)
+        }
+    }
+    
+    private func reloadTableView(with userStatus: [UserStatus]) {
+        self.aboutUser = userStatus
+        profileTableHeaderView.statusLabel.text = aboutUser.last?.status
         tableView.reloadData()
     }
     
@@ -119,27 +144,80 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .lightGray
         title = "Profile"
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: NSNotification.Name("ImageTapped"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: Notification.Name("statusTextChanged"), object: nil)
         
         tableView.addSubview(profileTableHeaderView)
         view.addSubview(tableView)
         //initialFetchEvents()
         setupConstraints()
-        
+        let exitButton = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(exitButtonTapped))
+        navigationItem.rightBarButtonItem = exitButton
+        navigationItem.setHidesBackButton(true, animated: false)
+
     }
+    
+    @objc func addStatus(_ notification: Notification) {
+        guard let statusText = notification.object as? String else { return }
+        profileTableHeaderView.statusLabel.text = ""
+        self.statusText = statusText
+        print("st st st", statusText)
+    }
+    
+    @objc func exitButtonTapped() {
+        
+        if let user = userID {
+            if let status = statusText {
+                let userStatus = UserStatus(user: user, status: status)
+                userService.addAboutUser(userStatus) {_ in
+                    print("status 3", userStatus)
+                }
+            }
+        }
+
+        profileTableHeaderView.statusSaved = { text in
+            guard let text = text else { return }
+            print("st st", text)
+        }
+
+        navigationController?.pushViewController(logoViewController, animated: true)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        setupTabBar()
+        loadViewIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        //navigationController?.setNavigationBarHidden(false, animated: animated)
+        loadViewIfNeeded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadViewIfNeeded()
+
     }
     
 //MARK: -methods
+    
+    
+    func setupTabBar() {
+        tabBarController?.tabBar.isHidden = false
+        tabBarController?.selectedIndex = 1
+        if let item = tabBarController?.tabBar.items {
+            item[1].isEnabled = false
+        }
+        
+    }
+
+    
     
     @objc func imageTapped() {
         presentImagePicker()
@@ -172,7 +250,6 @@ class ProfileViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
    
-      
         NSLayoutConstraint.activate([
             
             tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
@@ -291,7 +368,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             ) as? ProfileTableHeaderView else {
                 fatalError("could not dequeueReusableCell")
             }
-            
+            headerView.isUserInteractionEnabled = true
             return headerView
             
         } else {
@@ -329,3 +406,4 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
     }
     
 }
+

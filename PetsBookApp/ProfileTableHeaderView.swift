@@ -4,13 +4,22 @@
 
 import UIKit
 
-// MARK: - USER
+// MARK: - delegate
+
 
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     //static var userProfile: User2?
-    private var statusText:String
+    var statusText: String?
+    var statusSaved: ((String?) -> Void)?
+    var newStatus: String? {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("statusTextChanged"), object: newStatus)
+        }
+    }
+    
+    
     //private var inspector = LoginInspector()
     
     // MARK: - Subviews
@@ -36,14 +45,14 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         //var user: User2?
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
-        //label.text = userProfile?.name
+        //label.text =       //userProfile?.name
         label.numberOfLines = 0
         
         return label
         
     }()
 
-    let statusLabel: UILabel = {
+    lazy var statusLabel: UILabel = {
         let label = UILabel()
         //var user: User2?
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -90,21 +99,61 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
         return(button)
     }()
+    
+
 
     override init(reuseIdentifier: String?) {
         
-        statusText = ""
         super.init(reuseIdentifier: reuseIdentifier)
        
         
         addSubviews()
         elementConstraint()
-    
+        
+        statusSaved = { st in
+            guard let s = st else { return }
+            print ("st ", s)
+        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//MARK: - methods
+    
+    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
+        NotificationCenter.default.post(name: NSNotification.Name("ImageTapped"), object: nil)
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        
+        guard let text = textField.text else {
+            print("no text")
+            return
+        }
+        statusText = text
+    }
+    
+    @objc func buttonPressed(_ sender: UIButton) {
+        guard let st = statusText else { return }
+        if st.isEmpty {
+            return
+        } else {
+            statusLabel.text = st
+            newStatus = st
+            print("st", st)
+            statusSaved?(st)
+        }
+    }
+    
+    func setImage(_ image: UIImage?) {
+        imageView.image = image
+        setNeedsLayout()
+    }
+    
+
+//MARK: -layout
     
     func addSubviews() {
         
@@ -113,35 +162,6 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         addSubview(textField)
         addSubview(statusLabel)
         addSubview(nameLabel)
-    }
-    
-    @objc func statusTextChanged(_ textField: UITextField) {
-        statusText = textField.text ?? ""
-        
-    }
-    
-    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
-        NotificationCenter.default.post(name: NSNotification.Name("ImageTapped"), object: nil)
-    }
-    
-    func setImage(_ image: UIImage?) {
-        imageView.image = image
-        setNeedsLayout()
-    }
-    
-    
-    @objc func buttonPressed(_ sender: UIButton) {
-       
-        if let showText = textField.text {
-            print(showText)
-        }
-        
-        if statusText .isEmpty {
-            statusLabel.text = statusLabel.text
-        } else {
-            statusLabel.text = statusText
-        }
-        
     }
     
     func elementConstraint() {
