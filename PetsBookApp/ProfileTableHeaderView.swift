@@ -19,6 +19,12 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         }
     }
     
+    var newAva: UIImage? {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("avaChanged"), object: newAva)
+        }
+    }
+    
     
     //private var inspector = LoginInspector()
     
@@ -149,6 +155,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     func setImage(_ image: UIImage?) {
         imageView.image = image
+        newAva = image
         setNeedsLayout()
     }
     

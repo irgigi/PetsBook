@@ -14,10 +14,12 @@ class ProfileViewController: UIViewController {
     private let authService = AuthService()
     private let userService = UserService()
     private var userID: String?
+    private var ava: UIImage?
+    
     private var status: (() -> String)?
     private var statusText: String?
     
-    private var aboutUser = [UserStatus]()
+    private var aboutUser: UserStatus?
     
     enum CellReuseID: String {
         case base = "BaseTableViewCell_ReuseID"
@@ -75,7 +77,21 @@ class ProfileViewController: UIViewController {
         userID = user.user.uid
         
         if let id = userID {
-            
+            print("-----", id)
+            userService.fetchStatus(user: id) {[weak self] (user, error) in
+                if let error = error {
+                    print("-----", error.localizedDescription)
+                } else {
+                    if let us = user {
+                        print("-----", us)
+                        self?.reloadTableView(with: us)
+                    } else {
+                        print("----- not found")
+                    }
+                }
+                
+            }
+            /*
             userService.fetchAboutUser { [self] aboutUser in
                 let info = aboutUser.contains { $0.user == id }
                 if info {
@@ -84,7 +100,7 @@ class ProfileViewController: UIViewController {
                 }
             }
             
-            
+            */
             
 
             
@@ -117,7 +133,7 @@ class ProfileViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    /*
     private func initialFetchEvents() {
         userService.addObserverForEvents { [weak self] info in
             self?.reloadTableView(with: info)
@@ -129,10 +145,12 @@ class ProfileViewController: UIViewController {
             self?.reloadTableView(with: info)
         }
     }
-    
-    private func reloadTableView(with userStatus: [UserStatus]) {
+     */
+    private func reloadTableView(with userStatus: UserStatus) {
         self.aboutUser = userStatus
-        profileTableHeaderView.statusLabel.text = aboutUser.last?.status
+        if let st = userStatus.status {
+            profileTableHeaderView.statusLabel.text = st
+        }
         tableView.reloadData()
     }
     
@@ -148,6 +166,8 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: NSNotification.Name("ImageTapped"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: Notification.Name("statusTextChanged"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(addAvatar), name: Notification.Name("avaChanged"), object: nil)
         
         tableView.addSubview(profileTableHeaderView)
         view.addSubview(tableView)
@@ -166,13 +186,31 @@ class ProfileViewController: UIViewController {
         print("st st st", statusText)
     }
     
+    @objc func addAvatar(_ notification: Notification) {
+        guard let newAva = notification.object as? UIImage else { return }
+        ava = newAva
+    }
+    
     @objc func exitButtonTapped() {
+        
+        addAva(ava)
         
         if let user = userID {
             if let status = statusText {
                 let userStatus = UserStatus(user: user, status: status)
-                userService.addAboutUser(userStatus) {_ in
-                    print("status 3", userStatus)
+                userService.checkStatus(user: user) { [self] (isDoc, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        if isDoc {
+                            userService.updateStatus(user, status)
+                        } else {
+                            print("not document")
+                            userService.addAboutUser(userStatus) {_ in
+                                print("status 3", userStatus)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -221,6 +259,25 @@ class ProfileViewController: UIViewController {
     
     @objc func imageTapped() {
         presentImagePicker()
+        ava = profileTableHeaderView.imageView.image
+    }
+    
+    func addAva(_ image: UIImage?) {
+        if let im = image {
+            if let user = userID {
+                userService.saveAvatar(user, im) { [weak self] result in
+                    switch result {
+                    case .success(let avaString):
+                        let userAva = UserAvatar(user: user, avatar: avaString)
+                        self?.userService.addUserAvatar(userAva) { userAva in
+                            print("AVA saved")
+                        }
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+        }
     }
     
     func presentImagePicker() {
@@ -387,20 +444,7 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let picImage = info[.originalImage] as? UIImage {
             profileTableHeaderView.setImage(picImage)
-            if let id = userID {
-                firestoreService.loadImage(eventID: id) { [weak self] image in
-                    self?.profileTableHeaderView.imageView.image = image
-                }
-            }
 
-            firestoreService.addImage(picImage) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    print("DONE!")
-                }
-            }
-            
         }
         picker.dismiss(animated: true)
     }
