@@ -9,7 +9,8 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 
 struct UserUID: Codable {
-    let userUID: String
+    let user: String
+    let userName: String?
 }
 
 struct UserStatus: Codable {
@@ -59,17 +60,81 @@ final class UserService {
             print("aboutUser DONE")
         }
     }
+  //MARK: - USER NAME -
     
     func addUser(_ user: UserUID, completion: @escaping (Error?) -> Void) {
         
-        _ = try? dataBase.collection(.collectionName).addDocument(from: user) { error in
+        _ = try? dataBase.collection(.collectionUserName).addDocument(from: user) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
-            print("userInfo DONE")
+            print("userName DONE")
         }
          
     }
+    
+    func fetchName(user: String, completion: @escaping (UserUID?, Error?) -> Void) {
+        
+        let query = dataBase.collection(.collectionUserName)
+        query.whereField("user", isEqualTo: user).getDocuments { (snapshot, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, error)
+            } else {
+                if let document = snapshot?.documents.first {
+                    do {
+                        let userName = try document.data(as: UserUID.self)
+                        completion(userName, nil)
+                    } catch {
+                        completion(nil, error)
+                    }
+
+                } else {
+                    completion(nil, nil)
+                }
+            }
+        }
+    }
+    
+    func checkName(user: String, completion: @escaping (Bool, Error?) -> Void) {
+        let query = dataBase.collection(.collectionUserName)
+        query.whereField("user", isEqualTo: user).getDocuments { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false, error)
+            } else {
+                if let count = snapshot?.documents.count, count > 0 {
+                    completion(true, nil)
+                } else {
+                    completion(false, nil)
+                }
+            }
+        }
+    }
+    
+    func updateName(_ user: String, _ userName: String) {
+        let query = dataBase.collection(.collectionUserName)
+        query.whereField("user", isEqualTo: user).getDocuments { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let document = snapshot?.documents {
+                    for doc in document {
+                        doc.reference.updateData(["userName": userName]) { error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            } else {
+                               print("update!")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
  //MARK: - save/load user and status
     
     func addAboutUser(_ aboutUser: UserStatus, completion: @escaping (UserStatus) -> Void) {
@@ -149,7 +214,7 @@ final class UserService {
 
     
     
- //MARK: - -
+ //MARK: - AVA -
     
     
     func saveAvatar(_ user: String, _ image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
@@ -189,6 +254,46 @@ final class UserService {
             
         })
     }
+    
+    func fetchAvatar(user: String, completion: @escaping (UserAvatar?, Error?) -> Void) {
+        
+        let query = dataBase.collection(.collectionAvatar)
+        query.whereField("user", isEqualTo: user).getDocuments { (snapshot, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, error)
+            } else {
+                if let document = snapshot?.documents.first {
+                    do {
+                        let userAvatar = try document.data(as: UserAvatar.self)
+                        completion(userAvatar, nil)
+                    } catch {
+                        completion(nil, error)
+                    }
+
+                } else {
+                    completion(nil, nil)
+                }
+            }
+        }
+    }
+    
+    func getAvaFromURL(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data, let image = UIImage(data: data) {
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        } .resume()
+    }
+    
+    
     
   //MARK: - -
     
@@ -306,5 +411,6 @@ final class UserService {
 private extension String {
     static let collectionName = "UserInfo"
     static let collectionAvatar = "UserAvatar"
+    static let collectionUserName = "UserName"
 }
 

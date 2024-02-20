@@ -12,6 +12,10 @@ struct FireBaseUser {
 final class AuthService {
     
     let userService = UserService()
+    static let shared = AuthService()
+    
+    var currentUserHandler: ((User) -> Void)?
+    
     
 //MARK: - валидация логина и пароля
     
@@ -75,8 +79,12 @@ final class AuthService {
     
     //MARK: - получить пользователя
     
-    func getUser(email: String, password: String, completion: @escaping (Result<FireBaseUser, Error>) -> Void) {
-        
+    func getUser() {
+        if let user = Auth.auth().currentUser {
+            if let user = Auth.auth().currentUser {
+                currentUserHandler?(user)
+            }
+        }
     }
     
     

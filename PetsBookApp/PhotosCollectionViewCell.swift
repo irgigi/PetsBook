@@ -34,7 +34,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
     
     */
-    
+
     
     func setupConstraintsCollection() {
         profileImageView.translatesAutoresizingMaskIntoConstraints = false

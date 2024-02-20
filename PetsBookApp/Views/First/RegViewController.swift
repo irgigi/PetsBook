@@ -4,11 +4,26 @@
 
 
 import UIKit
+import FirebaseAuth
+
+
 
 class RegViewController: UIViewController {
     
     private let authService = AuthService()
     var completionHandler: (() -> Bool)?
+    var isNewUser: Bool?
+    var user: ((FireBaseUser?) -> Void)?
+    
+    func sendNotification(withUser user: FireBaseUser) {
+        let data: [String: Any] = ["user": user]
+        NotificationCenter.default.post(name: NSNotification.Name("NotificationName"), object: nil, userInfo: data)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     
     lazy var headTextLabel: UILabel = {
         let label = UILabel()
@@ -119,10 +134,12 @@ class RegViewController: UIViewController {
                 headTextLabel.text = "РЕГИСТРАЦИЯ"
                 descriptionLabel.text = "Напишите ваш e-mail и придумайте пароль"
                 regButton.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
+                isNewUser = true
             } else {
                 headTextLabel.text = "ВХОД"
                 descriptionLabel.text = "Введите ваш e-mail и пароль"
                 regButton.setTitle("ВОЙТИ", for: .normal)
+                isNewUser = false
             }
         }
         
@@ -226,16 +243,55 @@ class RegViewController: UIViewController {
 }
 
 private extension RegViewController {
+    
     func showProfileViewController(user: FireBaseUser) {
+        
+        self.user?(user)
+        
+        sendNotification(withUser: user)
+        
         let profileVC = ProfileViewController(user: user)
-        for vc in tabBarController?.viewControllers ?? [] {
+        /*
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let sceneDelegate = windowScene.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = tabBarController
+        }
+        
+       
+        guard let tabBarController = UIApplication.shared.windows.first?.rootViewController as? UITabBarController else { return }
+        
+        for vc in tabBarController.viewControllers ?? [] {
             if vc == profileVC {
                 return
             } else {
-                profileVC.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
-                tabBarController?.viewControllers?.append(profileVC)
+                profileVC.tabBarItem = UITabBarItem()
+                tabBarController.viewControllers?.append(profileVC)
             }
         }
-        navigationController?.pushViewController(profileVC, animated: true)
+        */
+        if let new = isNewUser {
+            if new {
+                
+                let alertController = UIAlertController(title: "Введите имя питомца", message: nil, preferredStyle: .alert)
+                alertController.addTextField { textField in
+                    textField.placeholder = "text"
+                }
+                
+                let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+                let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                    if let textField = alertController.textFields?.first, let text = textField.text, !text.isEmpty {
+                        profileVC.profileTableHeaderView.nameLabel.text = text
+                        self?.navigationController?.pushViewController(profileVC, animated: true)
+                    }
+                }
+                alertController.addAction(cancelAction)
+                alertController.addAction(okAction)
+                present(alertController, animated: true)
+                
+            } else {
+                navigationController?.pushViewController(profileVC, animated: true)
+            }
+        }
     }
 }
+
+

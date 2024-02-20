@@ -4,30 +4,101 @@
 
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    func currentUserSetup(_ user: User) {
+        userUser = FireBaseUser(user: user)
+    }
+    
 
     var window: UIWindow?
+    var userUser: FireBaseUser?
+    var isUser: Bool = false
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: Notification.Name("NotificationName"), object: nil)
+        
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)        
         let logoVC = UINavigationController(rootViewController: LogoViewController())
-        logoVC.tabBarItem = UITabBarItem(title: "Выход", image: UIImage(systemName: "door.right.hand.open"), tag: 0)
+        let usersVC = UINavigationController(rootViewController: UsersFeedController())
+        usersVC.tabBarItem = UITabBarItem(title: "Питомцы", image: UIImage(systemName: "pawprint.fill"), tag: 0)
         //let regVC = UINavigationController(rootViewController: RegViewController())
-
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [logoVC]
-
-        window.rootViewController = tabBarController
+        
+        let tabBarController = MyTabBarController.shared
+        tabBarController.viewControllers = [usersVC]
+        window.rootViewController = logoVC
         window.makeKeyAndVisible()
         self.window = window
         
 
+    }
+    
+    @objc func handleNotification(_ notification: Notification) {
+        
+        if let userInfo = notification.userInfo {
+            if userInfo["user"] is FireBaseUser {
+                let tabBarController = MyTabBarController.shared
+                for user in userInfo {
+                    if let us = user.value as? FireBaseUser {
+                        print("///", us)
+                        if isUser {
+                            return
+                        } else {
+                            addVControllers(user: us, tabBarController: tabBarController)
+                            if let newWindow = window {
+                                tabBarController.selectedIndex = 1
+                                newWindow.rootViewController = tabBarController
+                                newWindow.makeKeyAndVisible()
+                                self.window = newWindow
+                                isUser = true
+                            }
+                        }
+                    }
+                }
+                /*
+                AuthService.shared.currentUserHandler = { [self] user in
+                    userUser = FireBaseUser(user: user)
+                    if let user = userUser {
+                        addVControllers(user: user, tabBarController: tabBarController)
+                        
+                        if let newWindow = window {
+                            newWindow.rootViewController = tabBarController
+                            newWindow.makeKeyAndVisible()
+                            self.window = newWindow
+                        }
+                    }
+                }
+                */
+            }
+        }
+    }
+    
+    func addVControllers(user: FireBaseUser, tabBarController: UITabBarController) {
+        
+        let profileVC = UINavigationController(rootViewController: ProfileViewController(user: user))
+        
+        if let controllers = tabBarController.viewControllers {
+            if let vc = controllers.firstIndex(where: { $0 is ProfileViewController}) {
+                return
+            }
+        }
+        
+        
+        for vc in tabBarController.viewControllers ?? [] {
+            if vc == profileVC {
+                return
+            } else {
+                profileVC.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "teddybear.fill"), tag: 1)
+                tabBarController.viewControllers?.append(profileVC)
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

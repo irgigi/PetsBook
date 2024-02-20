@@ -12,6 +12,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     //static var userProfile: User2?
     var statusText: String?
+    var nameText: String?
     var statusSaved: ((String?) -> Void)?
     var newStatus: String? {
         didSet {
@@ -22,6 +23,12 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     var newAva: UIImage? {
         didSet {
             NotificationCenter.default.post(name: Notification.Name("avaChanged"), object: newAva)
+        }
+    }
+    
+    var newName: String? {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("nameChanged"), object: newName)
         }
     }
     
@@ -46,14 +53,16 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         return image
     }()
 
-    let nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         //var user: User2?
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         //label.text =       //userProfile?.name
         label.numberOfLines = 0
-        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(nameTapped))
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tapGestureRecognizer)
         return label
         
     }()
@@ -116,10 +125,10 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         addSubviews()
         elementConstraint()
         
-        statusSaved = { st in
-            guard let s = st else { return }
-            print ("st ", s)
-        }
+  //      statusSaved = { st in
+ //           guard let s = st else { return }
+ //           print ("st ", s)
+ //       }
     }
 
     required init?(coder: NSCoder) {
@@ -130,6 +139,11 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     @objc func imageTapped(_ sender: UITapGestureRecognizer) {
         NotificationCenter.default.post(name: NSNotification.Name("ImageTapped"), object: nil)
+    }
+    
+    
+    @objc func nameTapped(_ sender: UITapGestureRecognizer) {
+        NotificationCenter.default.post(name: NSNotification.Name("NameTapped"), object: nil)
     }
     
     @objc func statusTextChanged(_ textField: UITextField) {
@@ -154,8 +168,10 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     }
     
     func setImage(_ image: UIImage?) {
-        imageView.image = image
-        newAva = image
+        if let im = image {
+            imageView.image = im
+            newAva = im
+        }
         setNeedsLayout()
     }
     

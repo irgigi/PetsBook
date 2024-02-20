@@ -8,6 +8,8 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
     
+
+    
     let imageCollection: UIImageView = {
         let image = UIImageView(frame: .zero)
         let screenWidth = UIScreen.main.bounds.width
@@ -37,6 +39,15 @@ class CollectionViewCell: UICollectionViewCell {
         
         }
   */
+    
+    func setupImage(_ image: UIImage) {
+        
+        imageCollection.image = image
+        
+    }
+    
+
+    
     func constraint() {
         NSLayoutConstraint.activate([
             

@@ -12,9 +12,10 @@ class PhotosViewController: UIViewController {
     
     // массив для загрузки полученных картинок
     var photos: [UIImage] = []
+    var fileURLs: [String] = []
     
     //fileprivate lazy var profile: [Profile] = Profile.make()
-    
+    var photoCollectionService = PhotoCollectionService.shared
     
     
     let spacing = 8.0
@@ -22,6 +23,20 @@ class PhotosViewController: UIViewController {
     enum CellID: String {
         case base = "ViewCell_ReuseID"
     }
+    
+    lazy var photoButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Load photo", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.addTarget(self, action: #selector(loadPhoto), for: .touchUpInside)
+    
+        return(button)
+    }()
     
     private let collectionView: UICollectionView = {
         let  viewLayout = UICollectionViewFlowLayout()
@@ -63,11 +78,26 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         title = "Photo Gallery"
         view.backgroundColor = .white
+        view.addSubview(photoButton)
+        loadSavedPhoto()
         setupCollectionView()
         setupLayouts()
-        
-
-
+    }
+    
+    @objc func loadPhoto() {
+        presentImagePicker()
+    }
+    
+    func presentImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true)
+    }
+    
+    func loadSavedPhoto() {
+        photos = photoCollectionService.loadSavedPhoto()
+        collectionView.reloadData()
     }
     
     private func setupCollectionView() {
@@ -77,15 +107,21 @@ class PhotosViewController: UIViewController {
     }
     
     private func setupLayouts() {
-        let sefeAreaGuide = view.safeAreaLayoutGuide
+        let safeAreaGuide = view.safeAreaLayoutGuide
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        photoButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            collectionView.topAnchor.constraint(equalTo: sefeAreaGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: sefeAreaGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: sefeAreaGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: sefeAreaGuide.trailingAnchor)
+            photoButton.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            photoButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
+            photoButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
+            photoButton.heightAnchor.constraint(equalToConstant: 60),
+            
+            collectionView.topAnchor.constraint(equalTo: photoButton.bottomAnchor, constant: 20),
+            collectionView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor)
             
         ])
     }
@@ -159,4 +195,20 @@ extension PhotosViewController:  UICollectionViewDataSource, UICollectionViewDel
     ) -> CGFloat {
         spacing
     }
+}
+
+extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let picImage = info[.originalImage] as? UIImage {
+            //profileTableHeaderView.setImage(picImage)
+            photoCollectionService.addCollectionPhoto(image: picImage, to: &photos)
+            if let fileURL = photoCollectionService.savePhotoToFileSystem(image: picImage) {
+                fileURLs.append(fileURL)
+            }
+            collectionView.reloadData()
+        }
+        picker.dismiss(animated: true)
+    }
+    
 }

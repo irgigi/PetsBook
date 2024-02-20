@@ -39,9 +39,14 @@ class ElementsCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func buttonTapped() {
-        
-        
-        
+        let controller = PhotosViewController()
+        var responder: UIResponder? = self
+        while responder != nil {
+            responder = responder?.next
+            if let viewController = responder as? UIViewController {
+                viewController.navigationController?.pushViewController(controller, animated: true)
+            }
+        }
     }
     
     func constraints() {

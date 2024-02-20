@@ -9,17 +9,22 @@ import Photos
 class ProfileViewController: UIViewController {
 
     let profileTableHeaderView = ProfileTableHeaderView()
+    let photoCollectionService = PhotoCollectionService.shared
+    let photosCell = PhotosTableViewCell()
+    
     let logoViewController = LogoViewController()
     private let firestoreService = FirestoreService()
     private let authService = AuthService()
     private let userService = UserService()
     private var userID: String?
     private var ava: UIImage?
+    private var name: String?
     
     private var status: (() -> String)?
     private var statusText: String?
     
     private var aboutUser: UserStatus?
+    private var userName: UserUID?
     
     enum CellReuseID: String {
         case base = "BaseTableViewCell_ReuseID"
@@ -29,12 +34,18 @@ class ProfileViewController: UIViewController {
     private enum HeaderFooterReuseID: String {
         case base = "TableSelectionFooterHeaderView_ReuseID"
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
    
     // MARK: - Data
     
    // fileprivate let data = PostModel.make()
     private var userUID = [UserUID]()
     private var userStatus = [UserStatus]()
+    
+    var images: [UIImage] = []
     
     
     // MARK: - table
@@ -72,25 +83,69 @@ class ProfileViewController: UIViewController {
     
 //MARK: - инициализатор принимает юзера
     
+    func loadAvatar(_ user: String) {
+        //загружаем аватар, если есть
+        userService.fetchAvatar(user: user) { [weak self] (user, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let us = user {
+                    self?.userService.getAvaFromURL(from: us.avatar) { img in
+                        if let image = img {
+                            DispatchQueue.main.async {
+                                self?.profileTableHeaderView.imageView.image = image
+                                self?.ava = image
+                                self?.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     init(user: FireBaseUser) {
         super.init(nibName: nil, bundle: nil)
-        userID = user.user.uid
         
+        forExit()
+        
+        userID = user.user.uid
+        let userMail = user.user.email
         if let id = userID {
-            print("-----", id)
+
+            loadAvatar(id)
+            // загржаем статус, если есть
             userService.fetchStatus(user: id) {[weak self] (user, error) in
                 if let error = error {
-                    print("-----", error.localizedDescription)
+                    print(error.localizedDescription)
                 } else {
                     if let us = user {
-                        print("-----", us)
                         self?.reloadTableView(with: us)
                     } else {
-                        print("----- not found")
+                        print("not found status")
                     }
                 }
                 
             }
+            
+            // загружаем имя или мейл
+            userService.fetchName(user: id) { [weak self] (user, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    if let us = user {
+                        if let n = us.userName {
+                            self?.profileTableHeaderView.nameLabel.text = n
+                            print("?", n)
+                            self?.tableView.reloadData()
+                        }
+                    } else {
+                        self?.profileTableHeaderView.nameLabel.text = userMail
+                        print("not found name")
+                    }
+                }
+            }
+            
             /*
             userService.fetchAboutUser { [self] aboutUser in
                 let info = aboutUser.contains { $0.user == id }
@@ -123,11 +178,11 @@ class ProfileViewController: UIViewController {
             }
             */
             
-            firestoreService.loadImage(eventID: id) { [weak self] image in
-                self?.profileTableHeaderView.imageView.image = image
-            }
+  //          firestoreService.loadImage(eventID: id) { [weak self] image in
+  //              self?.profileTableHeaderView.imageView.image = image
+  //          }
         }
-        profileTableHeaderView.nameLabel.text = user.user.email
+        
     }
     
     required init?(coder: NSCoder) {
@@ -154,6 +209,15 @@ class ProfileViewController: UIViewController {
         tableView.reloadData()
     }
     
+    private func reloadTableView2(with userName: UserUID) {
+        self.userName = userName
+        if let us = userName.userName {
+            profileTableHeaderView.nameLabel.text = us
+        }
+        tableView.reloadData()
+    }
+    
+    
     
 //MARK: - life cycle
     
@@ -162,10 +226,13 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .lightGray
         title = "Profile"
+        loadSavedPhoto()
 
         NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: NSNotification.Name("ImageTapped"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: Notification.Name("statusTextChanged"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(addName), name: Notification.Name("NameTapped"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(addAvatar), name: Notification.Name("avaChanged"), object: nil)
         
@@ -173,18 +240,38 @@ class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         //initialFetchEvents()
         setupConstraints()
+
+    }
+    
+    func forExit() {
+        
         let exitButton = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(exitButtonTapped))
         navigationItem.rightBarButtonItem = exitButton
+        navigationItem.rightBarButtonItem?.isHidden = false
         navigationItem.setHidesBackButton(true, animated: false)
-
+    }
+    
+    func loadSavedPhoto() {
+        images = photoCollectionService.loadSavedPhoto()
+        tableView.reloadData()
     }
     
     @objc func addStatus(_ notification: Notification) {
         guard let statusText = notification.object as? String else { return }
         profileTableHeaderView.statusLabel.text = ""
         self.statusText = statusText
-        print("st st st", statusText)
     }
+    
+    @objc func addName(_ notification: Notification) {
+        showAddName { [weak self] name in
+            self?.profileTableHeaderView.nameLabel.text = name
+            self?.name = name
+        }
+        guard let nameText = notification.object as? String else { return }
+        self.name = nameText
+        
+    }
+    
     
     @objc func addAvatar(_ notification: Notification) {
         guard let newAva = notification.object as? UIImage else { return }
@@ -194,9 +281,10 @@ class ProfileViewController: UIViewController {
     @objc func exitButtonTapped() {
         
         addAva(ava)
-        
+
         if let user = userID {
             if let status = statusText {
+                
                 let userStatus = UserStatus(user: user, status: status)
                 userService.checkStatus(user: user) { [self] (isDoc, error) in
                     if let error = error {
@@ -207,17 +295,36 @@ class ProfileViewController: UIViewController {
                         } else {
                             print("not document")
                             userService.addAboutUser(userStatus) {_ in
-                                print("status 3", userStatus)
+                            }
+                        }
+                    }
+                }
+
+            }
+            
+            if let naming = name {
+                
+                let userName = UserUID(user: user, userName: naming)
+                userService.checkName(user: user) { [self] (isDoc, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        if isDoc {
+                            userService.updateName(user, naming)
+                        } else {
+                            print("not document")
+                            userService.addUser(userName) {_ in
                             }
                         }
                     }
                 }
             }
+
         }
 
-        profileTableHeaderView.statusSaved = { text in
+        profileTableHeaderView.statusSaved = { [self] text in
             guard let text = text else { return }
-            print("st st", text)
+            name = text
         }
 
         navigationController?.pushViewController(logoViewController, animated: true)
@@ -227,18 +334,20 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupTabBar()
+        forExit()
         loadViewIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        forExit()
         //navigationController?.setNavigationBarHidden(false, animated: animated)
         loadViewIfNeeded()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        forExit()
         loadViewIfNeeded()
 
     }
@@ -248,13 +357,17 @@ class ProfileViewController: UIViewController {
     
     func setupTabBar() {
         tabBarController?.tabBar.isHidden = false
-        tabBarController?.selectedIndex = 1
-        if let item = tabBarController?.tabBar.items {
-            item[1].isEnabled = false
-        }
+        
+        //if let selectedVC = tabBarController?.selectedViewController {
+        //    print("tabbar done")
+       // }
+        //tabBarController?.selectedIndex = 1
+
+        //if let item = tabBarController?.tabBar.items {
+        //    item[2].isEnabled = false
+        //}
         
     }
-
     
     
     @objc func imageTapped() {
@@ -365,6 +478,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             ) as? PhotosTableViewCell else {
                 fatalError("could not dequeueReusableCell")
             }
+            
             //cell.update(data[indexPath.row])
             cell.contentView.frame.size.width = tableView.frame.width
             return cell
@@ -450,4 +564,6 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
     }
     
 }
+
+
 
