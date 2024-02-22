@@ -10,7 +10,7 @@ class PhotosTableViewCell: UITableViewCell {
     
 
     //let data = PostModel.make()
-    private var events = [Event]()
+    //private var events = [Event]()
     
     let photoCollectionService = PhotoCollectionService.shared
     var images: [UIImage] = []
@@ -81,7 +81,7 @@ extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 1 {
-            return images.count //data.count
+            return 1//images.count //data.count
         }
         return 1
     }
@@ -96,10 +96,10 @@ extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
             ) as? CollectionViewCell else {
                 fatalError("error collection cell")
             }
-
-            cell.setupImage(images[indexPath.row])
+// changed
             //cell.setupImage(images[indexPath.row])
-            //cell.contentView.frame.size.width = collectionView.bounds.width
+            //cell.setupImage(images[indexPath.row])
+            cell.contentView.frame.size.width = collectionView.bounds.width
             return cell
         } else {
             

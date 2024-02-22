@@ -16,6 +16,9 @@ class ProfileViewController: UIViewController {
     private let firestoreService = FirestoreService()
     private let authService = AuthService()
     private let userService = UserService()
+    private let postService = PostService()
+    
+    
     private var userID: String?
     private var ava: UIImage?
     private var name: String?
@@ -44,6 +47,7 @@ class ProfileViewController: UIViewController {
    // fileprivate let data = PostModel.make()
     private var userUID = [UserUID]()
     private var userStatus = [UserStatus]()
+    private var post = [Post]()
     
     var images: [UIImage] = []
     
@@ -104,6 +108,14 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    func loadPost(_ user: String) {
+        postService.getPost(user) { [weak self] allPosts in
+            self?.post.append(contentsOf: allPosts)
+            print("///", allPosts)
+            self?.tableView.reloadData()
+        }
+    }
+    
     init(user: FireBaseUser) {
         super.init(nibName: nil, bundle: nil)
         
@@ -112,8 +124,9 @@ class ProfileViewController: UIViewController {
         userID = user.user.uid
         let userMail = user.user.email
         if let id = userID {
-
+             
             loadAvatar(id)
+            loadPost(id)
             // загржаем статус, если есть
             userService.fetchStatus(user: id) {[weak self] (user, error) in
                 if let error = error {
@@ -227,7 +240,9 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .lightGray
         title = "Profile"
         loadSavedPhoto()
-
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(buttonTap), name: .customButtonTapped, object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: NSNotification.Name("ImageTapped"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: Notification.Name("statusTextChanged"), object: nil)
@@ -240,7 +255,47 @@ class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         //initialFetchEvents()
         setupConstraints()
+        tableView.reloadData()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupTabBar()
+        forExit()
+        tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        forExit()
+        //navigationController?.setNavigationBarHidden(false, animated: animated)
+        tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        forExit()
+        tableView.reloadData()
+
+    }
+    
+//MARK: -METHODS
+    
+    @objc func buttonTap() {
+        showAddInfoForPost { [self] descr, img in
+            print("///",descr)
+            print("///",img)
+            guard let description = descr else { return }
+            guard let image = img else { return }
+            guard let id = userID else { return }
+            guard let name = profileTableHeaderView.nameLabel.text else { return }
+            
+            postService.uploadPost(image, id, descr, name) { _,_  in
+                print("/// post upload")
+            }
+        }
+        tableView.reloadData()
     }
     
     func forExit() {
@@ -331,41 +386,8 @@ class ProfileViewController: UIViewController {
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupTabBar()
-        forExit()
-        loadViewIfNeeded()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        forExit()
-        //navigationController?.setNavigationBarHidden(false, animated: animated)
-        loadViewIfNeeded()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        forExit()
-        loadViewIfNeeded()
-
-    }
-    
-//MARK: -methods
-    
-    
     func setupTabBar() {
         tabBarController?.tabBar.isHidden = false
-        
-        //if let selectedVC = tabBarController?.selectedViewController {
-        //    print("tabbar done")
-       // }
-        //tabBarController?.selectedIndex = 1
-
-        //if let item = tabBarController?.tabBar.items {
-        //    item[2].isEnabled = false
-        //}
         
     }
     
@@ -463,7 +485,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 1 //data.count
+            return  post.count
         }
         
     }
@@ -491,7 +513,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 fatalError("could not dequeueReusableCell")
             }
             //cell.update(data[indexPath.row])
-            //cell.update(event[indexPath.row])
+            cell.update(post[indexPath.row])
             return cell
             
         }
@@ -564,6 +586,5 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
     }
     
 }
-
 
 

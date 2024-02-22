@@ -5,7 +5,7 @@
 
 import UIKit
 
-class UsersFeedTableViewCell: PhotosTableViewCell {
+class UsersFeedTableViewCell: PostTableViewCell {
     
     
     

@@ -6,7 +6,9 @@ import UIKit
 
 // MARK: - delegate
 
-
+extension Notification.Name {
+    static let customButtonTapped = Notification.Name("ButtonTapped")
+}
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
@@ -31,7 +33,6 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
             NotificationCenter.default.post(name: Notification.Name("nameChanged"), object: newName)
         }
     }
-    
     
     //private var inspector = LoginInspector()
     
@@ -95,15 +96,22 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     }()
     
     lazy var bigButton: UIButton = {
-        let button = UIButton(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: 0,
-                height: 0
-            )
-        )
+        let button = UIButton()
         button.setTitle("Set status", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 5
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+    
+        return(button)
+    }()
+    
+    lazy var bigButton2: UIButton = {
+        let button = UIButton()
+        button.setTitle("Add post", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 5
@@ -155,15 +163,22 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         statusText = text
     }
     
-    @objc func buttonPressed(_ sender: UIButton) {
-        guard let st = statusText else { return }
-        if st.isEmpty {
+    @objc private func buttonPressed(_ sender: UIButton) {
+        switch sender {
+        case bigButton:
+            guard let st = statusText else { return }
+            if st.isEmpty {
+                return
+            } else {
+                statusLabel.text = st
+                newStatus = st
+                print("st", st)
+                statusSaved?(st)
+            }
+        case bigButton2:
+            NotificationCenter.default.post(name: .customButtonTapped, object: nil)
+        default:
             return
-        } else {
-            statusLabel.text = st
-            newStatus = st
-            print("st", st)
-            statusSaved?(st)
         }
     }
     
@@ -185,6 +200,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         addSubview(textField)
         addSubview(statusLabel)
         addSubview(nameLabel)
+        addSubview(bigButton2)
     }
     
     func elementConstraint() {
@@ -194,7 +210,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         bigButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        bigButton2.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
 
@@ -223,12 +239,16 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
             textField.widthAnchor.constraint(equalToConstant: 200),
             textField.heightAnchor.constraint(equalToConstant: 40),
             
-            bigButton.topAnchor.constraint(equalTo: textField.bottomAnchor),
-            bigButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            bigButton2.topAnchor.constraint(equalTo: topAnchor, constant: 180),
+            bigButton2.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            bigButton2.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -10),
+            bigButton2.heightAnchor.constraint(equalToConstant: 50),
+
+            bigButton.topAnchor.constraint(equalTo: topAnchor, constant: 180),
+            bigButton.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 10),
             bigButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            bigButton.heightAnchor.constraint(equalToConstant: 50)
-            
-        
+            bigButton.heightAnchor.constraint(equalToConstant: 50),
+
         ])
         
     }

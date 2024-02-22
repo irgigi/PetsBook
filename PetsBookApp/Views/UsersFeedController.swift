@@ -8,7 +8,13 @@ import UIKit
 
 final class UsersFeedController: UIViewController {
     
-    // MARK: - table -
+    let postService = PostService()
+    
+//MARK: -properties
+    
+    var post = [Post]()
+    
+// MARK: - table -
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView.init(
@@ -31,16 +37,27 @@ final class UsersFeedController: UIViewController {
         return tableView
     }()
     
-    // MARK: - life cycle -
+// MARK: - life cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBrown
         view.addSubview(tableView)
         setupConstraints()
+        loadPost()
     }
     
-    // MARK: - methods -
+// MARK: - methods -
+    
+    func loadPost() {
+        postService.addObserverForPost { [weak self] allPosts in
+            self?.post.append(contentsOf: allPosts)
+            print("///", allPosts)
+            self?.tableView.reloadData()
+        }
+    }
+    
+// MARK: - layout -
     
     func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
@@ -64,9 +81,9 @@ final class UsersFeedController: UIViewController {
 extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        return post.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -77,7 +94,8 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
             fatalError("could not dequeueReusableCell")
         }
         
-        cell.contentView.frame.size.width = tableView.frame.width
+        cell.update(post[indexPath.row])
+        //cell.contentView.frame.size.width = tableView.frame.width
         return cell
     }
 }

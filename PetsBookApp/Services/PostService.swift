@@ -24,14 +24,14 @@ class PostService {
     
     //MARK: - add photo
        
-    func uploadPost(_ image: UIImage, _ user: String, _ descript: String?, _ userName: String?, completion: @escaping (Error?) -> Void) {
+    func uploadPost(_ image: UIImage, _ user: String, _ descript: String?, _ userName: String?, completion: @escaping ([Post], Error?) -> Void) {
            
            // сначала загружаем фото в Storage
            let storageRef = Storage.storage().reference().child("image").child("\(UUID().uuidString).jpg")
            guard let imageData = image.jpegData(compressionQuality: 0.5) else {
                let error = NSError(domain: "gordeeva.PetsBookApp", code: -1)
                print("error-imageData")
-               completion(error)
+               completion([], error)
                return
            }
            
@@ -40,20 +40,20 @@ class PostService {
            
            storageRef.putData(imageData, metadata: metadata) { metadata, error in
                if let error = error {
-                   completion(error)
+                   completion([], error)
                    return
                }
                
                // если фото успешно загружено, то получаем ссылку на него
                storageRef.downloadURL { [self] url, error in
                    if let error = error {
-                       completion(error)
+                       completion([], error)
                        return
                    }
                    
                    guard let photoUrl = url else {
                        let error = NSError()
-                       completion(error)
+                       completion([], error)
                        return
                    }
                    
@@ -68,36 +68,63 @@ class PostService {
                    
                    userPhootoRef.setData(data) { error in
                        if let error = error {
-                           completion(error)
-                       } else {
-                           completion(nil)
-                       }
+                           completion([], error)
+                       } 
                    }
                }
            }
        }
-       
+    //Загрузка постов без отслеживания
+    func getPost(_ user: String,completion: @escaping ([Post]) -> Void) {
+        let query = dataBase.collection(.collectionPost)
+        query.whereField("user", isEqualTo: user).getDocuments { snapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            // ответ приходит в главном потоке
+            
+            let post = snapshot?.documents.compactMap({ snapshot in
+                try? snapshot.data(as: Post.self)
+            }) ?? []
+            completion(post)
+        }
+    }
     
-    func addObserverForPost(completion: @escaping (Post) -> Void) {
+       
+   // Загрузка постов с отслеживанием
+    func addObserverForPost(completion: @escaping ([Post]) -> Void) {
         dataBase.collection(.collectionPost).addSnapshotListener { snapshot, error in
             if let error = error {
                 print(error.localizedDescription)
             }
             // ответ приходит в главном потоке
-            if let info = snapshot?.documents.first {
-                do {
-                    let post = try info.data(as: Post.self)
-                    completion(post)
-                } catch {
-                    print(error)
-                }
-            } 
+            
+            let post = snapshot?.documents.compactMap({ snapshot in
+                try? snapshot.data(as: Post.self)
+            }) ?? []
+            completion(post)
         }
     }
     
     func removeListener() {
         listenRegistration?.remove()
     }
+    
+    //для преобразования ссылки на фото в UIImage
+    func getPhotoFromURL(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data, let image = UIImage(data: data) {
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        } .resume()
+    }
+
     
 }
 

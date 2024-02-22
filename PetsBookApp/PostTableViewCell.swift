@@ -8,8 +8,8 @@ import UIKit
 class PostTableViewCell: UITableViewCell {
     
     let profileTableHeaderView = ProfileTableHeaderView()
-    
-    
+    let post = [Post]()
+    let postService = PostService()
     
     // MARK: -
     
@@ -134,12 +134,16 @@ class PostTableViewCell: UITableViewCell {
         }
   */
     
-    func update(_ model: Event) {
-        autorLabel.text = model.author
-        if let im = model.image {
-            imagePost.image = UIImage(named: im)
+    func update(_ model: Post) {
+        autorLabel.text = model.userName
+        
+        postService.getPhotoFromURL(from: model.image) {[weak self] photo in
+            DispatchQueue.main.sync {
+                self?.imagePost.image = photo
+            }
         }
-        descriptionLabel.text = model.description
+        
+        descriptionLabel.text = model.descript
         
     }
     

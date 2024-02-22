@@ -31,4 +31,59 @@ extension UIViewController {
         present(alertController, animated: true)
     }
     
+    //test
+    /*
+    func showAddPost(_ user: String, _ image: String, completion: @escaping (Post) -> Void) {
+        let alertController = UIAlertController(title: "Создать описание", message: nil, preferredStyle: .alert)
+        alertController.addTextField()
+        alertController.addTextField()
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            let post = Post(user: user, image: image, descript: alertController.textFields?[0].text ?? "", userName: alertController.textFields?[1].text ?? "")
+            completion(post)
+        }
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
+    */
+    //other way
+    public func showAddInfoForPost(completion: @escaping (String?, UIImage?) -> Void) {
+        let alertController = UIAlertController(title: "Создать описание", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            let heihtConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+            
+            textField.textAlignment = .left
+            textField.contentVerticalAlignment = .top
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.addConstraint(heihtConstraint)
+        }
+        
+        let addPhotoAction = UIAlertAction(title: "Добавить фото", style: .default) { _ in
+            self.openPhotoVC { img in
+                let description = alertController.textFields?[0].text ?? ""
+                completion(description, img)
+            }
+            
+        }
+        alertController.addAction(addPhotoAction)
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    private func openPhotoVC(completion: @escaping (UIImage?) -> Void) {
+        let photoVC = PhotosViewController()
+        photoVC.didSelectPhoto = { [weak self] photo in
+            self?.handleSelectedPhoto(photo)
+            completion(photo)
+        }
+        present(photoVC, animated: true)
+    }
+    
+    private func handleSelectedPhoto(_ photo: UIImage) {
+        dismiss(animated: true)
+        loadViewIfNeeded()
+    }
 }

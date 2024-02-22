@@ -14,6 +14,8 @@ class PhotosViewController: UIViewController {
     var photos: [UIImage] = []
     var fileURLs: [String] = []
     
+    var didSelectPhoto: ((UIImage) -> Void)?
+    
     //fileprivate lazy var profile: [Profile] = Profile.make()
     var photoCollectionService = PhotoCollectionService.shared
     
@@ -98,6 +100,11 @@ class PhotosViewController: UIViewController {
     func loadSavedPhoto() {
         photos = photoCollectionService.loadSavedPhoto()
         collectionView.reloadData()
+    }
+    
+    func photoSelected(_ selectedPhoto: UIImage) {
+        didSelectPhoto?(selectedPhoto)
+        navigationController?.popViewController(animated: true)
     }
     
     private func setupCollectionView() {
@@ -194,6 +201,11 @@ extension PhotosViewController:  UICollectionViewDataSource, UICollectionViewDel
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         spacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedPhoto = photos[indexPath.item]
+        didSelectPhoto?(selectedPhoto)
     }
 }
 
