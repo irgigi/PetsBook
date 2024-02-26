@@ -8,11 +8,12 @@ import UIKit
 
 extension Notification.Name {
     static let customButtonTapped = Notification.Name("ButtonTapped")
+    static let subscribeButtonTapped = Notification.Name("SubscribeButtonTapped")
+    static let unSubscribeButtonTapped = Notification.Name("UnSubscribeButtonTapped")
 }
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
-    //static var userProfile: User2?
     var statusText: String?
     var nameText: String?
     var statusSaved: ((String?) -> Void)?
@@ -105,7 +106,6 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-    
         return(button)
     }()
     
@@ -119,9 +119,9 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-    
         return(button)
     }()
+    
     
 
 

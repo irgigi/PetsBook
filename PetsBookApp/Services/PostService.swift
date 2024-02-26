@@ -74,10 +74,11 @@ class PostService {
                }
            }
        }
-    //Загрузка постов без отслеживания
+    //Загрузка постов конкретного пользователя
     func getPost(_ user: String,completion: @escaping ([Post]) -> Void) {
+        removeListener()
         let query = dataBase.collection(.collectionPost)
-        query.whereField("user", isEqualTo: user).getDocuments { snapshot, error in
+        query.whereField("user", isEqualTo: user).addSnapshotListener { snapshot, error in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -93,6 +94,7 @@ class PostService {
        
    // Загрузка постов с отслеживанием
     func addObserverForPost(completion: @escaping ([Post]) -> Void) {
+        removeListener()
         dataBase.collection(.collectionPost).addSnapshotListener { snapshot, error in
             if let error = error {
                 print(error.localizedDescription)

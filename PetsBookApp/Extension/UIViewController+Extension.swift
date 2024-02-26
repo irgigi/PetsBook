@@ -79,6 +79,7 @@ extension UIViewController {
             self?.handleSelectedPhoto(photo)
             completion(photo)
         }
+        photoVC.photoButton.isHidden = true
         present(photoVC, animated: true)
     }
     

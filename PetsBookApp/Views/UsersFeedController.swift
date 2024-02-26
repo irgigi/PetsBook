@@ -5,14 +5,27 @@
 
 
 import UIKit
+import FirebaseAuth
 
 final class UsersFeedController: UIViewController {
     
     let postService = PostService()
+    let userService = UserService()
+    let subscribeService = SubscribeService.shared
     
 //MARK: -properties
     
     var post = [Post]()
+    
+    var value: String? {
+        didSet {
+            if let newValue = value {
+                subscribeService.subUser?(newValue)
+                print("/// - ///", newValue)
+            }
+        }
+    }
+    
     
 // MARK: - table -
     
@@ -51,8 +64,8 @@ final class UsersFeedController: UIViewController {
     
     func loadPost() {
         postService.addObserverForPost { [weak self] allPosts in
+            //self?.post = []
             self?.post.append(contentsOf: allPosts)
-            print("///", allPosts)
             self?.tableView.reloadData()
         }
     }
@@ -97,5 +110,13 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         cell.update(post[indexPath.row])
         //cell.contentView.frame.size.width = tableView.frame.width
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = post[indexPath.row]
+        //subscribeService.subUser?(selectedItem.user)
+        subscribeService.value = selectedItem.user
+        let openVC = OpenViewController(user: selectedItem.user)
+        present(openVC, animated: true)
     }
 }

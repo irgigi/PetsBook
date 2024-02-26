@@ -160,8 +160,7 @@ class PostTableViewCell: UITableViewCell {
             
             autorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             autorLabel.bottomAnchor.constraint(equalTo: imagePost.topAnchor, constant: 12),
-            autorLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            autorLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            autorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             autorLabel.widthAnchor.constraint(equalTo: widthAnchor),
             autorLabel.heightAnchor.constraint(equalToConstant: 50),
             

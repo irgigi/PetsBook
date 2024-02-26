@@ -58,8 +58,11 @@
 		86BABF962B710BEF004908EC /* ElementsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BABF952B710BEF004908EC /* ElementsCollectionViewCell.swift */; };
 		86BC1B9A2B831EDE00D65DD3 /* UsersFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC1B992B831EDE00D65DD3 /* UsersFeedTableViewCell.swift */; };
 		86BC1B9C2B83A1BC00D65DD3 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC1B9B2B83A1BC00D65DD3 /* MyTabBarController.swift */; };
+		86C185A72B89F23400EE1293 /* SubscribeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C185A62B89F23400EE1293 /* SubscribeService.swift */; };
 		86C539382B821FA70066F4FA /* OpenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C539372B821FA70066F4FA /* OpenViewController.swift */; };
 		86C5393A2B82236E0066F4FA /* UsersFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C539392B82236E0066F4FA /* UsersFeedController.swift */; };
+		86DAB4FC2B888A5F00BED091 /* OpenTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAB4FB2B888A5F00BED091 /* OpenTableView.swift */; };
+		86DAB4FE2B88938E00BED091 /* OpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAB4FD2B88938E00BED091 /* OpenTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,8 +92,11 @@
 		86BABF952B710BEF004908EC /* ElementsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsCollectionViewCell.swift; sourceTree = "<group>"; };
 		86BC1B992B831EDE00D65DD3 /* UsersFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFeedTableViewCell.swift; sourceTree = "<group>"; };
 		86BC1B9B2B83A1BC00D65DD3 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		86C185A62B89F23400EE1293 /* SubscribeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeService.swift; sourceTree = "<group>"; };
 		86C539372B821FA70066F4FA /* OpenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenViewController.swift; sourceTree = "<group>"; };
 		86C539392B82236E0066F4FA /* UsersFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFeedController.swift; sourceTree = "<group>"; };
+		86DAB4FB2B888A5F00BED091 /* OpenTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTableView.swift; sourceTree = "<group>"; };
+		86DAB4FD2B88938E00BED091 /* OpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,7 @@
 				863190692B80F70D00618C4F /* PhotoCollectionService.swift */,
 				86AAA0202B6F4F4C0098E32F /* FirestoreService.swift */,
 				8662CCBE2B84974F000F6EA2 /* PostService.swift */,
+				86C185A62B89F23400EE1293 /* SubscribeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -214,6 +221,8 @@
 			children = (
 				86C539362B821EC80066F4FA /* First */,
 				86C539372B821FA70066F4FA /* OpenViewController.swift */,
+				86DAB4FB2B888A5F00BED091 /* OpenTableView.swift */,
+				86DAB4FD2B88938E00BED091 /* OpenTableViewCell.swift */,
 				86C539392B82236E0066F4FA /* UsersFeedController.swift */,
 				86BC1B992B831EDE00D65DD3 /* UsersFeedTableViewCell.swift */,
 			);
@@ -334,7 +343,9 @@
 			files = (
 				86AAA0212B6F4F4C0098E32F /* FirestoreService.swift in Sources */,
 				862A0EB12B6BE24A007F7096 /* UIViewController+Extension.swift in Sources */,
+				86C185A72B89F23400EE1293 /* SubscribeService.swift in Sources */,
 				86AAA0252B6F6C8C0098E32F /* ProfileTableHeaderView.swift in Sources */,
+				86DAB4FE2B88938E00BED091 /* OpenTableViewCell.swift in Sources */,
 				86AAA0292B6F6D520098E32F /* PhotosTableViewCell.swift in Sources */,
 				86BABF922B710B20004908EC /* PhotosCollectionViewCell.swift in Sources */,
 				86C539382B821FA70066F4FA /* OpenViewController.swift in Sources */,
@@ -347,6 +358,7 @@
 				8631906A2B80F70D00618C4F /* PhotoCollectionService.swift in Sources */,
 				86AAA0272B6F6CFA0098E32F /* PostTableViewCell.swift in Sources */,
 				86BC1B9C2B83A1BC00D65DD3 /* MyTabBarController.swift in Sources */,
+				86DAB4FC2B888A5F00BED091 /* OpenTableView.swift in Sources */,
 				86BABF942B710B9B004908EC /* CollectionViewCell.swift in Sources */,
 				86C5393A2B82236E0066F4FA /* UsersFeedController.swift in Sources */,
 				8658668E2B74C9B100B94BEA /* UserService.swift in Sources */,

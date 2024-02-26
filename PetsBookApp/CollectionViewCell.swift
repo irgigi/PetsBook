@@ -5,58 +5,80 @@
 
 import UIKit
 
+
+
 class CollectionViewCell: UICollectionViewCell {
     
     
-
+// MARK: - Subview
     
-    let imageCollection: UIImageView = {
-        let image = UIImageView(frame: .zero)
-        let screenWidth = UIScreen.main.bounds.width
-        image.backgroundColor = .black
+    lazy var userCollection: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleToFill
         image.clipsToBounds = true
-        image.layer.cornerRadius = 6.0
-        image.contentMode = .scaleAspectFill
+        image.isUserInteractionEnabled = true
+        image.layer.cornerRadius = 20
+        image.layer.borderWidth = 5.0
+        image.layer.borderColor = UIColor.white.cgColor
         image.translatesAutoresizingMaskIntoConstraints = false
-
-       
+       // let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(userTapped))
+       // image.addGestureRecognizer(tapGestureRecognizer)
         return image
+    }()
+    
+    lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+        
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(imageCollection)
+        contentView.addSubview(userCollection)
+        contentView.addSubview(nameLabel)
         constraint()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-  /*
-    func setupImage(_ model: PostModel) {
-        
-        imageCollection.image = UIImage(named: model.image)
-        
-        }
-  */
     
     func setupImage(_ image: UIImage) {
         
-        imageCollection.image = image
+        userCollection.image = image
         
     }
     
+  
+    @objc func userTapped() {
+        print("nnn", "tap user")
+        //NotificationCenter.default.post(name: .unSubscribeButtonTapped, object: nil)
+    }
 
     
     func constraint() {
         NSLayoutConstraint.activate([
             
-            imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 12),
-            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            imageCollection.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageCollection.heightAnchor.constraint(equalTo: contentView.widthAnchor)
+            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            //nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            //nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            nameLabel.bottomAnchor.constraint(equalTo: userCollection.topAnchor, constant: -5),
+            nameLabel.widthAnchor.constraint(equalTo: userCollection.widthAnchor),
+            nameLabel.centerXAnchor.constraint(equalTo: userCollection.centerXAnchor),
+            nameLabel.heightAnchor.constraint(equalToConstant: 10),
+            
+            //userCollection.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+            userCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 12),
+            userCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            userCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            userCollection.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            //userCollection.heightAnchor.constraint(equalTo: contentView.widthAnchor)
             
         
         ])

@@ -6,26 +6,40 @@
 
 import UIKit
 
+
 class PhotosTableViewCell: UITableViewCell {
-    
 
     //let data = PostModel.make()
     //private var events = [Event]()
+    let subscribeService = SubscribeService()
     
-    let photoCollectionService = PhotoCollectionService.shared
-    var images: [UIImage] = []
+    var addImages: (([UIImage]) -> Void)?
+    
+    
+    var images: [UIImage] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    var names: [UserUID] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
     
-    let collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.sizeToFit()
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.register(ElementsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell_2")
-        
+
         return collectionView
     }()
+    
     
 
     
@@ -44,18 +58,22 @@ class PhotosTableViewCell: UITableViewCell {
         contentView.addSubview(collectionView)
         //collectionView.addSubview(imageCollection)
         constraint()
-        
-        loadSavedPhoto()
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func loadSavedPhoto() {
-        images = photoCollectionService.loadSavedPhoto()
+   /*
+    @objc private func unSubscribeButtonTapped(_ notification: Notification) {
+        print("nnn - here")
+        
+        print("nnn ->", selectedUser)
+            //let openVC = OpenViewController(user: selectedUser.user)
+            //self?.present(openVC, animated: true)
+        
     }
-
+*/
     
     func constraint() {
         NSLayoutConstraint.activate([
@@ -81,7 +99,9 @@ extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 1 {
-            return 1//images.count //data.count
+            print("/// ///", images.count)
+            return images.count
+             //data.count
         }
         return 1
     }
@@ -98,7 +118,10 @@ extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
             }
 // changed
             //cell.setupImage(images[indexPath.row])
-            //cell.setupImage(images[indexPath.row])
+            
+            cell.setupImage(images[indexPath.row])
+            cell.nameLabel.text = names[indexPath.row].userName
+            
             cell.contentView.frame.size.width = collectionView.bounds.width
             return cell
         } else {
@@ -110,8 +133,8 @@ extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
                 fatalError("error collection cell")
             }
             //cell.setupImage(data[indexPath.row])
-            cell.textLabel.text = "Photos"
-            cell.arrowButton.setImage(UIImage(systemName: "arrow.forward"), for: .normal)
+            cell.textLabel.text = "Мои подписки"
+            cell.arrowButton.setImage(UIImage(systemName: "arrowshape.forward.fill"), for: .normal)
             return cell
         }
        // return UICollectionViewCell()
@@ -137,9 +160,15 @@ extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
                     viewController.navigationController?.pushViewController(controller, animated: true)
                 }
             }
+        } else if indexPath.section == 1 {
+            
+            let selectItem = names[indexPath.row]
+            subscribeService.selectedUser = selectItem
+
         }
+    
     }
-        
+    
 }
 extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     

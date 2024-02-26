@@ -10,13 +10,16 @@ class ProfileViewController: UIViewController {
 
     let profileTableHeaderView = ProfileTableHeaderView()
     let photoCollectionService = PhotoCollectionService.shared
-    let photosCell = PhotosTableViewCell()
+    var photosCell = PhotosTableViewCell()
     
     let logoViewController = LogoViewController()
+    let usersFeedController = UsersFeedController()
+    
     private let firestoreService = FirestoreService()
     private let authService = AuthService()
     private let userService = UserService()
     private let postService = PostService()
+    private let subscribeService = SubscribeService.shared
     
     
     private var userID: String?
@@ -50,7 +53,19 @@ class ProfileViewController: UIViewController {
     private var post = [Post]()
     
     var images: [UIImage] = []
+    var subscribeUsers: [UIImage] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
+    var names: [UserUID] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+
+    var selUser: UserUID?
     
     // MARK: - table
     
@@ -85,7 +100,8 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-//MARK: - инициализатор принимает юзера
+
+ //MARK: - загрузка данных
     
     func loadAvatar(_ user: String) {
         //загружаем аватар, если есть
@@ -99,7 +115,6 @@ class ProfileViewController: UIViewController {
                             DispatchQueue.main.async {
                                 self?.profileTableHeaderView.imageView.image = image
                                 self?.ava = image
-                                self?.tableView.reloadData()
                             }
                         }
                     }
@@ -110,15 +125,50 @@ class ProfileViewController: UIViewController {
     
     func loadPost(_ user: String) {
         postService.getPost(user) { [weak self] allPosts in
+            self?.post = []
             self?.post.append(contentsOf: allPosts)
-            print("///", allPosts)
             self?.tableView.reloadData()
         }
     }
     
+    func loadSubscribeUsers(_ user: String) {
+        subscribeService.getAddedUsers(user) { [self] array in
+            self.subscribeUsers = []
+            for item in array {
+                self.userService.getListenerhAvatar(user: item.addUser) { userAva, error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        guard let addedUser = userAva?.user else { return }
+                        
+                        self.userService.fetchName(user: addedUser) { userName, error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            } else {
+                                guard let name = userName else { return }
+                                self.names.append(name)
+                            }
+                        }
+                        guard let urlAva = userAva else { return }
+                        self.userService.getAvaFromURL(from: urlAva.avatar) { [weak self] image in
+                            DispatchQueue.main.async { [weak self] in
+                                if let image = image {
+                                    self?.subscribeUsers.append(image)
+                                    self?.tableView.reloadData()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+//MARK: - инициализатор принимает юзера
+    
     init(user: FireBaseUser) {
         super.init(nibName: nil, bundle: nil)
-        
+
         forExit()
         
         userID = user.user.uid
@@ -127,6 +177,7 @@ class ProfileViewController: UIViewController {
              
             loadAvatar(id)
             loadPost(id)
+            loadSubscribeUsers(id)
             // загржаем статус, если есть
             userService.fetchStatus(user: id) {[weak self] (user, error) in
                 if let error = error {
@@ -159,41 +210,6 @@ class ProfileViewController: UIViewController {
                 }
             }
             
-            /*
-            userService.fetchAboutUser { [self] aboutUser in
-                let info = aboutUser.contains { $0.user == id }
-                if info {
-                    initialFetch()
-                    
-                }
-            }
-            
-            */
-            
-
-            
-    // переменная для хранения id user
-           // let userSFB = UserUID(userUID: id)
-            
-    // если в бд есть пользователь, то загружаем его данные; если нет - то создаем данные в бд
-            /*
-            userService.fetchDocument { [weak self] users in
-                for user in users {
-                    if id == user.user {
-                        print("load info")
-                    } else {
-                        let newUser = UserUID(userUID: id)
-                        self?.userService.addUser(newUser) { info in
-                            print("user DONE")
-                        }
-                    }
-                }
-            }
-            */
-            
-  //          firestoreService.loadImage(eventID: id) { [weak self] image in
-  //              self?.profileTableHeaderView.imageView.image = image
-  //          }
         }
         
     }
@@ -201,19 +217,7 @@ class ProfileViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
-    private func initialFetchEvents() {
-        userService.addObserverForEvents { [weak self] info in
-            self?.reloadTableView(with: info)
-        }
-    }
-    
-    private func initialFetch() {
-        userService.fetchAboutUser { [weak self] info in
-            self?.reloadTableView(with: info)
-        }
-    }
-     */
+
     private func reloadTableView(with userStatus: UserStatus) {
         self.aboutUser = userStatus
         if let st = userStatus.status {
@@ -239,7 +243,13 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .lightGray
         title = "Profile"
+        
         loadSavedPhoto()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(subscribeButtonTapped), name: .subscribeButtonTapped, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(unSubscribeButtonTapped), name: .unSubscribeButtonTapped, object: nil)
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTap), name: .customButtonTapped, object: nil)
         
@@ -282,20 +292,60 @@ class ProfileViewController: UIViewController {
     
 //MARK: -METHODS
     
+    //отслеживание подписки на пользователя
+    @objc private func subscribeButtonTapped(_ notification: Notification) {
+        if let id = userID {
+            guard let user = subscribeService.value else { return }
+            let subscibe = Subscribe(user: id, addUser: user)
+            
+            let openVC = OpenViewController(user: user)
+            
+            subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
+                if let error = error {
+                    print(error)
+                }
+                if !result {
+                    self?.subscribeService.addUserToUser(subscibe) { error in
+                        if let error = error {
+                            print(error)
+                        }
+
+                    }
+                }
+    
+            }
+        }
+    }
+  
+    @objc private func unSubscribeButtonTapped(_ notification: Notification) {
+        if let newValue = notification.object as? UserUID {
+            let openVC = OpenViewController(user: newValue.user)
+            if let id = userID {
+                subscribeService.checkSubscribe(id, addUser: newValue.user) { [self] result, error in
+                    if let error = error {
+                        print(error)
+                    }
+                    if result {
+                        tableView.reloadData()
+                    }
+                }
+            }
+            present(openVC, animated: true)
+        }
+    }
+    
+    
     @objc func buttonTap() {
         showAddInfoForPost { [self] descr, img in
-            print("///",descr)
-            print("///",img)
             guard let description = descr else { return }
             guard let image = img else { return }
             guard let id = userID else { return }
             guard let name = profileTableHeaderView.nameLabel.text else { return }
-            
-            postService.uploadPost(image, id, descr, name) { _,_  in
-                print("/// post upload")
+            postService.uploadPost(image, id, description, name) { [weak self] _,_  in
+                self?.tableView.reloadData()
             }
+            //loadPost(id)
         }
-        tableView.reloadData()
     }
     
     func forExit() {
@@ -381,8 +431,15 @@ class ProfileViewController: UIViewController {
             guard let text = text else { return }
             name = text
         }
-
-        navigationController?.pushViewController(logoViewController, animated: true)
+        authService.logoutUser { [weak self] error in
+            
+            if let logoVC = self?.logoViewController {
+                self?.navigationController?.pushViewController(logoVC, animated: true)
+            } else {
+                print(error)
+            }
+            
+        }
     }
     
     
@@ -501,8 +558,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 fatalError("could not dequeueReusableCell")
             }
             
+            cell.images = subscribeUsers
+            cell.names = names
             //cell.update(data[indexPath.row])
+
             cell.contentView.frame.size.width = tableView.frame.width
+            
+            
             return cell
         } else {
             
@@ -519,6 +581,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
+    
     
     func tableView(
         _ tableView: UITableView,
@@ -571,7 +634,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
        
     }
-    
     
 }
 

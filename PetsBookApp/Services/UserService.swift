@@ -279,6 +279,30 @@ final class UserService {
         }
     }
     
+    func getListenerhAvatar(user: String, completion: @escaping (UserAvatar?, Error?) -> Void) {
+        removeListener()
+        let query = dataBase.collection(.collectionAvatar)
+        query.whereField("user", isEqualTo: user).addSnapshotListener { (snapshot, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, error)
+            } else {
+                if let document = snapshot?.documents.first {
+                    do {
+                        let userAvatar = try document.data(as: UserAvatar.self)
+                        completion(userAvatar, nil)
+                    } catch {
+                        completion(nil, error)
+                    }
+
+                } else {
+                    completion(nil, nil)
+                }
+            }
+        }
+    }
+    
     func getAvaFromURL(from urlString: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
