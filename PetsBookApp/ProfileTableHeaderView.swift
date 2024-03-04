@@ -6,11 +6,7 @@ import UIKit
 
 // MARK: - delegate
 
-extension Notification.Name {
-    static let customButtonTapped = Notification.Name("ButtonTapped")
-    static let subscribeButtonTapped = Notification.Name("SubscribeButtonTapped")
-    static let unSubscribeButtonTapped = Notification.Name("UnSubscribeButtonTapped")
-}
+
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
     

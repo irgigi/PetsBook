@@ -63,9 +63,9 @@ class SubscribeService {
     }
 
     
-    func addUserToUser(_ subscribe: Subscribe, completion: @escaping (Error?) -> Void) {
+    func addUserToUser(_ subscribe: Subscribe, completion: @escaping (Subscribe?, Error?) -> Void) {
         
-        _ = try? dataBase.collection(.collectionSubscribe).addDocument(from: subscribe) { error in
+        _ = try? dataBase.collection(.collectionSubscribe).addDocument(from: subscribe) { [weak self] error in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -73,17 +73,49 @@ class SubscribeService {
                 print("НЕЛЬЗЯ ПОДПИСАТЬСЯ НА СЕБЯ")
                 return
             }
+            
+            self?.fetchSubscribe(completion: completion)
+            
+            
             print("userName DONE")
         }
-         
     }
     
+    
+    
+    
+    func fetchSubscribe(completion: @escaping (Subscribe?, Error?) -> Void) {
+        
+        let query = dataBase.collection(.collectionSubscribe)
+        query.getDocuments { (snapshot, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil, error)
+            } else {
+                if let document = snapshot?.documents.first {
+                    do {
+                        let users = try document.data(as: Subscribe.self)
+                        completion(users, nil)
+                    } catch {
+                        completion(nil, error)
+                    }
+
+                } else {
+                    completion(nil, nil)
+                }
+            }
+        }
+    }
+    
+    
     func deleteSubscribe(_ subscribe: Subscribe, completion: @escaping (Error?) -> Void) {
+        removeListener()
         let collection = dataBase.collection(.collectionSubscribe)
         let query = collection.whereField("user", isEqualTo: subscribe.user)
             .whereField("addUser", isEqualTo: subscribe.addUser)
             .limit(to: 1)
-        query.getDocuments { (snapshot, error) in
+        query.addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error)
             } else {
@@ -107,18 +139,35 @@ class SubscribeService {
     
     //загрузка подписок пользователя
     func getAddedUsers(_ user: String, completion: @escaping ([Subscribe]) -> Void) {
-        removeListener()
         let query = dataBase.collection(.collectionSubscribe)
-        query.whereField("user", isEqualTo: user).addSnapshotListener { snapshot, error in
+        query.whereField("user", isEqualTo: user).getDocuments { snapshot, error in
             if let error = error {
                 print(error.localizedDescription)
+            } else {
+                var subscribers: [Subscribe] = []
+                if let informations = snapshot?.documents {
+                    for document in informations {
+                        if let addUser = document.data()["addUser"] as? String {
+                            let subscribe = Subscribe(user: user, addUser: addUser)
+                            subscribers.append(subscribe)
+                        }
+                    }
+                }
+                completion(subscribers)
+                
             }
-            // ответ приходит в главном потоке
             
+            
+            
+            
+           /*
+            // ответ приходит в главном потоке
             let subscribes = snapshot?.documents.compactMap({ snapshot in
                 try? snapshot.data(as: Subscribe.self)
             }) ?? []
+            print("---", subscribes)
             completion(subscribes)
+           */
         }
     }
     

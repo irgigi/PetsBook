@@ -216,7 +216,7 @@ final class UserService {
     
  //MARK: - AVA -
     
-    
+    //сохранение авы и получение ссылки
     func saveAvatar(_ user: String, _ image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             completion(.failure(NSError(domain: "gordeeva.PetsBookApp", code: -1)))
@@ -242,7 +242,7 @@ final class UserService {
             }
         }
     }
-    
+    //добавление записи юзер - ссылка на аватарку
     func addUserAvatar(_ avaUser: UserAvatar, completion: @escaping (UserAvatar) -> Void) {
         
         _ = try? dataBase.collection(.collectionAvatar).addDocument(from: avaUser, completion: { error in
@@ -254,7 +254,7 @@ final class UserService {
             
         })
     }
-    
+    //получение данных
     func fetchAvatar(user: String, completion: @escaping (UserAvatar?, Error?) -> Void) {
         
         let query = dataBase.collection(.collectionAvatar)
@@ -279,6 +279,53 @@ final class UserService {
         }
     }
     
+    //для загрузки подписок с именем
+    func getAvatarAndName(forUser user: String, completion: @escaping ((avatar: String?, name: String?)) -> Void) {
+        var userData: (avatar: String?, name: String?) = (nil, nil)
+        let dispatchGroup = DispatchGroup()
+        
+        //запрос к коллекции UserAvatar
+        dispatchGroup.enter()
+        dataBase.collection(.collectionAvatar).whereField("user", isEqualTo: user).getDocuments { (snapshot, error) in
+            do {
+                dispatchGroup.leave()
+            }
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let document = snapshot?.documents.first {
+                let data = document.data()
+                userData.avatar = data["avatar"] as? String
+            }
+        }
+        
+        //запрос к колекции UserUID
+        dispatchGroup.enter()
+        dataBase.collection(.collectionUserName).whereField("user", isEqualTo: user).getDocuments { (snapshot, error) in
+            do {
+                dispatchGroup.leave()
+            }
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let document = snapshot?.documents.first {
+                let data = document.data()
+                userData.name = data["name"] as? String
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(userData)
+        }
+    }
+    
+    //для загрузки подписок
     func getListenerhAvatar(user: String, completion: @escaping (UserAvatar?, Error?) -> Void) {
         removeListener()
         let query = dataBase.collection(.collectionAvatar)
@@ -291,6 +338,7 @@ final class UserService {
                 if let document = snapshot?.documents.first {
                     do {
                         let userAvatar = try document.data(as: UserAvatar.self)
+                        print("service - ", userAvatar.user)
                         completion(userAvatar, nil)
                     } catch {
                         completion(nil, error)
@@ -302,7 +350,7 @@ final class UserService {
             }
         }
     }
-    
+    //для загрузки фото по ссылке
     func getAvaFromURL(from urlString: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
@@ -317,6 +365,46 @@ final class UserService {
         } .resume()
     }
     
+    //метод обновления данных в базе при добавлении
+    func updateUserAvatar(_ avaUser: UserAvatar, completion: @escaping (UserAvatar) -> Void) {
+        let query = dataBase.collection(.collectionAvatar).whereField("user", isEqualTo: avaUser.user)
+        
+        query.getDocuments { [self] (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let documents = snapshot?.documents, !documents.isEmpty {
+                //если найдены документы, то обновляем
+                guard let document = documents.first else {
+                    return
+                }
+                
+                let userRef = document.reference
+                
+                userRef.updateData([
+                    "avatar": avaUser.avatar
+                ]) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    print("Update avatar!")
+                    completion(avaUser)
+                }
+            } else {
+                // если документы не найдены, то добавляем
+                let _ = try? dataBase.collection(.collectionAvatar).addDocument(from: avaUser) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    completion(avaUser)
+                }
+            }
+        }
+    }
     
     
   //MARK: - -

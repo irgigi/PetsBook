@@ -6,20 +6,24 @@
 import UIKit
 import Photos
 
+
+
 class ProfileViewController: UIViewController {
 
     let profileTableHeaderView = ProfileTableHeaderView()
     let photoCollectionService = PhotoCollectionService.shared
     var photosCell = PhotosTableViewCell()
+    var postCell = PostTableViewCell()
     
     let logoViewController = LogoViewController()
     let usersFeedController = UsersFeedController()
     
     private let firestoreService = FirestoreService()
-    private let authService = AuthService()
+    private let authService = AuthService.shared
     private let userService = UserService()
     private let postService = PostService()
     private let subscribeService = SubscribeService.shared
+    private let likeService = LikeService()
     
     
     private var userID: String?
@@ -35,6 +39,7 @@ class ProfileViewController: UIViewController {
     enum CellReuseID: String {
         case base = "BaseTableViewCell_ReuseID"
         case custom = "CustomTableViewCell_ReuseID"
+        case info = "ElementViewCell_ReuseID"
     }
     
     private enum HeaderFooterReuseID: String {
@@ -51,8 +56,15 @@ class ProfileViewController: UIViewController {
     private var userUID = [UserUID]()
     private var userStatus = [UserStatus]()
     private var post = [Post]()
+    private var subscribers = [UserAvatarAndName]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     var images: [UIImage] = []
+    
+    
     var subscribeUsers: [UIImage] = [] {
         didSet {
             tableView.reloadData()
@@ -66,6 +78,9 @@ class ProfileViewController: UIViewController {
     }
 
     var selUser: UserUID?
+    
+
+    
     
     // MARK: - table
     
@@ -87,6 +102,10 @@ class ProfileViewController: UIViewController {
         tableView.register(
             PhotosTableViewCell.self,
             forCellReuseIdentifier: CellReuseID.custom.rawValue)
+        
+        tableView.register(
+            ElementTabelViewCell.self,
+            forCellReuseIdentifier: CellReuseID.info.rawValue)
         
         tableView.register(
             ProfileTableHeaderView.self,
@@ -132,34 +151,62 @@ class ProfileViewController: UIViewController {
     }
     
     func loadSubscribeUsers(_ user: String) {
+        subscribers = []
         subscribeService.getAddedUsers(user) { [self] array in
-            self.subscribeUsers = []
+         
             for item in array {
-                self.userService.getListenerhAvatar(user: item.addUser) { userAva, error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        guard let addedUser = userAva?.user else { return }
-                        
-                        self.userService.fetchName(user: addedUser) { userName, error in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            } else {
-                                guard let name = userName else { return }
-                                self.names.append(name)
-                            }
-                        }
-                        guard let urlAva = userAva else { return }
-                        self.userService.getAvaFromURL(from: urlAva.avatar) { [weak self] image in
-                            DispatchQueue.main.async { [weak self] in
-                                if let image = image {
-                                    self?.subscribeUsers.append(image)
-                                    self?.tableView.reloadData()
-                                }
+                /*
+                self.userService.getAvatarAndName(forUser: item.user) { (avatar: String?, name: String?) in
+                    
+                    guard let urlAva = avatar else { return }
+                    guard let name = name else { return }
+                    self.userService.getAvaFromURL(from: urlAva) { [weak self] image in
+                        DispatchQueue.main.async { [weak self] in
+                            if let image = image {
+                                var data = UserAvatarAndName(ava: image, name: name)
+                                self?.data.append(data)
+                                self?.tableView.reloadData()
                             }
                         }
                     }
                 }
+                
+                */
+                self.userService.getListenerhAvatar(user: item.addUser) { userAva, error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        guard let addedUser = userAva?.avatar else { return }
+                        
+                        self.userService.fetchName(user: item.addUser) { [weak self] userName, error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            } else {
+                                guard let name = userName?.userName else { return }
+                                guard let selectUser = userName?.user else { return }
+                                //self?.names.append(name)
+                                //self?.tableView.reloadData()
+                                //guard let urlAva = userAva else { return }
+                                self?.userService.getAvaFromURL(from: addedUser) { [weak self] image in
+                                    DispatchQueue.main.async { [weak self] in
+                                        if let image = image {
+                                            //self?.subscribeUsers.append(image)
+                                            //guard let id = userName?.user else { return }
+                                            let userInfo = UserUID(user: selectUser, userName: name)
+                                            let info = UserAvatarAndName(user: userInfo, ava: image)
+                                            self?.subscribers.append(info)
+                                            self?.tableView.reloadData()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        
+                    }
+                }
+            
+                
             }
         }
     }
@@ -172,12 +219,17 @@ class ProfileViewController: UIViewController {
         forExit()
         
         userID = user.user.uid
+        
         let userMail = user.user.email
         if let id = userID {
+            
+            //для других взаимодействий
+
+            authService.getUser(id)
              
             loadAvatar(id)
             loadPost(id)
-            loadSubscribeUsers(id)
+            //loadSubscribeUsers(id)
             // загржаем статус, если есть
             userService.fetchStatus(user: id) {[weak self] (user, error) in
                 if let error = error {
@@ -200,7 +252,6 @@ class ProfileViewController: UIViewController {
                     if let us = user {
                         if let n = us.userName {
                             self?.profileTableHeaderView.nameLabel.text = n
-                            print("?", n)
                             self?.tableView.reloadData()
                         }
                     } else {
@@ -246,14 +297,17 @@ class ProfileViewController: UIViewController {
         
         loadSavedPhoto()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(subscribeButtonTapped), name: .subscribeButtonTapped, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(subscribeButtonTapped), name: .subscribeButtonTapped, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(unSubscribeButtonTapped), name: .unSubscribeButtonTapped, object: nil)
+        
+        //NotificationCenter.default.addObserver(self, selector: #selector(deleteButtonTapped), name: .deleteButtonTapped, object: nil)
+        
 
         
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTap), name: .customButtonTapped, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: NSNotification.Name("ImageTapped"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: .imageTapped, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: Notification.Name("statusTextChanged"), object: nil)
         
@@ -273,7 +327,8 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         setupTabBar()
         forExit()
-        tableView.reloadData()
+        guard let user = userID else { return }
+        loadSubscribeUsers(user)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -292,31 +347,43 @@ class ProfileViewController: UIViewController {
     
 //MARK: -METHODS
     
+
+    
+    /*
     //отслеживание подписки на пользователя
     @objc private func subscribeButtonTapped(_ notification: Notification) {
         if let id = userID {
             guard let user = subscribeService.value else { return }
             let subscibe = Subscribe(user: id, addUser: user)
-            
             let openVC = OpenViewController(user: user)
-            
             subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
                 if let error = error {
                     print(error)
                 }
                 if !result {
-                    self?.subscribeService.addUserToUser(subscibe) { error in
-                        if let error = error {
-                            print(error)
+                    
+                    if id == user {
+                        self?.showAllert(message: "На себя подписаться нельзя!")
+                    } else {
+                        self?.subscribeService.addUserToUser(subscibe) { [weak self] error, result  in
+                            if let error = error {
+                                print(error)
+                            }
+                            print("nnn subscribe done")
+                            if (result != nil) {
+                                openVC.openTableHeaderView.button.isSelected = true
+                                self?.tableView.reloadData()
+                            }
+                            
                         }
-
                     }
+                    
                 }
-    
             }
+            
         }
     }
-  
+  */
     @objc private func unSubscribeButtonTapped(_ notification: Notification) {
         if let newValue = notification.object as? UserUID {
             let openVC = OpenViewController(user: newValue.user)
@@ -326,14 +393,40 @@ class ProfileViewController: UIViewController {
                         print(error)
                     }
                     if result {
-                        tableView.reloadData()
+                        openVC.updateData = { [weak self] in
+                            self?.tableView.reloadData()
+                        }
                     }
                 }
             }
             present(openVC, animated: true)
         }
     }
-    
+    /*
+    @objc private func deleteButtonTapped(_ notification: Notification) {
+        if let id = userID {
+            print("nnn 1")
+            guard let user = subscribeService.value else { return }
+            let subscibe = Subscribe(user: id, addUser: user)
+            print("nnn 2")
+            subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
+                if let error = error {
+                    print(error)
+                }
+                print("nnn 3")
+                if result {
+                    self?.subscribeService.deleteSubscribe(subscibe) { error in
+                        if let error = error {
+                            print(error)
+                        }
+                        print("nnn 4")
+                    }
+                }
+            }
+            
+        }
+    }
+    */
     
     @objc func buttonTap() {
         showAddInfoForPost { [self] descr, img in
@@ -461,9 +554,10 @@ class ProfileViewController: UIViewController {
                     switch result {
                     case .success(let avaString):
                         let userAva = UserAvatar(user: user, avatar: avaString)
-                        self?.userService.addUserAvatar(userAva) { userAva in
+                        self?.userService.updateUserAvatar(userAva) { userAva in
                             print("AVA saved")
                         }
+                        self?.tableView.reloadData()
                     case .failure(let error):
                         print(error)
                     }
@@ -535,12 +629,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
+        } else if section == 1 {
+            return  1
         } else {
             return  post.count
         }
@@ -549,7 +645,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: CellReuseID.custom.rawValue,
@@ -558,15 +654,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 fatalError("could not dequeueReusableCell")
             }
             
-            cell.images = subscribeUsers
-            cell.names = names
+            //cell.collectionView.reloadData()
+            //cell.names = names
             //cell.update(data[indexPath.row])
-
+            NotificationCenter.default.post(name: .dataButtonTapped, object: data)
+            cell.info = subscribers
             cell.contentView.frame.size.width = tableView.frame.width
             
             
             return cell
-        } else {
+        } else if indexPath.section == 2 {
             
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: CellReuseID.base.rawValue,
@@ -578,10 +675,31 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             cell.update(post[indexPath.row])
             return cell
             
+        } else if indexPath.section == 0 {
+            
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: CellReuseID.info.rawValue,
+                for: indexPath
+            ) as? ElementTabelViewCell else {
+                fatalError("could not dequeueReusableCell")
+            }
+            //cell.update(data[indexPath.row])
+            cell.textLabel?.text = "Моя фотогалерея"
+            cell.arrowButton.setImage(UIImage(systemName: "arrowshape.forward.fill"), for: .normal)
+            cell.contentView.frame.size.width = tableView.frame.width
+            return cell
+        } else {
+            return UITableViewCell()
         }
         
     }
     
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 0 {
+            return "test"
+        }
+        return ""
+    }
     
     func tableView(
         _ tableView: UITableView,
@@ -605,8 +723,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if indexPath.section == 0 {
-            return 190
+            return 50
+        }
+        
+        if indexPath.section == 1 {
+            return 130
         } else {
             return UITableView.automaticDimension
         }
@@ -634,6 +757,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
        
     }
+    
     
 }
 

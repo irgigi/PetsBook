@@ -40,6 +40,7 @@
 		8631906A2B80F70D00618C4F /* PhotoCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863190692B80F70D00618C4F /* PhotoCollectionService.swift */; };
 		865689852B7F7F1000FBD796 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865689842B7F7F1000FBD796 /* PhotoService.swift */; };
 		8658668E2B74C9B100B94BEA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658668D2B74C9B100B94BEA /* UserService.swift */; };
+		865D1E012B91F722006D632C /* ElementTabelViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D1E002B91F722006D632C /* ElementTabelViewCell.swift */; };
 		8662CCBF2B84974F000F6EA2 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662CCBE2B84974F000F6EA2 /* PostService.swift */; };
 		866BC8A82B67D33B007F3836 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8A72B67D33B007F3836 /* AppDelegate.swift */; };
 		866BC8AA2B67D33B007F3836 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8A92B67D33B007F3836 /* SceneDelegate.swift */; };
@@ -47,6 +48,9 @@
 		866BC8B12B67D33F007F3836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 866BC8B02B67D33F007F3836 /* Assets.xcassets */; };
 		866BC8B42B67D33F007F3836 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */; };
 		866BC8BC2B67F243007F3836 /* RegViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8BB2B67F243007F3836 /* RegViewController.swift */; };
+		869E83C32B8EF15000995854 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869E83C22B8EF15000995854 /* NotificationName.swift */; };
+		869E83C52B8F368800995854 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869E83C42B8F368800995854 /* LikeService.swift */; };
+		869E83C82B8F88C400995854 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869E83C72B8F88C400995854 /* UserModel.swift */; };
 		86AAA0212B6F4F4C0098E32F /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAA0202B6F4F4C0098E32F /* FirestoreService.swift */; };
 		86AAA0232B6F6C490098E32F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAA0222B6F6C490098E32F /* ProfileViewController.swift */; };
 		86AAA0252B6F6C8C0098E32F /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AAA0242B6F6C8C0098E32F /* ProfileTableHeaderView.swift */; };
@@ -72,6 +76,7 @@
 		863190692B80F70D00618C4F /* PhotoCollectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionService.swift; sourceTree = "<group>"; };
 		865689842B7F7F1000FBD796 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		8658668D2B74C9B100B94BEA /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		865D1E002B91F722006D632C /* ElementTabelViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementTabelViewCell.swift; sourceTree = "<group>"; };
 		8662CCBE2B84974F000F6EA2 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		866BC8A42B67D33B007F3836 /* PetsBookApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetsBookApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		866BC8A72B67D33B007F3836 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +86,9 @@
 		866BC8B32B67D33F007F3836 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		866BC8B52B67D33F007F3836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		866BC8BB2B67F243007F3836 /* RegViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegViewController.swift; sourceTree = "<group>"; };
+		869E83C22B8EF15000995854 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		869E83C42B8F368800995854 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
+		869E83C72B8F88C400995854 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		86AAA0202B6F4F4C0098E32F /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		86AAA0222B6F6C490098E32F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		86AAA0242B6F6C8C0098E32F /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
@@ -147,6 +155,7 @@
 				86AAA0202B6F4F4C0098E32F /* FirestoreService.swift */,
 				8662CCBE2B84974F000F6EA2 /* PostService.swift */,
 				86C185A62B89F23400EE1293 /* SubscribeService.swift */,
+				869E83C42B8F368800995854 /* LikeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -165,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				862A0EB02B6BE24A007F7096 /* UIViewController+Extension.swift */,
+				869E83C22B8EF15000995854 /* NotificationName.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -191,6 +201,7 @@
 				862A0EAE2B6BDB7F007F7096 /* Main */,
 				866BC8BF2B67F403007F3836 /* Sets */,
 				862A0EAB2B6BAD3F007F7096 /* Services */,
+				869E83C62B8F888000995854 /* Model */,
 				862A0EAF2B6BE202007F7096 /* Extension */,
 				86C539352B821E510066F4FA /* Views */,
 				86AAA0242B6F6C8C0098E32F /* ProfileTableHeaderView.swift */,
@@ -216,9 +227,18 @@
 			path = Sets;
 			sourceTree = "<group>";
 		};
+		869E83C62B8F888000995854 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				869E83C72B8F88C400995854 /* UserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		86C539352B821E510066F4FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				865D1E002B91F722006D632C /* ElementTabelViewCell.swift */,
 				86C539362B821EC80066F4FA /* First */,
 				86C539372B821FA70066F4FA /* OpenViewController.swift */,
 				86DAB4FB2B888A5F00BED091 /* OpenTableView.swift */,
@@ -343,11 +363,14 @@
 			files = (
 				86AAA0212B6F4F4C0098E32F /* FirestoreService.swift in Sources */,
 				862A0EB12B6BE24A007F7096 /* UIViewController+Extension.swift in Sources */,
+				869E83C52B8F368800995854 /* LikeService.swift in Sources */,
+				869E83C82B8F88C400995854 /* UserModel.swift in Sources */,
 				86C185A72B89F23400EE1293 /* SubscribeService.swift in Sources */,
 				86AAA0252B6F6C8C0098E32F /* ProfileTableHeaderView.swift in Sources */,
 				86DAB4FE2B88938E00BED091 /* OpenTableViewCell.swift in Sources */,
 				86AAA0292B6F6D520098E32F /* PhotosTableViewCell.swift in Sources */,
 				86BABF922B710B20004908EC /* PhotosCollectionViewCell.swift in Sources */,
+				869E83C32B8EF15000995854 /* NotificationName.swift in Sources */,
 				86C539382B821FA70066F4FA /* OpenViewController.swift in Sources */,
 				866BC8AC2B67D33B007F3836 /* LogoViewController.swift in Sources */,
 				86BABF962B710BEF004908EC /* ElementsCollectionViewCell.swift in Sources */,
@@ -365,6 +388,7 @@
 				86BABF902B710A54004908EC /* PhotosViewController.swift in Sources */,
 				86BC1B9A2B831EDE00D65DD3 /* UsersFeedTableViewCell.swift in Sources */,
 				865689852B7F7F1000FBD796 /* PhotoService.swift in Sources */,
+				865D1E012B91F722006D632C /* ElementTabelViewCell.swift in Sources */,
 				86AAA0232B6F6C490098E32F /* ProfileViewController.swift in Sources */,
 				866BC8BC2B67F243007F3836 /* RegViewController.swift in Sources */,
 			);

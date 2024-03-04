@@ -11,6 +11,8 @@ class PostTableViewCell: UITableViewCell {
     let post = [Post]()
     let postService = PostService()
     
+    var likeAction: (() -> Void)?
+    
     // MARK: -
     
     let autorLabel: UILabel = {
@@ -45,10 +47,20 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.text = "Views: "
+        label.text = "0"
         return label
     }()
     
+    lazy var likesButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.setImage(UIImage(systemName: "heart.fill"), for: .selected)
+        button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    /*
     let viewsLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -56,13 +68,14 @@ class PostTableViewCell: UITableViewCell {
         label.text = "Likes: "
         return label
     }()
+    */
     
     let stackForLabels: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.spacing = 250
+        stackView.alignment = .leading
+        stackView.distribution = .fill
+        stackView.spacing = 0
         
         return stackView
     }()
@@ -79,9 +92,10 @@ class PostTableViewCell: UITableViewCell {
             reuseIdentifier: reuseIdentifier
         )
         
+        
+        //stackForLabels.addArrangedSubview(viewsLabel)
+        stackForLabels.addArrangedSubview(likesButton)
         stackForLabels.addArrangedSubview(likesLabel)
-        stackForLabels.addArrangedSubview(viewsLabel)
-     
         addSubviewInCell()
         
         consraintInCell()
@@ -114,11 +128,18 @@ class PostTableViewCell: UITableViewCell {
         selectedBackgroundView?.isHidden = !selected
     }
     
-    func addSubviewInCell() {
+//MARK: - METHODS
+    
+    @objc func likeButtonTapped() {
         
+    }
+
+    
+    func addSubviewInCell() {
+       
         let subviews = [autorLabel, imagePost, stackForLabels, descriptionLabel]
         for subview in subviews {
-            addSubview(subview)
+            contentView.addSubview(subview)
         }
         
     }
@@ -138,7 +159,7 @@ class PostTableViewCell: UITableViewCell {
         autorLabel.text = model.userName
         
         postService.getPhotoFromURL(from: model.image) {[weak self] photo in
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 self?.imagePost.image = photo
             }
         }
@@ -153,46 +174,50 @@ class PostTableViewCell: UITableViewCell {
         imagePost.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
-        viewsLabel.translatesAutoresizingMaskIntoConstraints = false
+       // viewsLabel.translatesAutoresizingMaskIntoConstraints = false
         stackForLabels.translatesAutoresizingMaskIntoConstraints = false
+        likesButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            autorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            autorLabel.bottomAnchor.constraint(equalTo: imagePost.topAnchor, constant: 12),
-            autorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            autorLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            autorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            autorLabel.bottomAnchor.constraint(equalTo: imagePost.topAnchor, constant: -12),
+            autorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            autorLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             autorLabel.heightAnchor.constraint(equalToConstant: 50),
             
             imagePost.topAnchor.constraint(equalTo: autorLabel.bottomAnchor),
             imagePost.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor),
-            imagePost.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imagePost.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imagePost.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imagePost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imagePost.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            imagePost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imagePost.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             imagePost.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             
-            descriptionLabel.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: -16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            descriptionLabel.bottomAnchor.constraint(equalTo: stackForLabels.topAnchor),
+            descriptionLabel.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: 20),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            descriptionLabel.bottomAnchor.constraint(equalTo: stackForLabels.topAnchor, constant: -10),
             
-            stackForLabels.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: -16),
-            stackForLabels.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            stackForLabels.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            stackForLabels.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackForLabels.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackForLabels.widthAnchor.constraint(equalTo: widthAnchor),
+            stackForLabels.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
+            stackForLabels.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            stackForLabels.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            //stackForLabels.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackForLabels.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            stackForLabels.heightAnchor.constraint(equalToConstant: 50),
+            stackForLabels.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            
+            likesButton.topAnchor.constraint(equalTo: stackForLabels.topAnchor, constant: 10),
+            likesButton.leadingAnchor.constraint(equalTo: stackForLabels.leadingAnchor, constant: 10),
+            likesButton.trailingAnchor.constraint(equalTo: likesLabel.leadingAnchor, constant: -10),
+            likesButton.bottomAnchor.constraint(equalTo: stackForLabels.bottomAnchor, constant: -10),
     
-            likesLabel.topAnchor.constraint(equalTo: stackForLabels.topAnchor),
-            likesLabel.leadingAnchor.constraint(equalTo: stackForLabels.leadingAnchor),
-            likesLabel.leftAnchor.constraint(equalTo: leftAnchor),
-            likesLabel.bottomAnchor.constraint(equalTo: stackForLabels.bottomAnchor),
+            likesLabel.topAnchor.constraint(equalTo: stackForLabels.topAnchor, constant: 10),
+            likesLabel.leadingAnchor.constraint(equalTo: stackForLabels.leadingAnchor, constant: 40),
+            likesLabel.widthAnchor.constraint(equalToConstant: 50),
+            likesLabel.bottomAnchor.constraint(equalTo: stackForLabels.bottomAnchor, constant: -10)
         
-            viewsLabel.topAnchor.constraint(equalTo: stackForLabels.topAnchor),
-            viewsLabel.trailingAnchor.constraint(equalTo: stackForLabels.trailingAnchor),
-            viewsLabel.rightAnchor.constraint(equalTo: rightAnchor),
-            viewsLabel.bottomAnchor.constraint(equalTo: stackForLabels.bottomAnchor)
+
       
         ])
         

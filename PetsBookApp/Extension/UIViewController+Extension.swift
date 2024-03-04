@@ -49,6 +49,25 @@ extension UIViewController {
     //other way
     public func showAddInfoForPost(completion: @escaping (String?, UIImage?) -> Void) {
         let alertController = UIAlertController(title: "Создать описание", message: nil, preferredStyle: .alert)
+        let textView = UITextView()
+        textView.textAlignment = .left
+        textView.isEditable = true
+        textView.isScrollEnabled = true
+        
+        alertController.view.addSubview(textView)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            textView.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 20),
+            textView.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 20),
+            textView.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -20),
+            textView.heightAnchor.constraint(equalToConstant: 300),
+            textView.widthAnchor.constraint(equalToConstant: 250),
+            
+            alertController.view.widthAnchor.constraint(equalToConstant: 300),
+            alertController.view.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        /*
         alertController.addTextField { (textField) in
             let heihtConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
             
@@ -57,10 +76,11 @@ extension UIViewController {
             textField.translatesAutoresizingMaskIntoConstraints = false
             textField.addConstraint(heihtConstraint)
         }
-        
+        */
         let addPhotoAction = UIAlertAction(title: "Добавить фото", style: .default) { _ in
             self.openPhotoVC { img in
-                let description = alertController.textFields?[0].text ?? ""
+                //let description = alertController.textFields?[0].text ?? ""
+                let description = textView.text
                 completion(description, img)
             }
             

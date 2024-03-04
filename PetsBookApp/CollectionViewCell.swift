@@ -49,9 +49,10 @@ class CollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupImage(_ image: UIImage) {
+    func setupImage(_ data: UserAvatarAndName) {
         
-        userCollection.image = image
+        userCollection.image = data.ava
+        nameLabel.text = data.user.userName
         
     }
     

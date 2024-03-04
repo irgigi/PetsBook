@@ -14,7 +14,13 @@ final class AuthService {
     let userService = UserService()
     static let shared = AuthService()
     
-    var currentUserHandler: ((User) -> Void)?
+    var currentUserHandler: String? {
+        didSet {
+            if let newUser = currentUserHandler {
+                print("nnn - user", newUser)
+            }
+        }
+    }
     
     
 //MARK: - валидация логина и пароля
@@ -78,13 +84,9 @@ final class AuthService {
     }
     
     //MARK: - получить пользователя
-    
-    func getUser() {
-        if let user = Auth.auth().currentUser {
-            if let user = Auth.auth().currentUser {
-                currentUserHandler?(user)
-            }
-        }
+
+    func getUser(_ id: String) {
+        currentUserHandler = id
     }
-    
+   
 }

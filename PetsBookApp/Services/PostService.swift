@@ -9,6 +9,7 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 
 struct Post: Codable {
+    @DocumentID var postID: String?
     let user: String
     let image: String
     let descript: String?
@@ -58,12 +59,14 @@ class PostService {
                    }
                    
                    // сохраняем ссылку на фото в cloud firestore
+                   let postID = UUID().uuidString
                    let userPhootoRef = dataBase.collection(.collectionPost).document()
                    let data: [String: Any] = [
-                       "user": user,
-                       "image": photoUrl.absoluteString,
-                       "descript": descript ?? "",
-                       "userName": userName ?? ""
+                    "postID": postID,
+                    "user": user,
+                    "image": photoUrl.absoluteString,
+                    "descript": descript ?? "",
+                    "userName": userName ?? ""
                    ]
                    
                    userPhootoRef.setData(data) { error in
@@ -107,6 +110,21 @@ class PostService {
             completion(post)
         }
     }
+    
+    // Загрузка постов без отслеживания
+     func addForPost(completion: @escaping ([Post]) -> Void) {
+         dataBase.collection(.collectionPost).getDocuments { snapshot, error in
+             if let error = error {
+                 print(error.localizedDescription)
+             }
+             // ответ приходит в главном потоке
+             
+             let post = snapshot?.documents.compactMap({ snapshot in
+                 try? snapshot.data(as: Post.self)
+             }) ?? []
+             completion(post)
+         }
+     }
     
     func removeListener() {
         listenRegistration?.remove()

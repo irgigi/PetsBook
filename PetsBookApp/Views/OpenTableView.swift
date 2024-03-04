@@ -7,6 +7,7 @@ import UIKit
 
 class OpenTableView: ProfileTableHeaderView {
     
+    
     lazy var button: UIButton = {
         let button = UIButton(type: .system)
         //button.setTitle("Добавить", for: .normal)
@@ -31,13 +32,22 @@ class OpenTableView: ProfileTableHeaderView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     @objc func buttonTapped() {
-        NotificationCenter.default.post(name: .subscribeButtonTapped, object: nil)
-        if !button.isSelected {
-            button.isSelected = true
-        } else {
-            button.isSelected = false
+        
+        NotificationCenter.default.post(name: .tapped, object: nil)
+    
+      /*
+        if let result = isSelect {
+            if result {
+                print("nnn selected")
+                NotificationCenter.default.post(name: .deleteButtonTapped, object: nil)
+            } else {
+                print("nnn unselected")
+                NotificationCenter.default.post(name: .subscribeButtonTapped, object: nil)
+            }
         }
+      */
     }
     
     func setup() {

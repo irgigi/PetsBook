@@ -11,10 +11,13 @@ class OpenViewController: UIViewController {
     
     let openTableHeaderView = OpenTableView()
     let profileTableHeaderView = ProfileTableHeaderView()
+    let openCell = OpenTableViewCell()
+    
     private let userService = UserService()
     private let postService = PostService()
     private let subscribeService = SubscribeService.shared
-    
+    private let authService = AuthService.shared
+    private let likeService = LikeService.shared
     
     enum CellReuseID: String {
         case base = "BaseTableViewCell_ReuseID"
@@ -25,6 +28,10 @@ class OpenViewController: UIViewController {
         case base = "TableSelectionFooterHeaderView_ReuseID"
     }
     
+    var baseUser: String?
+    var thisUser: String?
+    
+
     
 // MARK: - Data
     
@@ -33,6 +40,8 @@ class OpenViewController: UIViewController {
     private var post = [Post]()
     
    // var images: [UIImage] = []
+    
+    var updateData: (() -> Void)?
     
     // MARK: - table
     
@@ -76,6 +85,7 @@ class OpenViewController: UIViewController {
     init(user: String?) {
         super.init(nibName: nil, bundle: nil)
         if let id = user {
+            self.thisUser = id
             loadAvatar(id)
             loadPost(id)
             // загржаем статус, если есть
@@ -110,9 +120,31 @@ class OpenViewController: UIViewController {
                     }
                 }
             }
+            
+            if let fromUser = authService.currentUserHandler {
+                self.baseUser = fromUser
+                subscribeService.checkSubscribe(fromUser, addUser: id) { [weak self] result, error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    
+                    if result {
+                        
+                        self?.openTableHeaderView.button.isSelected = true
+                        self?.tableView.reloadData()
+                        
+                    } else {
+                        
+                        self?.openTableHeaderView.button.isSelected = false
+                        self?.tableView.reloadData()
+                    }
+                    
+                }
+                
+            }
 
         }
-        
+
     }
     
     required init?(coder: NSCoder) {
@@ -124,6 +156,9 @@ class OpenViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .lightGray
         title = "Profile"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tapped), name: .tapped, object: nil)
+        
 
         tableView.addSubview(openTableHeaderView)
         view.addSubview(tableView)
@@ -151,6 +186,124 @@ class OpenViewController: UIViewController {
     }
     
 //MARK: - METHODS
+    
+    func close() {
+        updateData?()
+        dismiss(animated: true)
+    }
+    
+
+    
+    @objc func tapped(_ notification: NSNotification) {
+        
+        guard let id = baseUser else { return }
+        guard let user = thisUser else { return }
+        
+        let subscibe = Subscribe(user: id, addUser: user)
+        
+        if openTableHeaderView.button.isSelected {
+            
+            subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
+                if let error = error {
+                    print(error)
+                }
+                if result {
+                    self?.subscribeService.deleteSubscribe(subscibe) { [weak self] error in
+                        if let error = error {
+                            print(error)
+                        }
+                        self?.openTableHeaderView.button.isSelected = false
+                        self?.tableView.reloadData()
+                    }
+                }
+            }
+        } else {
+            
+            subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
+                if let error = error {
+                    print(error)
+                }
+                if !result {
+                    
+                    if id == user {
+                        self?.showAllert(message: "На себя подписаться нельзя!")
+                    } else {
+                        self?.subscribeService.addUserToUser(subscibe) { [weak self] error, result  in
+                            if let error = error {
+                                print(error)
+                            }
+                            self?.openTableHeaderView.button.isSelected = true
+                            self?.tableView.reloadData()
+                            
+                            
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
+        /*
+        
+        if openTableHeaderView.button.isSelected {
+            if let id = user {
+                print("nnn from", id)
+                guard let user = fromUser else { return }
+                let subscibe = Subscribe(user: user, addUser: id)
+                print("nnn 2")
+                subscribeService.checkSubscribe(user, addUser: id) { [weak self] result, error in
+                    if let error = error {
+                        print(error)
+                    }
+                    print("nnn 3")
+                    if result {
+                        self?.subscribeService.deleteSubscribe(subscibe) { [weak self] error in
+                            if let error = error {
+                                print(error)
+                            }
+                            print("nnn 4")
+                            self?.openTableHeaderView.button.isSelected = false
+                        }
+                    }
+                }
+            }
+            
+            //NotificationCenter.default.post(name: .deleteButtonTapped, object: nil)
+        } else {
+            //NotificationCenter.default.post(name: .subscribeButtonTapped, object: nil)
+            if let id = fromUser {
+                guard let user = user else { return }
+                let subscibe = Subscribe(user: id, addUser: user)
+                let openVC = OpenViewController(user: user)
+                subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
+                    if let error = error {
+                        print(error)
+                    }
+                    if !result {
+                        
+                        if id == user {
+                            self?.showAllert(message: "На себя подписаться нельзя!")
+                        } else {
+                            self?.subscribeService.addUserToUser(subscibe) { [weak self] error, result  in
+                                if let error = error {
+                                    print(error)
+                                }
+                                print("nnn subscribe done")
+                                if (result != nil) {
+                                    openVC.openTableHeaderView.button.isSelected = true
+                                    self?.tableView.reloadData()
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                }
+                
+            }
+        }
+         */
+    }
         
     func loadAvatar(_ user: String) {
         //загружаем аватар, если есть
@@ -178,6 +331,29 @@ class OpenViewController: UIViewController {
             self?.post.append(contentsOf: allPosts)
             self?.tableView.reloadData()
         }
+    }
+    
+    func showFullScreenImage(_ image: UIImage?) {
+        guard let image = image else { return }
+        
+        let fullScreenViewController = UIViewController()
+        fullScreenViewController.view.backgroundColor = .systemBackground
+        
+        let imageView = UIImageView(frame: fullScreenViewController.view.bounds)
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = image
+        imageView.isUserInteractionEnabled = true
+        
+        let dismissTapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissFullScreenImage(_:)))
+        imageView.addGestureRecognizer(dismissTapGesture)
+        
+        fullScreenViewController.view.addSubview(imageView)
+        fullScreenViewController.modalPresentationStyle = .overFullScreen
+        present(fullScreenViewController, animated: true)
+    }
+    
+    @objc func dismissFullScreenImage(_ gesture: UITapGestureRecognizer) {
+        dismiss(animated: true)
     }
     
     
@@ -282,6 +458,17 @@ extension OpenViewController: UITableViewDelegate, UITableViewDataSource {
         headerView.isUserInteractionEnabled = true
         return headerView
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = post[indexPath.row]
+        let photoService = PhotoService()
+        photoService.getPhotoFromURL(from: selectedItem.image) { [weak self] image in
+            DispatchQueue.main.async { [weak self] in
+                guard let image = image else { return }
+                self?.showFullScreenImage(image)
+            }
+        }
     }
     
 }

@@ -16,12 +16,20 @@ class UsersFeedTableViewCell: PostTableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        likesButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         addSubview(newButton)
         setupElement()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+//MARK: - methods
+    
+    @objc func buttonPressed() {
+        NotificationCenter.default.post(name: .liked, object: nil)
+        likeAction?()
     }
     
     private func setupElement() {
