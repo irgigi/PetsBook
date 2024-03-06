@@ -30,7 +30,7 @@ class OpenViewController: UIViewController {
     
     var baseUser: String?
     var thisUser: String?
-    
+    var likeItem: String?
 
     
 // MARK: - Data
@@ -356,6 +356,48 @@ class OpenViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    func buttonTapped(at indexPath: IndexPath) {
+        print("tap here2")
+        
+        likeItem = post[indexPath.row].postID
+        guard let idPost = likeItem else { return }
+    
+        if let id = baseUser {
+            
+            likeService.checkLike(idPost, id) { [weak self] result in
+                if result {
+                    self?.likeService.unlikepost(idPost, id) { [weak self] error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        print("... unliked!")
+                        self?.openCell.likesButton.isSelected = true
+                        self?.tableView.reloadData()
+                    }
+                } else {
+                    self?.likeService.addLike(idPost, id) { [weak self] error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        } else {
+                            print("... liked!")
+                            self?.openCell.likesButton.isSelected = true
+                            self?.tableView.reloadData()
+                        }
+                        
+                    }
+                }
+            }
+          
+
+            /*
+            likeService.countLikes(forPostID: idPost) { [weak self] count in
+                self?.postCell.likesLabel.text = String(count)
+                self?.tableView.reloadData()
+            }
+             */
+        }
+    }
+    
     
     
 //MARK: - вспомогательные методы
@@ -414,8 +456,33 @@ extension OpenViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? OpenTableViewCell else {
             fatalError("could not dequeueReusableCell")
         }
-        //cell.update(data[indexPath.row])
+        
+        
+        cell.likeAction = { [weak self] in
+            self?.buttonTapped(at: indexPath)
+        }
+        
         cell.update(post[indexPath.row])
+        
+        
+        guard let id = baseUser else { return cell }
+        guard let post = post[indexPath.row].postID else { return cell }
+        
+        
+        
+        likeService.countLikes(forPostID: post) { count in
+            cell.likesLabel.text = String(count)
+        }
+        
+        
+        likeService.checkLike(post, id) { result in
+            if result {
+                cell.likesButton.isSelected = true
+            } else {
+                cell.likesButton.isSelected = false
+            }
+        }
+        
         return cell
             
         

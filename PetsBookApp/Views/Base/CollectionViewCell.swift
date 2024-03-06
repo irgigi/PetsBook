@@ -19,7 +19,7 @@ class CollectionViewCell: UICollectionViewCell {
         image.isUserInteractionEnabled = true
         image.layer.cornerRadius = 20
         image.layer.borderWidth = 5.0
-        image.layer.borderColor = UIColor.white.cgColor
+        image.layer.borderColor = Colors.almostWhite.cgColor
         image.translatesAutoresizingMaskIntoConstraints = false
        // let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(userTapped))
        // image.addGestureRecognizer(tapGestureRecognizer)
@@ -29,7 +29,7 @@ class CollectionViewCell: UICollectionViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
-        label.textColor = .black
+        label.textColor = Colors.myColor
         label.numberOfLines = 0
         label.textAlignment = .center
         label.isUserInteractionEnabled = true

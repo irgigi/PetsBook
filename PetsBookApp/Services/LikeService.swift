@@ -20,12 +20,12 @@ class LikeService {
     var listenRegistration: ListenerRegistration? //firebase protocol
     
     func addLike(_ postID: String, _ userFrom: String, completion: @escaping (Error?) -> Void) {
-        
+        removeListener()
         let likeRef = dataBase.collection(.collectionLike)
         
         likeRef.whereField("postID", isEqualTo: postID)
             .whereField("userFrom", isEqualTo: userFrom)
-            .getDocuments { snapshot, error in
+            .addSnapshotListener { snapshot, error in
                 if let error = error {
                     completion(error)
                     return
@@ -70,7 +70,18 @@ class LikeService {
                 completion(0)
                 return
             }
-            completion(snapshot.documents.count)
+            
+            var users: Set<String> = Set()
+            
+            for document in snapshot.documents {
+                let data = document.data()
+                if let userID = data["userFrom"] as? String {
+                    users.insert(userID)
+                }
+    
+            }
+            
+            completion(users.count)
         }
     }
     
@@ -93,6 +104,37 @@ class LikeService {
                 
                 completion(!snapshot.isEmpty)
             }
+    }
+    
+    func deleteLikes(forPostID postID: String, completion: @escaping (Error?) -> Void) {
+        removeListener()
+        let likesRef = dataBase.collection(.collectionLike)
+        
+        likesRef.whereField("postID", isEqualTo: postID).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(error)
+                return
+            }
+            
+            guard let snapshot = snapshot else {
+                completion(error)
+                return
+            }
+            
+            for document in snapshot.documents {
+                let docID = document.documentID
+                likesRef.document(docID).delete { error in
+                    if let error = error {
+                        completion(error)
+                        return
+                    }
+                }
+    
+            }
+            
+            completion(nil)
+        }
     }
     
     func unlikepost(_ postID: String, _ userFrom: String, completion: @escaping (Error?) -> Void) {
@@ -126,6 +168,10 @@ class LikeService {
                 }
             }
         
+    }
+    
+    func removeListener() {
+        listenRegistration?.remove()
     }
 
 }

@@ -28,8 +28,7 @@ class RegViewController: UIViewController {
     lazy var headTextLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.textColor = .systemBrown
-        //label.text = "РЕГИСТРАЦИЯ"
+        label.textColor = Colors.myColor
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -39,7 +38,7 @@ class RegViewController: UIViewController {
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .systemBrown
+        label.textColor = Colors.myColor
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         //label.text = "Напишите ваш e-mail и придумайте пароль"
@@ -65,13 +64,9 @@ class RegViewController: UIViewController {
     
     lazy var loginField: UITextField = {
         let text = UITextField()
-        
-        //text.backgroundColor = .systemGray6
         text.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         text.placeholder = "email"
         text.text = "test@mail.ru"
-        //text.textColor = UIColor.black
-        //text.tintColor = UIColor(named: "MyColor")
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
         text.autocapitalizationType = .none
@@ -79,7 +74,7 @@ class RegViewController: UIViewController {
         text.returnKeyType = .done
         text.clearButtonMode = .whileEditing
         text.contentVerticalAlignment = .center
-        text.layer.borderColor = UIColor.lightGray.cgColor
+        text.layer.borderColor = Colors.secondaryColor.cgColor
         text.layer.borderWidth = 0.5
         text.layer.cornerRadius = 10
         text.tag = 0
@@ -89,12 +84,9 @@ class RegViewController: UIViewController {
     
     lazy var passwordField: UITextField = {
         let text = UITextField()
-        //text.backgroundColor = .systemGray6
         text.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         text.placeholder = "password"
         text.text = "123456"
-        //text.textColor = UIColor.black
-        //text.tintColor = UIColor(named: "MyColor")
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
         text.autocapitalizationType = .none
@@ -103,7 +95,7 @@ class RegViewController: UIViewController {
         text.clearButtonMode = .whileEditing
         text.contentVerticalAlignment = .center
         text.isSecureTextEntry = true
-        text.layer.borderColor = UIColor.lightGray.cgColor
+        text.layer.borderColor = Colors.secondaryColor.cgColor
         text.layer.borderWidth = 0.5
         text.layer.cornerRadius = 10
         text.tag = 1
@@ -113,7 +105,6 @@ class RegViewController: UIViewController {
     
     lazy var regButton: UIButton = {
         let button = UIButton()
-        //button.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
         button.backgroundColor = .systemBrown
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(goToAccauntView), for: .touchUpInside)
@@ -124,21 +115,21 @@ class RegViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if traitCollection.userInterfaceStyle == .dark {
-            view.backgroundColor = .darkGray
+            view.backgroundColor = Colors.myColorLight
         } else {
-            view.backgroundColor = .white
+            view.backgroundColor = Colors.myColorLight
         }
         if let comp = completionHandler {
             let isReg = comp()
             if isReg {
-                headTextLabel.text = "РЕГИСТРАЦИЯ"
-                descriptionLabel.text = "Напишите ваш e-mail и придумайте пароль"
-                regButton.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
+                headTextLabel.text = "REGISTRATION"
+                descriptionLabel.text = "Write your e-mail and create a password"
+                regButton.setTitle("REGISTER", for: .normal)
                 isNewUser = true
             } else {
-                headTextLabel.text = "ВХОД"
-                descriptionLabel.text = "Введите ваш e-mail и пароль"
-                regButton.setTitle("ВОЙТИ", for: .normal)
+                headTextLabel.text = "ENTRANCE"
+                descriptionLabel.text = "Enter your e-mail and password"
+                regButton.setTitle("COME IN", for: .normal)
                 isNewUser = false
             }
         }
@@ -158,7 +149,7 @@ class RegViewController: UIViewController {
             if comp() {
                 
                 if !authService.isValidEmail(login) || !authService.isValidPassword(password) {
-                    showAllert(message: "Ошибка ввода email или пароля (не менее 6 символов)")
+                    showAllert(message: "Error: email or password (at least 6 characters)")
                     return
                 }
                 
@@ -168,7 +159,7 @@ class RegViewController: UIViewController {
                         print("\(user) зарегистрирован")
                         self?.showProfileViewController(user: user)
                     case .failure:
-                        self?.showAllert(message: "Этот пользователь уже зарегистрирован!")
+                        self?.showAllert(message: "This user is already registered!")
                     }
                 }
                 
@@ -181,7 +172,7 @@ class RegViewController: UIViewController {
                         print("\(user) загружен")
                         self?.showProfileViewController(user: user)
                     case .failure:
-                        self?.showAllert(message: "Этот пользователь не найден!")
+                        self?.showAllert(message: "This user not found!")
                     }
                 }
                 
@@ -271,12 +262,12 @@ private extension RegViewController {
         if let new = isNewUser {
             if new {
                 
-                let alertController = UIAlertController(title: "Введите имя питомца", message: nil, preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Enter pet's name", message: nil, preferredStyle: .alert)
                 alertController.addTextField { textField in
                     textField.placeholder = "text"
                 }
                 
-                let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
                     if let textField = alertController.textFields?.first, let text = textField.text, !text.isEmpty {
                         profileVC.profileTableHeaderView.nameLabel.text = text

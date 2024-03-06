@@ -28,11 +28,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)        
         let logoVC = UINavigationController(rootViewController: LogoViewController())
         let usersVC = UINavigationController(rootViewController: UsersFeedController())
-        usersVC.tabBarItem = UITabBarItem(title: "Питомцы", image: UIImage(systemName: "pawprint.fill"), tag: 0)
+        usersVC.tabBarItem = UITabBarItem(title: "PETS", image: UIImage(systemName: "pawprint.fill"), tag: 0)
         //let regVC = UINavigationController(rootViewController: RegViewController())
         
         let tabBarController = MyTabBarController.shared
         tabBarController.viewControllers = [usersVC]
+        tabBarController.tabBar.tintColor = Colors.myColor
+        tabBarController.tabBar.barTintColor = Colors.myColorLight
         window.rootViewController = logoVC
         window.makeKeyAndVisible()
         self.window = window
@@ -47,7 +49,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let tabBarController = MyTabBarController.shared
                 for user in userInfo {
                     if let us = user.value as? FireBaseUser {
-                        print("///", us)
                         if isUser {
                             return
                         } else {
@@ -95,7 +96,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if vc == profileVC {
                 return
             } else {
-                profileVC.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "teddybear.fill"), tag: 1)
+                profileVC.tabBarItem = UITabBarItem(title: "PROFILE", image: UIImage(systemName: "teddybear.fill"), tag: 1)
                 tabBarController.viewControllers?.append(profileVC)
             }
         }

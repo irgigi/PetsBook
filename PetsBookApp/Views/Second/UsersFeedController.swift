@@ -33,13 +33,13 @@ final class UsersFeedController: UIViewController {
     var likeItem: String?
     var likeUser: String?
     var baseUser: String?
-    
+  /*
     var count: Int? {
         didSet {
             print("... count", count)
         }
     }
-    
+   */
     
 // MARK: - table -
     
@@ -68,8 +68,8 @@ final class UsersFeedController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBrown
-        loadPost()
+        view.backgroundColor = Colors.myColorLight
+        
        // NotificationCenter.default.addObserver(self, selector: #selector(liked), name: .liked, object: nil)
 
         view.addSubview(tableView)
@@ -77,16 +77,22 @@ final class UsersFeedController: UIViewController {
         
         if let id = authService.currentUserHandler {
             self.baseUser = id
+            loadPost()
         }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         tableView.reloadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+
     
 // MARK: - methods -
     
@@ -111,6 +117,7 @@ final class UsersFeedController: UIViewController {
             self?.post = []
             self?.post.append(contentsOf: allPosts)
             self?.tableView.reloadData()
+
         }
     }
     
@@ -123,20 +130,24 @@ final class UsersFeedController: UIViewController {
             
             likeService.checkLike(idPost, id) { [weak self] result in
                 if result {
-                    self?.likeService.unlikepost(idPost, id) { error in
-                        if let error = error {
-                            print(error.localizedDescription)
-                        }
-                        self?.tableView.reloadData()
-                    }
-                } else {
-                    self?.likeService.addLike(idPost, id) { error in
+                    self?.likeService.unlikepost(idPost, id) { [weak self] error in
                         if let error = error {
                             print(error.localizedDescription)
                         } else {
+                            self?.postCell.likesButton.isSelected = false
+                            self?.tableView.reloadData()
+                            print("... unliked!")
+                        }
+                    }
+                } else {
+                    self?.likeService.addLike(idPost, id) { [weak self] error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        } else {
+                            self?.postCell.likesButton.isSelected = true
+                            self?.tableView.reloadData()
                             print("... liked!")
                         }
-                        self?.tableView.reloadData()
                     }
                 }
             }
@@ -149,10 +160,6 @@ final class UsersFeedController: UIViewController {
             }
              */
         }
-        
-        
-
-        
         
     }
     
@@ -209,18 +216,20 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
             cell.likesLabel.text = String(count)
         }
         
-        for _ in post {
-            likeService.checkLike(post, id) { result in
-                if result {
-                    cell.likesButton.isSelected = true
-                } else {
-                    cell.likesButton.isSelected = false
-                }
+        
+        
+       
+        likeService.checkLike(post, id) { result in
+            if result {
+                cell.likesButton.isSelected = true
+            } else {
+                cell.likesButton.isSelected = false
             }
-
         }
-          
-            
+
+        
+        
+
         
         
         
@@ -243,6 +252,5 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         let openVC = OpenViewController(user: selectedItem.user)
         present(openVC, animated: true)
         
-
     }
 }

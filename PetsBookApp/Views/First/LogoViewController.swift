@@ -16,8 +16,8 @@ class LogoViewController: UIViewController {
     
     lazy var regButton: UIButton = {
         let button = UIButton()
-        button.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
-        button.backgroundColor = .systemBrown
+        button.setTitle("REGISTER", for: .normal)
+        button.backgroundColor = Colors.primaryColor
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(goToRegView), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -26,8 +26,8 @@ class LogoViewController: UIViewController {
     
     lazy var textButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Уже есть аккаунт", for: .normal)
-        button.setTitleColor(.systemBrown, for: .normal)
+        button.setTitle("have account", for: .normal)
+        button.setTitleColor(Colors.primaryColor, for: .normal)
         button.addTarget(self, action: #selector(goToLogView), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -38,13 +38,15 @@ class LogoViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
         if traitCollection.userInterfaceStyle == .dark {
             view.backgroundColor = .darkGray
-            if let thisImage = UIImage(named: "petsbook_dark") {
+            if let thisImage = UIImage(named: "petsbook") {
                 logoView.image = thisImage
+                view.backgroundColor = Colors.myColorLight
             }
         } else {
             view.backgroundColor = .white
-            if let thisImage = UIImage(named: "petsbook_light") {
+            if let thisImage = UIImage(named: "petsbook") {
                 logoView.image = thisImage
+                view.backgroundColor = Colors.myColorLight
             }
         }
         setupUI()

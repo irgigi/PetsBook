@@ -17,8 +17,8 @@ class PostTableViewCell: UITableViewCell {
     
     let autorLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textColor = Colors.secondaryColor
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.numberOfLines = 2
         return label
     }()
@@ -29,6 +29,9 @@ class PostTableViewCell: UITableViewCell {
         image.backgroundColor = .black
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 10
+        image.layer.borderWidth = 1.0
+        image.layer.borderColor = Colors.almostWhite.cgColor
       /*
         image.transform = CGAffineTransform(scaleX: UIScreen.main.bounds.width/image.bounds.width, y: UIScreen.main.bounds.width/image.bounds.width)
        */
@@ -131,7 +134,9 @@ class PostTableViewCell: UITableViewCell {
 //MARK: - METHODS
     
     @objc func likeButtonTapped() {
-        
+        print("tap cell")
+        NotificationCenter.default.post(name: .liked, object: nil)
+        likeAction?()
     }
 
     
@@ -188,9 +193,9 @@ class PostTableViewCell: UITableViewCell {
             
             imagePost.topAnchor.constraint(equalTo: autorLabel.bottomAnchor),
             imagePost.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor),
-            imagePost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imagePost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             imagePost.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imagePost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imagePost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             imagePost.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             imagePost.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             

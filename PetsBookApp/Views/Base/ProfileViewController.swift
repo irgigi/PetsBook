@@ -80,7 +80,7 @@ class ProfileViewController: UIViewController {
     var selUser: UserUID?
     
 
-    
+    var likeItem: String?
     
     // MARK: - table
     
@@ -96,7 +96,10 @@ class ProfileViewController: UIViewController {
             PostTableViewCell.self,
             forCellReuseIdentifier: CellReuseID.base.rawValue
         )
-        
+        tableView.backgroundColor = Colors.myColorLight
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = Colors.myColor
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         tableView.setAndLayout(headerView: profileTableHeaderView)
         
         tableView.register(
@@ -292,18 +295,19 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .lightGray
-        title = "Profile"
-        
-        loadSavedPhoto()
-        
+        view.backgroundColor = Colors.myColorLight
+        title = "PROFILE"
+        let titleColor = [
+            NSAttributedString.Key.foregroundColor: Colors.myColor
+        ]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor as [NSAttributedString.Key : Any]
         //NotificationCenter.default.addObserver(self, selector: #selector(subscribeButtonTapped), name: .subscribeButtonTapped, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(unSubscribeButtonTapped), name: .unSubscribeButtonTapped, object: nil)
         
         //NotificationCenter.default.addObserver(self, selector: #selector(deleteButtonTapped), name: .deleteButtonTapped, object: nil)
         
-
+        NotificationCenter.default.addObserver(self, selector: #selector(likeButtonTapped), name: .liked, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTap), name: .customButtonTapped, object: nil)
         
@@ -327,6 +331,7 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         setupTabBar()
         forExit()
+        loadSavedPhoto()
         guard let user = userID else { return }
         loadSubscribeUsers(user)
     }
@@ -335,20 +340,66 @@ class ProfileViewController: UIViewController {
         super.viewWillDisappear(animated)
         forExit()
         //navigationController?.setNavigationBarHidden(false, animated: animated)
-        tableView.reloadData()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         forExit()
-        tableView.reloadData()
+        
 
     }
     
 //MARK: -METHODS
     
-
+    @objc func likeButtonTapped(_ notification: Notification) {
+        print("tap here")
+        tableView.reloadData()
+    }
+   
+    func buttonTapped(at indexPath: IndexPath) {
+        print("tap here2")
+        
+        likeItem = post[indexPath.row].postID
+        guard let idPost = likeItem else { return }
     
+        if let id = userID {
+            
+            likeService.checkLike(idPost, id) { [weak self] result in
+                if result {
+                    self?.likeService.unlikepost(idPost, id) { [weak self] error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        print("... unliked!")
+                        self?.postCell.likesButton.isSelected = true
+                        self?.tableView.reloadData()
+                    }
+                } else {
+                    self?.likeService.addLike(idPost, id) { [weak self] error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        } else {
+                            print("... liked!")
+                            self?.postCell.likesButton.isSelected = true
+                            self?.tableView.reloadData()
+                        }
+                        
+                    }
+                }
+            }
+          
+
+            /*
+            likeService.countLikes(forPostID: idPost) { [weak self] count in
+                self?.postCell.likesLabel.text = String(count)
+                self?.tableView.reloadData()
+            }
+             */
+        }
+    }
+
+
     /*
     //отслеживание подписки на пользователя
     @objc private func subscribeButtonTapped(_ notification: Notification) {
@@ -443,7 +494,7 @@ class ProfileViewController: UIViewController {
     
     func forExit() {
         
-        let exitButton = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(exitButtonTapped))
+        let exitButton = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitButtonTapped))
         navigationItem.rightBarButtonItem = exitButton
         navigationItem.rightBarButtonItem?.isHidden = false
         navigationItem.setHidesBackButton(true, animated: false)
@@ -574,6 +625,8 @@ class ProfileViewController: UIViewController {
     }
     
 
+    
+
     //MARK: - вспомогательные методы
     
     func resizeImage(_ image: UIImage, targetSize: CGSize) -> UIImage {
@@ -618,7 +671,7 @@ extension UITableView {
         NSLayoutConstraint.activate([
             headerView.widthAnchor.constraint(equalTo: widthAnchor)
         ])
-        
+        headerView.backgroundColor = Colors.myColorLight
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
         headerView.frame.size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -654,6 +707,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 fatalError("could not dequeueReusableCell")
             }
             
+            
             //cell.collectionView.reloadData()
             //cell.names = names
             //cell.update(data[indexPath.row])
@@ -671,8 +725,33 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             ) as? PostTableViewCell else {
                 fatalError("could not dequeueReusableCell")
             }
-            //cell.update(data[indexPath.row])
+            
+            
+            cell.likeAction = { [weak self] in
+                self?.buttonTapped(at: indexPath)
+            }
+            
             cell.update(post[indexPath.row])
+            
+            
+            guard let id = userID else { return cell }
+            guard let post = post[indexPath.row].postID else { return cell }
+            
+            
+            
+            likeService.countLikes(forPostID: post) { count in
+                cell.likesLabel.text = String(count)
+            }
+            
+            
+            likeService.checkLike(post, id) { result in
+                if result {
+                    cell.likesButton.isSelected = true
+                } else {
+                    cell.likesButton.isSelected = false
+                }
+            }
+
             return cell
             
         } else if indexPath.section == 0 {
@@ -683,8 +762,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             ) as? ElementTabelViewCell else {
                 fatalError("could not dequeueReusableCell")
             }
-            //cell.update(data[indexPath.row])
-            cell.textLabel?.text = "Моя фотогалерея"
+            //
+            cell.textLabel?.text = "My Photo Gallery"
             cell.arrowButton.setImage(UIImage(systemName: "arrowshape.forward.fill"), for: .normal)
             cell.contentView.frame.size.width = tableView.frame.width
             return cell
@@ -695,10 +774,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        /*
         if section == 0 {
             return "test"
         }
-        return ""
+         */
+        return " "
     }
     
     func tableView(
@@ -747,6 +828,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             ) as? ProfileTableHeaderView else {
                 fatalError("could not dequeueReusableCell")
             }
+            headerView.backgroundColor = Colors.myColorLight
             headerView.isUserInteractionEnabled = true
             return headerView
             
@@ -756,6 +838,25 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let post = post[indexPath.row]
+            guard let postID = post.postID else { return }
+            postService.deletePost(post) { [weak self] post in
+                self?.likeService.deleteLikes(forPostID: postID) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = .myColorLight
     }
     
     

@@ -144,6 +144,37 @@ class PostService {
             }
         } .resume()
     }
+    
+    func deletePost(_ event: Post, completion: @escaping (Post) -> Void) {
+        guard let docID = event.postID else { return }
+        dataBase.collection(.collectionPost).document(docID).delete { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            // подгружаем данные
+            self.fetchPost(completion: completion)
+            
+
+        }
+    }
+    
+    func fetchPost(completion: @escaping (Post) -> Void) {
+        
+        dataBase.collection(.collectionPost).getDocuments { snapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            // ответ приходит в главном потоке
+            if let document = snapshot?.documents.first {
+                do {
+                    let posts = try document.data(as: Post.self)
+                    completion(posts)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
 
     
 }

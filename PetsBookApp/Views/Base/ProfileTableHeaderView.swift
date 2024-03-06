@@ -37,14 +37,13 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     lazy var imageView: UIImageView = {
         let image = UIImageView()
-        //image.image = UIImage(named: "none_ava")
         image.contentMode = .scaleToFill
         image.clipsToBounds = true
         image.isUserInteractionEnabled = true
         //создание круглой рамки
         image.layer.cornerRadius = 60
-        image.layer.borderWidth = 3.0
-        image.layer.borderColor = UIColor.white.cgColor
+        image.layer.borderWidth = 2.0
+        image.layer.borderColor = Colors.almostWhite.cgColor
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
         image.addGestureRecognizer(tapGestureRecognizer)
         
@@ -53,10 +52,8 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
 
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        //var user: User2?
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
-        //label.text =       //userProfile?.name
+        label.textColor = Colors.secondaryColor
         label.numberOfLines = 0
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(nameTapped))
         label.isUserInteractionEnabled = true
@@ -67,26 +64,22 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
 
     lazy var statusLabel: UILabel = {
         let label = UILabel()
-        //var user: User2?
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = UIColor.gray
-        //label.text = userProfile?.status
-        
+        label.textColor = Colors.myColor
         return label
     }()
   
     lazy var textField: UITextField = {
         let text = UITextField()
-        
         text.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        text.textColor = UIColor.black
-        text.placeholder = " введите текст "
+        text.textColor = Colors.myColorLight
+        text.placeholder = " enter text "
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
         text.layer.cornerRadius = 12
         text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.black.cgColor
-        text.layer.backgroundColor = UIColor.white.cgColor
+        text.layer.borderColor = Colors.secondaryColor.cgColor
+        text.layer.backgroundColor = Colors.myColorLight?.cgColor
         text.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
 
         return text
@@ -94,11 +87,11 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     lazy var bigButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Set status", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
+        button.setTitle("set status", for: .normal)
+        button.backgroundColor = Colors.secondaryColor
+        button.setTitleColor(Colors.myColorLight, for: .normal)
         button.layer.cornerRadius = 5
-        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowColor = Colors.almostWhite.cgColor
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
@@ -107,11 +100,11 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     lazy var bigButton2: UIButton = {
         let button = UIButton()
-        button.setTitle("Add post", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
+        button.setTitle("add post", for: .normal)
+        button.backgroundColor = Colors.secondaryColor
+        button.setTitleColor(Colors.myColorLight, for: .normal)
         button.layer.cornerRadius = 5
-        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowColor = Colors.almostWhite.cgColor
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
@@ -122,17 +115,10 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
 
 
     override init(reuseIdentifier: String?) {
-        
         super.init(reuseIdentifier: reuseIdentifier)
-       
-        
+        backgroundColor = Colors.myColorLight
         addSubviews()
         elementConstraint()
-        
-  //      statusSaved = { st in
- //           guard let s = st else { return }
- //           print ("st ", s)
- //       }
     }
 
     required init?(coder: NSCoder) {
