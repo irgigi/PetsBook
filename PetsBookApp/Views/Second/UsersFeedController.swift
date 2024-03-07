@@ -51,6 +51,11 @@ final class UsersFeedController: UIViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         
+        tableView.backgroundColor = Colors.almostWhite
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = Colors.myColor
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        
         tableView.register(
             UsersFeedTableViewCell.self,
             forCellReuseIdentifier: "table"
@@ -70,7 +75,10 @@ final class UsersFeedController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Colors.myColorLight
         
+        title = NSLocalizedString("Posts", comment: "")
+        
        // NotificationCenter.default.addObserver(self, selector: #selector(liked), name: .liked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissedVC), name: .dissmissedVC, object: nil)
 
         view.addSubview(tableView)
         setupConstraints()
@@ -112,6 +120,11 @@ final class UsersFeedController: UIViewController {
 
     }
     */
+    
+    @objc private func dismissedVC(_ notification: Notification) {
+        tableView.reloadData()
+    }
+    
     func loadPost() {
         postService.addForPost { [weak self] allPosts in
             self?.post = []
@@ -200,6 +213,10 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
             fatalError("could not dequeueReusableCell")
         }
         
+        let selectedView = UIView()
+        selectedView.backgroundColor = Colors.myColorLight
+        cell.selectedBackgroundView = selectedView
+        
         cell.update(post[indexPath.row])
         //cell.contentView.frame.size.width = tableView.frame.width
         
@@ -226,12 +243,6 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
                 cell.likesButton.isSelected = false
             }
         }
-
-        
-        
-
-        
-        
         
         return cell
     }
@@ -239,7 +250,7 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let selectedItem = post[indexPath.row]
-        
+   
         
         //subscribeService.subUser?(selectedItem.user)
         subscribeService.value = selectedItem.user
@@ -253,4 +264,10 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         present(openVC, animated: true)
         
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = Colors.almostWhite
+    }
+    
+    
 }

@@ -49,7 +49,10 @@
 		866BC8B12B67D33F007F3836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 866BC8B02B67D33F007F3836 /* Assets.xcassets */; };
 		866BC8B42B67D33F007F3836 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */; };
 		866BC8BC2B67F243007F3836 /* RegViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866BC8BB2B67F243007F3836 /* RegViewController.swift */; };
+		866FC34C2B99B7BA009A74E6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866FC34B2B99B7BA009A74E6 /* StringExtension.swift */; };
+		866FC3532B99C07B009A74E6 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 866FC3522B99C07B009A74E6 /* Localizable.xcstrings */; };
 		8674287E2B975D80002A6EF1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8674287D2B975D80002A6EF1 /* Colors.swift */; };
+		8687BE102B988B7900509226 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8687BE0F2B988B7900509226 /* Fonts.swift */; };
 		869E83C32B8EF15000995854 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869E83C22B8EF15000995854 /* NotificationName.swift */; };
 		869E83C52B8F368800995854 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869E83C42B8F368800995854 /* LikeService.swift */; };
 		869E83C82B8F88C400995854 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869E83C72B8F88C400995854 /* UserModel.swift */; };
@@ -89,7 +92,12 @@
 		866BC8B32B67D33F007F3836 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		866BC8B52B67D33F007F3836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		866BC8BB2B67F243007F3836 /* RegViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegViewController.swift; sourceTree = "<group>"; };
+		866FC34B2B99B7BA009A74E6 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		866FC34D2B99B90F009A74E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		866FC34F2B99BC21009A74E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		866FC3522B99C07B009A74E6 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		8674287D2B975D80002A6EF1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		8687BE0F2B988B7900509226 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		869E83C22B8EF15000995854 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		869E83C42B8F368800995854 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
 		869E83C72B8F88C400995854 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -179,6 +187,7 @@
 			children = (
 				862A0EB02B6BE24A007F7096 /* UIViewController+Extension.swift */,
 				869E83C22B8EF15000995854 /* NotificationName.swift */,
+				866FC34B2B99B7BA009A74E6 /* StringExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -213,6 +222,7 @@
 				866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */,
 				866BC8B52B67D33F007F3836 /* Info.plist */,
 				862A0EA92B6BAB40007F7096 /* GoogleService-Info.plist */,
+				866FC3522B99C07B009A74E6 /* Localizable.xcstrings */,
 			);
 			path = PetsBookApp;
 			sourceTree = "<group>";
@@ -221,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				8674287D2B975D80002A6EF1 /* Colors.swift */,
+				8687BE0F2B988B7900509226 /* Fonts.swift */,
 			);
 			path = Sets;
 			sourceTree = "<group>";
@@ -351,6 +362,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 866BC89B2B67D33B007F3836;
 			packageReferences = (
@@ -372,6 +384,7 @@
 			files = (
 				866BC8B42B67D33F007F3836 /* LaunchScreen.storyboard in Resources */,
 				866BC8B12B67D33F007F3836 /* Assets.xcassets in Resources */,
+				866FC3532B99C07B009A74E6 /* Localizable.xcstrings in Resources */,
 				862A0EAA2B6BAB40007F7096 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,6 +404,7 @@
 				86C185A72B89F23400EE1293 /* SubscribeService.swift in Sources */,
 				86AAA0252B6F6C8C0098E32F /* ProfileTableHeaderView.swift in Sources */,
 				86DAB4FE2B88938E00BED091 /* OpenTableViewCell.swift in Sources */,
+				866FC34C2B99B7BA009A74E6 /* StringExtension.swift in Sources */,
 				86AAA0292B6F6D520098E32F /* PhotosTableViewCell.swift in Sources */,
 				86BABF922B710B20004908EC /* PhotosCollectionViewCell.swift in Sources */,
 				869E83C32B8EF15000995854 /* NotificationName.swift in Sources */,
@@ -402,6 +416,7 @@
 				862A0EAD2B6BAD60007F7096 /* AuthService.swift in Sources */,
 				866BC8AA2B67D33B007F3836 /* SceneDelegate.swift in Sources */,
 				8631906A2B80F70D00618C4F /* PhotoCollectionService.swift in Sources */,
+				8687BE102B988B7900509226 /* Fonts.swift in Sources */,
 				86AAA0272B6F6CFA0098E32F /* PostTableViewCell.swift in Sources */,
 				86BC1B9C2B83A1BC00D65DD3 /* MyTabBarController.swift in Sources */,
 				86DAB4FC2B888A5F00BED091 /* OpenTableView.swift in Sources */,
@@ -425,6 +440,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				866BC8B32B67D33F007F3836 /* Base */,
+				866FC34D2B99B90F009A74E6 /* ru */,
+				866FC34F2B99BC21009A74E6 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -437,6 +454,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -500,6 +518,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

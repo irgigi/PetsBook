@@ -1,0 +1,327 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    " enter text " : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "введите текст"
+          }
+        }
+      }
+    },
+    "Add photo" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить фото"
+          }
+        }
+      }
+    },
+    "add post" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "добавить пост"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        }
+      }
+    },
+    "COME IN" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ВОЙТИ"
+          }
+        }
+      }
+    },
+    "Create description" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Создать описание"
+          }
+        }
+      }
+    },
+    "email" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "емейл"
+          }
+        }
+      }
+    },
+    "Enter pet's name" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите имя питомца"
+          }
+        }
+      }
+    },
+    "Enter your e-mail and password" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите свой мейл и пароль"
+          }
+        }
+      }
+    },
+    "ENTRANCE" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ВХОД"
+          }
+        }
+      }
+    },
+    "Error: email or password (at least 6 characters)" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ошибка: емейл или пароль(не менее 6 символов)"
+          }
+        }
+      }
+    },
+    "Error!" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка!"
+          }
+        }
+      }
+    },
+    "Error! It's your account!" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка! Это ваш аккаунт!"
+          }
+        }
+      }
+    },
+    "Exit" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выход"
+          }
+        }
+      }
+    },
+    "HAVE ACCOUNT" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "УЖЕ ЕСТЬ АККАУНТ"
+          }
+        }
+      }
+    },
+    "language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "русский"
+          }
+        }
+      }
+    },
+    "Load photo" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузить фото"
+          }
+        }
+      }
+    },
+    "My Photo Gallery" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Моя фотогалерея"
+          }
+        }
+      }
+    },
+    "password" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "пароль"
+          }
+        }
+      }
+    },
+    "PETS" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПИТОМЦЫ"
+          }
+        }
+      }
+    },
+    "Photo Gallery" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фотогалерея"
+          }
+        }
+      }
+    },
+    "Posts" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посты"
+          }
+        }
+      }
+    },
+    "Profile" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
+          }
+        }
+      }
+    },
+    "PROFILE" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПРОФАЙЛ"
+          }
+        }
+      }
+    },
+    "REGISTER" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "РЕГИСТРАЦИЯ"
+          }
+        }
+      }
+    },
+    "REGISTRATION" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "РЕГИСТРАЦИЯ"
+          }
+        }
+      }
+    },
+    "set status" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "установить статус"
+          }
+        }
+      }
+    },
+    "text" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "текст"
+          }
+        }
+      }
+    },
+    "This user is already registered!" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот пользователь уже зарегистрирован"
+          }
+        }
+      }
+    },
+    "This user not found!" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот пользователь не найден"
+          }
+        }
+      }
+    },
+    "Try again!" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте снова!"
+          }
+        }
+      }
+    },
+    "Write your e-mail and create a password" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напишите свой емейл и пароль"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

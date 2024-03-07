@@ -17,8 +17,8 @@ class PostTableViewCell: UITableViewCell {
     
     let autorLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.secondaryColor
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = Colors.primaryColor
+        label.font = Fonts.boldTextFont
         label.numberOfLines = 2
         return label
     }()
@@ -26,9 +26,9 @@ class PostTableViewCell: UITableViewCell {
     let imagePost: UIImageView = {
         let image = UIImageView()
         let screenWidth = UIScreen.main.bounds.width
-        image.backgroundColor = .black
+        image.backgroundColor = Colors.almostWhite
         image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         image.layer.cornerRadius = 10
         image.layer.borderWidth = 1.0
         image.layer.borderColor = Colors.almostWhite.cgColor
@@ -40,16 +40,16 @@ class PostTableViewCell: UITableViewCell {
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .systemGray
+        label.font = Fonts.italicTextFont
+        label.textColor = Colors.myColor
         label.numberOfLines = 0
         return label
     }()
     
     let likesLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = Colors.secondaryColor
+        label.font = Fonts.baseTextFont
         label.text = "0"
         return label
     }()
@@ -199,7 +199,7 @@ class PostTableViewCell: UITableViewCell {
             imagePost.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             imagePost.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             
-            descriptionLabel.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: 20),
+            descriptionLabel.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: 30),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             descriptionLabel.bottomAnchor.constraint(equalTo: stackForLabels.topAnchor, constant: -10),

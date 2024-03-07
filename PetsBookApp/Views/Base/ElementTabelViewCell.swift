@@ -9,8 +9,8 @@ class ElementTabelViewCell: UITableViewCell {
     
     lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.font = Fonts.boldTextFont
+        label.textColor = Colors.myColor
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -19,7 +19,7 @@ class ElementTabelViewCell: UITableViewCell {
     
     lazy var arrowButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = .black
+        button.tintColor = Colors.myColor
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return(button)
@@ -59,7 +59,8 @@ class ElementTabelViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             
             infoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            infoLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            //infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             infoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
            // infoLabel.widthAnchor.constraint(equalToConstant: 100),
           //  infoLabel.heightAnchor.constraint(equalToConstant: 50),

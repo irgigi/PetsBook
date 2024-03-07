@@ -39,7 +39,7 @@ class PhotosTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.sizeToFit()
-        collectionView.backgroundColor = Colors.myColorLight
+        collectionView.backgroundColor = Colors.almostWhite
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         layout.scrollDirection = .horizontal

@@ -6,7 +6,7 @@ import UIKit
 
 extension UIViewController {
     
-    func showAllert(title: String = "Ошибка", message: String = "Попробуйте ещё раз") {
+    func showAllert(title: String = NSLocalizedString("Error!", comment: ""), message: String = NSLocalizedString("Try again!", comment: "")) {
         let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default)
         alertViewController.addAction(action)
@@ -14,12 +14,12 @@ extension UIViewController {
     }
     
     func showAddName(completion: @escaping (String) -> Void) {
-        let alertController = UIAlertController(title: "Введите имя питомца", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Enter pet's name", comment: ""), message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "text"
+            textField.placeholder = NSLocalizedString("text", comment: "")
         }
         
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             if let textField = alertController.textFields?.first, let text = textField.text, !text.isEmpty {
                 print("???", text)
@@ -48,7 +48,7 @@ extension UIViewController {
     */
     //other way
     public func showAddInfoForPost(completion: @escaping (String?, UIImage?) -> Void) {
-        let alertController = UIAlertController(title: "Создать описание", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Create description", comment: ""), message: nil, preferredStyle: .alert)
         let textView = UITextView()
         textView.textAlignment = .left
         textView.isEditable = true
@@ -77,7 +77,7 @@ extension UIViewController {
             textField.addConstraint(heihtConstraint)
         }
         */
-        let addPhotoAction = UIAlertAction(title: "Добавить фото", style: .default) { _ in
+        let addPhotoAction = UIAlertAction(title: NSLocalizedString("Add photo", comment: ""), style: .default) { _ in
             self.openPhotoVC { img in
                 //let description = alertController.textFields?[0].text ?? ""
                 let description = textView.text
@@ -87,7 +87,7 @@ extension UIViewController {
         }
         alertController.addAction(addPhotoAction)
         
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)

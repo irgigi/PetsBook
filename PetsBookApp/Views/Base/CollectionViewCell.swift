@@ -28,8 +28,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
-        label.textColor = Colors.myColor
+        label.font = Fonts.lightTextFont
+        label.textColor = Colors.primaryColor
         label.numberOfLines = 0
         label.textAlignment = .center
         label.isUserInteractionEnabled = true

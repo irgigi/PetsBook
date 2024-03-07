@@ -37,13 +37,13 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     lazy var imageView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleToFill
+        image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.isUserInteractionEnabled = true
         //создание круглой рамки
         image.layer.cornerRadius = 60
         image.layer.borderWidth = 2.0
-        image.layer.borderColor = Colors.almostWhite.cgColor
+        image.layer.borderColor = Colors.almostBroun.cgColor
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
         image.addGestureRecognizer(tapGestureRecognizer)
         
@@ -72,14 +72,14 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     lazy var textField: UITextField = {
         let text = UITextField()
         text.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        text.textColor = Colors.myColorLight
-        text.placeholder = " enter text "
+        text.textColor = Colors.primaryColor
+        text.placeholder = NSLocalizedString(" enter text ", comment: "")
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
         text.layer.cornerRadius = 12
         text.layer.borderWidth = 1
-        text.layer.borderColor = Colors.secondaryColor.cgColor
-        text.layer.backgroundColor = Colors.myColorLight?.cgColor
+        text.layer.borderColor = Colors.primaryColor.cgColor
+        text.layer.backgroundColor = Colors.almostWhite.cgColor
         text.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
 
         return text
@@ -87,9 +87,9 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     lazy var bigButton: UIButton = {
         let button = UIButton()
-        button.setTitle("set status", for: .normal)
-        button.backgroundColor = Colors.secondaryColor
-        button.setTitleColor(Colors.myColorLight, for: .normal)
+        button.setTitle(NSLocalizedString("set status", comment: ""), for: .normal)
+        button.backgroundColor = Colors.primaryColor
+        button.setTitleColor(Colors.almostWhite, for: .normal)
         button.layer.cornerRadius = 5
         button.layer.shadowColor = Colors.almostWhite.cgColor
         button.layer.shadowOpacity = 0.7
@@ -100,9 +100,9 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     lazy var bigButton2: UIButton = {
         let button = UIButton()
-        button.setTitle("add post", for: .normal)
-        button.backgroundColor = Colors.secondaryColor
-        button.setTitleColor(Colors.myColorLight, for: .normal)
+        button.setTitle(NSLocalizedString("add post", comment: ""), for: .normal)
+        button.backgroundColor = Colors.primaryColor
+        button.setTitleColor(Colors.almostWhite, for: .normal)
         button.layer.cornerRadius = 5
         button.layer.shadowColor = Colors.almostWhite.cgColor
         button.layer.shadowOpacity = 0.7
@@ -154,8 +154,8 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
             } else {
                 statusLabel.text = st
                 newStatus = st
-                print("st", st)
                 statusSaved?(st)
+                textField.text = ""
             }
         case bigButton2:
             NotificationCenter.default.post(name: .customButtonTapped, object: nil)

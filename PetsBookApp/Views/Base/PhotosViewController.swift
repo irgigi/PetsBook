@@ -28,13 +28,13 @@ class PhotosViewController: UIViewController {
     
     lazy var photoButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Load photo", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
+        button.setTitle(NSLocalizedString("Load photo", comment: ""), for: .normal)
+        button.backgroundColor = Colors.primaryColor
+        button.setTitleColor(Colors.almostWhite, for: .normal)
         button.layer.cornerRadius = 5
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        //button.layer.shadowColor = Colors.almostWhite.cgColor
+        //button.layer.shadowOpacity = 0.7
+        //button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.addTarget(self, action: #selector(loadPhoto), for: .touchUpInside)
     
         return(button)
@@ -51,6 +51,8 @@ class PhotosViewController: UIViewController {
             PhotosCollectionViewCell.self,
             forCellWithReuseIdentifier: CellID.base.rawValue
         )
+        
+        collectionView.backgroundColor = Colors.almostWhite
         return collectionView
     }()
     
@@ -78,8 +80,8 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Photo Gallery"
-        view.backgroundColor = .white
+        title = NSLocalizedString("Photo Gallery", comment: "")
+        view.backgroundColor = Colors.myColorLight
         view.addSubview(photoButton)
         loadSavedPhoto()
         setupCollectionView()

@@ -47,7 +47,7 @@ class PostClass {
 /*
  
  PostModel(author: "Alex",
-           description: NSLocalizedString("Me in 2 mounth", comment: "-"),
+           description: "Me in 2 mounth", comment: "-",
            image: UIImage(named: "felix1"),
            likes: 1,
            views: 1),

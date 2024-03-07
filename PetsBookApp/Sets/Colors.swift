@@ -11,6 +11,8 @@ struct Colors {
     static let secondaryColor = UIColor.brown
     static let myColor = UIColor(named: "MyColor")
     static let myColorLight = UIColor(named: "MyColorLight")
-    static let almostWhite = UIColor(red: 0.994, green: 0.977, blue: 0.928, alpha: 1)
+    static let almostWhite = UIColor(red: 255, green: 253, blue: 244, alpha: 1)
+    static let almostBroun = UIColor(red: 223, green: 197, blue: 168, alpha: 1)
+    
     
 }

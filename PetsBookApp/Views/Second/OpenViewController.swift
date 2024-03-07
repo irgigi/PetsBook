@@ -60,6 +60,11 @@ class OpenViewController: UIViewController {
         
         tableView.setAndLayout(headerView: openTableHeaderView)
         
+        tableView.backgroundColor = Colors.almostWhite
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = Colors.myColor
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        
         tableView.register(
             PhotosTableViewCell.self,
             forCellReuseIdentifier: CellReuseID.custom.rawValue)
@@ -155,7 +160,7 @@ class OpenViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .lightGray
-        title = "Profile"
+        title = NSLocalizedString("Profile", comment: "")
         
         NotificationCenter.default.addObserver(self, selector: #selector(tapped), name: .tapped, object: nil)
         
@@ -173,16 +178,11 @@ class OpenViewController: UIViewController {
         tableView.reloadData()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //navigationController?.setNavigationBarHidden(false, animated: animated)
-        tableView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.reloadData()
-        
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if isBeingDismissed {
+            NotificationCenter.default.post(name: .dissmissedVC, object: nil)
+        }
     }
     
 //MARK: - METHODS
@@ -226,7 +226,7 @@ class OpenViewController: UIViewController {
                 if !result {
                     
                     if id == user {
-                        self?.showAllert(message: "На себя подписаться нельзя!")
+                        self?.showAllert(message: NSLocalizedString("Error! It's your account!", comment: ""))
                     } else {
                         self?.subscribeService.addUserToUser(subscibe) { [weak self] error, result  in
                             if let error = error {
@@ -337,7 +337,6 @@ class OpenViewController: UIViewController {
         guard let image = image else { return }
         
         let fullScreenViewController = UIViewController()
-        fullScreenViewController.view.backgroundColor = .systemBackground
         
         let imageView = UIImageView(frame: fullScreenViewController.view.bounds)
         imageView.contentMode = .scaleAspectFit
@@ -349,6 +348,7 @@ class OpenViewController: UIViewController {
         
         fullScreenViewController.view.addSubview(imageView)
         fullScreenViewController.modalPresentationStyle = .overFullScreen
+        fullScreenViewController.view.backgroundColor = Colors.myColorLight
         present(fullScreenViewController, animated: true)
     }
     
@@ -457,6 +457,9 @@ extension OpenViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("could not dequeueReusableCell")
         }
         
+        let selectedView = UIView()
+        selectedView.backgroundColor = Colors.myColorLight
+        cell.selectedBackgroundView = selectedView
         
         cell.likeAction = { [weak self] in
             self?.buttonTapped(at: indexPath)
@@ -536,6 +539,10 @@ extension OpenViewController: UITableViewDelegate, UITableViewDataSource {
                 self?.showFullScreenImage(image)
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = Colors.almostWhite
     }
     
 }

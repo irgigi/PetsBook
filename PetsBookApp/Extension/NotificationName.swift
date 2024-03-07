@@ -15,4 +15,5 @@ extension Notification.Name {
     static let dataButtonTapped = Notification.Name("DataButtonTapped")
     static let liked = Notification.Name("Liked")
     static let newButtonTapped = Notification.Name("NewButtonTapped")
+    static let dissmissedVC = Notification.Name("DissmissedVC")
 }

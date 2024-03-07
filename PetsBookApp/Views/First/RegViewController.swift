@@ -64,8 +64,8 @@ class RegViewController: UIViewController {
     
     lazy var loginField: UITextField = {
         let text = UITextField()
-        text.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        text.placeholder = "email"
+        text.font = Fonts.baseTextFont
+        text.placeholder = NSLocalizedString("email", comment: "")
         text.text = "test@mail.ru"
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
@@ -84,8 +84,8 @@ class RegViewController: UIViewController {
     
     lazy var passwordField: UITextField = {
         let text = UITextField()
-        text.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        text.placeholder = "password"
+        text.font = Fonts.baseTextFont
+        text.placeholder = NSLocalizedString("password", comment: "")
         text.text = "123456"
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
@@ -105,7 +105,7 @@ class RegViewController: UIViewController {
     
     lazy var regButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemBrown
+        button.backgroundColor = Colors.primaryColor
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(goToAccauntView), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -114,22 +114,19 @@ class RegViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if traitCollection.userInterfaceStyle == .dark {
-            view.backgroundColor = Colors.myColorLight
-        } else {
-            view.backgroundColor = Colors.myColorLight
-        }
+        view.backgroundColor = Colors.myColorLight
+        
         if let comp = completionHandler {
             let isReg = comp()
             if isReg {
-                headTextLabel.text = "REGISTRATION"
-                descriptionLabel.text = "Write your e-mail and create a password"
-                regButton.setTitle("REGISTER", for: .normal)
+                headTextLabel.text = NSLocalizedString("REGISTRATION", comment: "")
+                descriptionLabel.text = NSLocalizedString("Write your e-mail and create a password", comment: "")
+                regButton.setTitle(NSLocalizedString("REGISTER", comment: ""), for: .normal)
                 isNewUser = true
             } else {
-                headTextLabel.text = "ENTRANCE"
-                descriptionLabel.text = "Enter your e-mail and password"
-                regButton.setTitle("COME IN", for: .normal)
+                headTextLabel.text = NSLocalizedString("ENTRANCE", comment: "")
+                descriptionLabel.text = NSLocalizedString("Enter your e-mail and password", comment: "")
+                regButton.setTitle(NSLocalizedString("COME IN", comment: ""), for: .normal)
                 isNewUser = false
             }
         }
@@ -149,7 +146,7 @@ class RegViewController: UIViewController {
             if comp() {
                 
                 if !authService.isValidEmail(login) || !authService.isValidPassword(password) {
-                    showAllert(message: "Error: email or password (at least 6 characters)")
+                    showAllert(message: NSLocalizedString("Error: email or password (at least 6 characters)", comment: ""))
                     return
                 }
                 
@@ -159,7 +156,7 @@ class RegViewController: UIViewController {
                         print("\(user) зарегистрирован")
                         self?.showProfileViewController(user: user)
                     case .failure:
-                        self?.showAllert(message: "This user is already registered!")
+                        self?.showAllert(message: NSLocalizedString("This user is already registered!", comment: ""))
                     }
                 }
                 
@@ -172,7 +169,7 @@ class RegViewController: UIViewController {
                         print("\(user) загружен")
                         self?.showProfileViewController(user: user)
                     case .failure:
-                        self?.showAllert(message: "This user not found!")
+                        self?.showAllert(message: NSLocalizedString("This user not found!", comment: ""))
                     }
                 }
                 
@@ -262,12 +259,12 @@ private extension RegViewController {
         if let new = isNewUser {
             if new {
                 
-                let alertController = UIAlertController(title: "Enter pet's name", message: nil, preferredStyle: .alert)
+                let alertController = UIAlertController(title: NSLocalizedString("Enter pet's name", comment: ""), message: nil, preferredStyle: .alert)
                 alertController.addTextField { textField in
                     textField.placeholder = "text"
                 }
                 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
                 let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
                     if let textField = alertController.textFields?.first, let text = textField.text, !text.isEmpty {
                         profileVC.profileTableHeaderView.nameLabel.text = text

@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)        
         let logoVC = UINavigationController(rootViewController: LogoViewController())
         let usersVC = UINavigationController(rootViewController: UsersFeedController())
-        usersVC.tabBarItem = UITabBarItem(title: "PETS", image: UIImage(systemName: "pawprint.fill"), tag: 0)
+        usersVC.tabBarItem = UITabBarItem(title: NSLocalizedString("PETS", comment: ""), image: UIImage(systemName: "pawprint.fill"), tag: 0)
         //let regVC = UINavigationController(rootViewController: RegViewController())
         
         let tabBarController = MyTabBarController.shared
@@ -96,7 +96,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if vc == profileVC {
                 return
             } else {
-                profileVC.tabBarItem = UITabBarItem(title: "PROFILE", image: UIImage(systemName: "teddybear.fill"), tag: 1)
+                profileVC.tabBarItem = UITabBarItem(title: NSLocalizedString("PROFILE", comment: ""), image: UIImage(systemName: "teddybear.fill"), tag: 1)
                 tabBarController.viewControllers?.append(profileVC)
             }
         }
