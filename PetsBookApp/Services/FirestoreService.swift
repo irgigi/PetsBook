@@ -2,6 +2,8 @@
 //  FirestoreService.swift
 //  PetsBookApp
 
+// НЕ НУЖЕН
+/*
 import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -119,4 +121,4 @@ final class FirestoreService {
 private extension String {
     static let collectionName = "Events"
 }
-
+*/

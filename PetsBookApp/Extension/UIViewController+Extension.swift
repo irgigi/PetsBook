@@ -46,7 +46,7 @@ extension UIViewController {
         present(alertController, animated: true)
     }
     */
-    //other way
+    //for create post
     public func showAddInfoForPost(completion: @escaping (String?, UIImage?) -> Void) {
         let alertController = UIAlertController(title: NSLocalizedString("Create description", comment: ""), message: nil, preferredStyle: .alert)
         let textView = UITextView()

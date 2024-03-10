@@ -64,7 +64,6 @@
 		86BABF902B710A54004908EC /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BABF8F2B710A54004908EC /* PhotosViewController.swift */; };
 		86BABF922B710B20004908EC /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BABF912B710B20004908EC /* PhotosCollectionViewCell.swift */; };
 		86BABF942B710B9B004908EC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BABF932B710B9B004908EC /* CollectionViewCell.swift */; };
-		86BABF962B710BEF004908EC /* ElementsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BABF952B710BEF004908EC /* ElementsCollectionViewCell.swift */; };
 		86BC1B9A2B831EDE00D65DD3 /* UsersFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC1B992B831EDE00D65DD3 /* UsersFeedTableViewCell.swift */; };
 		86BC1B9C2B83A1BC00D65DD3 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC1B9B2B83A1BC00D65DD3 /* MyTabBarController.swift */; };
 		86C185A72B89F23400EE1293 /* SubscribeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C185A62B89F23400EE1293 /* SubscribeService.swift */; };
@@ -109,7 +108,6 @@
 		86BABF8F2B710A54004908EC /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		86BABF912B710B20004908EC /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		86BABF932B710B9B004908EC /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		86BABF952B710BEF004908EC /* ElementsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsCollectionViewCell.swift; sourceTree = "<group>"; };
 		86BC1B992B831EDE00D65DD3 /* UsersFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFeedTableViewCell.swift; sourceTree = "<group>"; };
 		86BC1B9B2B83A1BC00D65DD3 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		86C185A62B89F23400EE1293 /* SubscribeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeService.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 				869E83C62B8F888000995854 /* Model */,
 				862A0EAF2B6BE202007F7096 /* Extension */,
 				86C539352B821E510066F4FA /* Views and Controllers */,
-				86BABF952B710BEF004908EC /* ElementsCollectionViewCell.swift */,
 				866BC8B02B67D33F007F3836 /* Assets.xcassets */,
 				866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */,
 				866BC8B52B67D33F007F3836 /* Info.plist */,
@@ -410,7 +407,6 @@
 				869E83C32B8EF15000995854 /* NotificationName.swift in Sources */,
 				86C539382B821FA70066F4FA /* OpenViewController.swift in Sources */,
 				866BC8AC2B67D33B007F3836 /* LogoViewController.swift in Sources */,
-				86BABF962B710BEF004908EC /* ElementsCollectionViewCell.swift in Sources */,
 				8662CCBF2B84974F000F6EA2 /* PostService.swift in Sources */,
 				866BC8A82B67D33B007F3836 /* AppDelegate.swift in Sources */,
 				862A0EAD2B6BAD60007F7096 /* AuthService.swift in Sources */,

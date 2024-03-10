@@ -30,10 +30,15 @@ final class UserService {
     private let storage = Storage.storage().reference()
     
     var getUserUID: (() -> String)?
-    var getStatus: (() -> String)?
+    //var getStatus: (() -> String)?
     
     var listenRegistration: ListenerRegistration? //firebase protocol
     
+    
+    func removeListener() {
+        listenRegistration?.remove()
+    }
+    /*
     func addObserverForEvents(completion: @escaping ([UserStatus]) -> Void) {
         dataBase.collection(.collectionName).addSnapshotListener { snapshot, error in
             if let error = error {
@@ -47,11 +52,9 @@ final class UserService {
             completion(info)
         }
     }
-    
-    func removeListener() {
-        listenRegistration?.remove()
-    }
-    
+    */
+
+    /*
     func addAboutUserWithoutFetch(_ aboutUser: UserStatus) {
         _ = try? dataBase.collection(.collectionName).addDocument(from: aboutUser) { error in
             if let error = error {
@@ -60,6 +63,8 @@ final class UserService {
             print("aboutUser DONE")
         }
     }
+     */
+    
   //MARK: - USER NAME -
     
     func addUser(_ user: UserUID, completion: @escaping (Error?) -> Void) {
@@ -171,6 +176,7 @@ final class UserService {
         }
     }
     
+    
  //MARK: -check
     
     func checkStatus(user: String, completion: @escaping (Bool, Error?) -> Void) {
@@ -278,7 +284,7 @@ final class UserService {
             }
         }
     }
-    
+    /*
     //для загрузки подписок с именем
     func getAvatarAndName(forUser user: String, completion: @escaping ((avatar: String?, name: String?)) -> Void) {
         var userData: (avatar: String?, name: String?) = (nil, nil)
@@ -324,7 +330,7 @@ final class UserService {
             completion(userData)
         }
     }
-    
+    */
     //для загрузки подписок
     func getListenerhAvatar(user: String, completion: @escaping (UserAvatar?, Error?) -> Void) {
         removeListener()
@@ -426,7 +432,7 @@ final class UserService {
     
   //MARK: - -
     
-    
+    /*
     func addImage(_ image: UIImage, completion: @escaping (Error?) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             completion(NSError(domain: "gordeeva.PetsBookApp", code: -1))
@@ -458,7 +464,7 @@ final class UserService {
             completion(error)
         }
     }
-    
+     
     func loadImage(user: String, completion: @escaping (UIImage?) -> Void) {
         
         let eventRef = dataBase.collection(.collectionName).document(user)
@@ -485,7 +491,7 @@ final class UserService {
             }
         }
     }
-
+     */
  //MARK: - -
     
     /*
@@ -501,7 +507,7 @@ final class UserService {
             })
         }
     }
-    */
+    
     
     func deleteEvent(_ user: UserStatus, completion: @escaping ([UserStatus]) -> Void) {
         guard let docID = user.status else { return }
@@ -534,7 +540,7 @@ final class UserService {
 
         }
     }
-    
+     */
 }
 
 private extension String {

@@ -2,6 +2,8 @@
 //  PhotoService.swift
 //  PetsBookApp
 
+// НЕ НУЖЕН
+
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -14,15 +16,15 @@ struct UserPhoto: Codable {
 
 final class PhotoService {
     
-    private let dataBase = Firestore.firestore()
-    private let storage = Storage.storage().reference()
+    //private let dataBase = Firestore.firestore()
+    //private let storage = Storage.storage().reference()
     
     
-    var listenRegistration: ListenerRegistration? //firebase protocol
+    //var listenRegistration: ListenerRegistration? //firebase protocol
     
     
  //MARK: - add photo
-    
+/*
     func uploadPhoto(_ image: UIImage, _ user: String, completion: @escaping (Error?) -> Void) {
         
         // сначала загружаем фото в Storage
@@ -73,9 +75,9 @@ final class PhotoService {
             }
         }
     }
-    
+ */
  //MARK: - отслеживание
-    
+/*
     func listenForUserPhotos(completion: @escaping ([UIImage]?, Error?) -> Void) {
         
         removeListener()
@@ -113,15 +115,16 @@ final class PhotoService {
         }
     }
     
-    
+   
     func removeListener() {
         listenRegistration?.remove()
     }
-    
+ */
 
 //MARK: - -
     
     // загрузить из бд и отслеживать
+    /*
     func addObserverForPhotos(completion: @escaping ([UserPhoto]) -> Void) {
         removeListener()
         dataBase.collection(.collectionPhoto).addSnapshotListener { snapshot, error in
@@ -147,11 +150,11 @@ final class PhotoService {
             print("photo DONE")
         }
     }
-    
+    */
     //MARK: - -
       
       //добавить фото и сохранить ссылку
-    
+    /*
       func addPhoto(_ image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
           guard let imageData = image.jpegData(compressionQuality: 0.5) else {
               completion(.failure(NSError(domain: "gordeeva.PetsBookApp", code: -1)))
@@ -226,7 +229,7 @@ final class PhotoService {
             }
         } .resume()
     }
-
+     */
     
 }
 

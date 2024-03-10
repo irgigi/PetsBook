@@ -2,7 +2,7 @@
 //  PostModel.swift
 //  PetsBookApp
 
-
+/*
 import UIKit
 
 struct PostModel {
@@ -44,7 +44,7 @@ class PostClass {
     
 }
 
-/*
+
  
  PostModel(author: "Alex",
            description: "Me in 2 mounth", comment: "-",

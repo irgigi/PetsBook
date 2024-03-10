@@ -94,7 +94,11 @@ class PostService {
         }
     }
     
-       
+    func removeListener() {
+        listenRegistration?.remove()
+    }
+    
+   /*
    // Загрузка постов с отслеживанием
     func addObserverForPost(completion: @escaping ([Post]) -> Void) {
         removeListener()
@@ -110,7 +114,7 @@ class PostService {
             completion(post)
         }
     }
-    
+    */
     // Загрузка постов без отслеживания
      func addForPost(completion: @escaping ([Post]) -> Void) {
          dataBase.collection(.collectionPost).getDocuments { snapshot, error in
@@ -126,9 +130,6 @@ class PostService {
          }
      }
     
-    func removeListener() {
-        listenRegistration?.remove()
-    }
     
     //для преобразования ссылки на фото в UIImage
     func getPhotoFromURL(from urlString: String, completion: @escaping (UIImage?) -> Void) {
@@ -154,7 +155,6 @@ class PostService {
             // подгружаем данные
             self.fetchPost(completion: completion)
             
-
         }
     }
     

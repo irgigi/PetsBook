@@ -75,8 +75,6 @@ class SubscribeService {
             }
             
             self?.fetchSubscribe(completion: completion)
-            
-            
             print("userName DONE")
         }
     }
@@ -137,6 +135,10 @@ class SubscribeService {
         
     }
     
+    func removeListener() {
+        listenRegistration?.remove()
+    }
+    
     //загрузка подписок пользователя
     func getAddedUsers(_ user: String, completion: @escaping ([Subscribe]) -> Void) {
         let query = dataBase.collection(.collectionSubscribe)
@@ -156,24 +158,10 @@ class SubscribeService {
                 completion(subscribers)
                 
             }
-            
-            
-            
-            
-           /*
-            // ответ приходит в главном потоке
-            let subscribes = snapshot?.documents.compactMap({ snapshot in
-                try? snapshot.data(as: Subscribe.self)
-            }) ?? []
-            print("---", subscribes)
-            completion(subscribes)
-           */
+
         }
     }
     
-    func removeListener() {
-        listenRegistration?.remove()
-    }
     
 }
 

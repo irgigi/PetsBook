@@ -137,6 +137,10 @@ class LikeService {
         }
     }
     
+    func removeListener() {
+        listenRegistration?.remove()
+    }
+    
     func unlikepost(_ postID: String, _ userFrom: String, completion: @escaping (Error?) -> Void) {
         let likesRef = dataBase.collection(.collectionLike)
         
@@ -168,10 +172,6 @@ class LikeService {
                 }
             }
         
-    }
-    
-    func removeListener() {
-        listenRegistration?.remove()
     }
 
 }

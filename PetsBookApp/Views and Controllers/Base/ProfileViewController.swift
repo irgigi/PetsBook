@@ -18,12 +18,13 @@ class ProfileViewController: UIViewController {
     
 //MARK: - service
     let photoCollectionService = PhotoCollectionService.shared
-    private let firestoreService = FirestoreService()
+    //private let firestoreService = FirestoreService()
     private let authService = AuthService.shared
     private let userService = UserService()
     private let postService = PostService()
     private let subscribeService = SubscribeService.shared
     private let likeService = LikeService()
+    private let userModel = UserAvatarAndNameModel()
     
 //MARK: - controllers
     
@@ -736,7 +737,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             //cell.collectionView.reloadData()
             //cell.names = names
             //cell.update(data[indexPath.row])
-            NotificationCenter.default.post(name: .dataButtonTapped, object: data)
+            NotificationCenter.default.post(name: .dataButtonTapped, object: userModel.data)
             cell.info = subscribers
             cell.contentView.frame.size.width = tableView.frame.width
             

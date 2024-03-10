@@ -17,7 +17,7 @@ final class AuthService {
     var currentUserHandler: String? {
         didSet {
             if let newUser = currentUserHandler {
-                print("nnn - user", newUser)
+                print(newUser)
             }
         }
     }
@@ -51,7 +51,7 @@ final class AuthService {
             }
         }
     }
-    //MARK: - вход пользователя
+//MARK: - вход пользователя
     
     func loginUser (email: String, password: String, completion: @escaping (Result<FireBaseUser, Error>) -> Void) {
         
@@ -70,7 +70,7 @@ final class AuthService {
         }
     }
     
-    //MARK: - выход пользователя
+//MARK: - выход пользователя
     
     func logoutUser(completion: @escaping (Result<Void, Error>) -> Void) {
         
@@ -83,7 +83,7 @@ final class AuthService {
         
     }
     
-    //MARK: - получить пользователя
+//MARK: - получить пользователя
 
     func getUser(_ id: String) {
         currentUserHandler = id

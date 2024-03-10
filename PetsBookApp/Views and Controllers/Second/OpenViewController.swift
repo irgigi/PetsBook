@@ -14,6 +14,7 @@ class OpenViewController: UIViewController {
     private let subscribeService = SubscribeService.shared
     private let authService = AuthService.shared
     private let likeService = LikeService.shared
+    private let photoService = PhotoCollectionService.shared
     
 // MARK: - Properties
     
@@ -536,7 +537,7 @@ extension OpenViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = post[indexPath.row]
-        let photoService = PhotoService()
+        //let photoService = PhotoService()
         photoService.getPhotoFromURL(from: selectedItem.image) { [weak self] image in
             DispatchQueue.main.async { [weak self] in
                 guard let image = image else { return }

@@ -10,9 +10,16 @@ struct UserAvatarAndName {
     let ava: UIImage
 }
 
-var data: [UserAvatarAndName] = [] {
-    didSet {
-        print("this", data.count)
-        //NotificationCenter.default.post(name: .dataButtonTapped, object: data)
+class UserAvatarAndNameModel {
+    
+    var data: [UserAvatarAndName] = [] {
+        didSet {
+            print("this", data.count)
+        }
     }
+    
+    init() {}
 }
+
+
+
