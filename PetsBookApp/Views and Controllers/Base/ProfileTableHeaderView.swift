@@ -27,7 +27,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     var newAva: UIImage? {
         didSet {
-            NotificationCenter.default.post(name: Notification.Name("avaChanged"), object: newAva)
+            NotificationCenter.default.post(name: .avaChanged, object: newAva)
         }
     }
     

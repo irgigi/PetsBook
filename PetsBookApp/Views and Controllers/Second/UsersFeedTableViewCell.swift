@@ -7,12 +7,16 @@ import UIKit
 
 class UsersFeedTableViewCell: PostTableViewCell {
     
+//MARK: - subview
+    
     lazy var newButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "eyes"), for: .normal)
         return button
     }()
+    
+//MARK: - init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

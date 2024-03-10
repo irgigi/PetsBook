@@ -8,6 +8,8 @@ import UIKit
 class OpenTableView: ProfileTableHeaderView {
     
     
+//MARK: - subview
+    
     lazy var button: UIButton = {
         let button = UIButton(type: .system)
         //button.setTitle("Добавить", for: .normal)
@@ -18,6 +20,8 @@ class OpenTableView: ProfileTableHeaderView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+//MARK: - init
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -32,6 +36,8 @@ class OpenTableView: ProfileTableHeaderView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+//MARK: - methods
     
     @objc func buttonTapped() {
         

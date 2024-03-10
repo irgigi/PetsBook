@@ -147,7 +147,6 @@ class ProfileViewController: UIViewController {
         //button exit
         forExit()
         userID = user.user.uid
-        
         let userMail = user.user.email
         if let id = userID {
             
@@ -630,7 +629,7 @@ class ProfileViewController: UIViewController {
                     case .success(let avaString):
                         let userAva = UserAvatar(user: user, avatar: avaString)
                         self?.userService.updateUserAvatar(userAva) { userAva in
-                            print("AVA saved")
+                            print("new AVA saved")
                         }
                         self?.tableView.reloadData()
                     case .failure(let error):

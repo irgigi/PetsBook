@@ -7,17 +7,19 @@ import UIKit
 
 class OpenViewController: UIViewController {
     
-// MARK: - Properties
-    
-    let openTableHeaderView = OpenTableView()
-    let profileTableHeaderView = ProfileTableHeaderView()
-    let openCell = OpenTableViewCell()
+//MARK: - service
     
     private let userService = UserService()
     private let postService = PostService()
     private let subscribeService = SubscribeService.shared
     private let authService = AuthService.shared
     private let likeService = LikeService.shared
+    
+// MARK: - Properties
+    
+    let openTableHeaderView = OpenTableView()
+    let profileTableHeaderView = ProfileTableHeaderView()
+    let openCell = OpenTableViewCell()
     
     enum CellReuseID: String {
         case base = "BaseTableViewCell_ReuseID"
@@ -85,7 +87,7 @@ class OpenViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     */
-    //MARK: - life cycle
+//MARK: - init
     
     init(user: String?) {
         super.init(nibName: nil, bundle: nil)
@@ -155,6 +157,8 @@ class OpenViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -202,7 +202,7 @@ class RegViewController: UIViewController {
             headTextLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: headTextLabel.bottomAnchor, constant: 100),
+            descriptionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
             descriptionLabel.widthAnchor.constraint(equalToConstant: 300),
             descriptionLabel.heightAnchor.constraint(equalToConstant: 50),
             

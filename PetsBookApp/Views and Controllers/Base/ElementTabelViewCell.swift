@@ -7,6 +7,8 @@ import UIKit
 
 class ElementTabelViewCell: UITableViewCell {
     
+//MARK: - Subview
+    
     lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.font = Fonts.boldTextFont
@@ -24,6 +26,8 @@ class ElementTabelViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         return(button)
     }()
+    
+//MARK: - init
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -43,6 +47,8 @@ class ElementTabelViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//MARK: - methods
     
     @objc func buttonTapped() {
         let controller = PhotosViewController()

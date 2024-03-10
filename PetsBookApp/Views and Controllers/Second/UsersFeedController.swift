@@ -9,22 +9,24 @@ import FirebaseAuth
 
 final class UsersFeedController: UIViewController {
     
+//MARK: - service
+    
     let postService = PostService()
     let userService = UserService()
     let likeService = LikeService.shared
     let subscribeService = SubscribeService.shared
     let authService = AuthService.shared
     
-    let postCell = PostTableViewCell()
-    
 //MARK: -properties
+    
+    let postCell = PostTableViewCell()
     
     var post = [Post]() {
         didSet {
             tableView.reloadData()
         }
     }
-    
+    /*
     var value: String? {
         didSet {
             if let newValue = value {
@@ -32,17 +34,11 @@ final class UsersFeedController: UIViewController {
             }
         }
     }
-    
+    */
     var likeItem: String?
     var likeUser: String?
     var baseUser: String?
-  /*
-    var count: Int? {
-        didSet {
-            print("... count", count)
-        }
-    }
-   */
+
     
 // MARK: - table -
     
@@ -177,7 +173,7 @@ final class UsersFeedController: UIViewController {
         
     }
     
-// MARK: - layout -
+// MARK: - constraint -
     
     func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
@@ -196,7 +192,7 @@ final class UsersFeedController: UIViewController {
     }
 }
 
-// MARK: - EXTRA -
+// MARK: - Extencion -
 
 extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
     

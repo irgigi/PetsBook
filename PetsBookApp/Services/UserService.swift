@@ -375,14 +375,27 @@ final class UserService {
                 return
             }
             
+    
             if let documents = snapshot?.documents, !documents.isEmpty {
                 //если найдены документы, то обновляем
                 guard let document = documents.first else {
                     return
                 }
                 
-                let userRef = document.reference
+                let docID = document.documentID 
                 
+                dataBase.collection(.collectionAvatar).document(docID).delete()
+                
+                let _ = try? dataBase.collection(.collectionAvatar).addDocument(from: avaUser) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    completion(avaUser)
+                }
+                
+                /*
+                let userRef = document.reference
                 userRef.updateData([
                     "avatar": avaUser.avatar
                 ]) { error in
@@ -390,9 +403,11 @@ final class UserService {
                         print(error.localizedDescription)
                         return
                     }
-                    print("Update avatar!")
+                    
                     completion(avaUser)
+                    
                 }
+                 */
             } else {
                 // если документы не найдены, то добавляем
                 let _ = try? dataBase.collection(.collectionAvatar).addDocument(from: avaUser) { error in
@@ -402,7 +417,9 @@ final class UserService {
                     }
                     completion(avaUser)
                 }
+                
             }
+            
         }
     }
     

@@ -7,13 +7,15 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+ //MARK: - properties
+    
     let profileTableHeaderView = ProfileTableHeaderView()
     let post = [Post]()
     let postService = PostService()
     
     var likeAction: (() -> Void)?
     
-// MARK: -
+// MARK: - Subview
     
     let autorLabel: UILabel = {
         let label = UILabel()
@@ -84,7 +86,7 @@ class PostTableViewCell: UITableViewCell {
     }()
     
     
-    // MARK: - Lifecycle
+// MARK: - Lifecycle
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -172,6 +174,7 @@ class PostTableViewCell: UITableViewCell {
         descriptionLabel.text = model.descript
         
     }
+//MARK: -constraints
     
     func consraintInCell() {
         

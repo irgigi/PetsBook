@@ -7,6 +7,7 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
 
+//MARK: - Subview
     
     lazy var profileImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -16,7 +17,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    
+//MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -29,13 +30,9 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-   /*
-    func setup( with profile: Profile) {
-        profileImageView.image = UIImage(named: profile.img)
-    }
-    
-    */
+  
 
+//MARK: - constraint
     
     func setupConstraintsCollection() {
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,14 +47,4 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
 }
 
-/*
-extension UIImage {
-    
-    func resize(to size: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        defer { UIGraphicsEndImageContext() }
-        draw(in: CGRect(origin: .zero, size: size))
-        return UIGraphicsGetImageFromCurrentImageContext()
-    }
-}
-*/
+

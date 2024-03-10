@@ -9,10 +9,10 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
 
-    //let data = PostModel.make()
-    //private var events = [Event]()
-    let subscribeService = SubscribeService()
+//MARK: - properties
     
+    let subscribeService = SubscribeService()
+   /*
     var addImages: (([UIImage]) -> Void)?
     
     
@@ -27,13 +27,14 @@ class PhotosTableViewCell: UITableViewCell {
             collectionView.reloadData()
         }
     }
-    
+    */
     var info: [UserAvatarAndName] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
 
+//MARK: - Subview
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -109,6 +110,7 @@ class PhotosTableViewCell: UITableViewCell {
     }
     
 }
+
 extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

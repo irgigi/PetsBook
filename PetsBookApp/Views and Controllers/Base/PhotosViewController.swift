@@ -4,11 +4,10 @@
 
 
 import UIKit
-//import iOSIntPackage
 
 class PhotosViewController: UIViewController {
 
-    //let imagePublisherFacade = ImagePublisherFacade()
+//MARK: - properties
     
     // массив для загрузки полученных картинок
     var photos: [UIImage] = []
@@ -16,15 +15,15 @@ class PhotosViewController: UIViewController {
     
     var didSelectPhoto: ((UIImage) -> Void)?
     
-    //fileprivate lazy var profile: [Profile] = Profile.make()
     var photoCollectionService = PhotoCollectionService.shared
-    
     
     let spacing = 8.0
     
     enum CellID: String {
         case base = "ViewCell_ReuseID"
     }
+    
+//MARK: - Subview
     
     lazy var photoButton: UIButton = {
         let button = UIButton()
@@ -55,6 +54,8 @@ class PhotosViewController: UIViewController {
         collectionView.backgroundColor = Colors.almostWhite
         return collectionView
     }()
+    
+//MARK: - life cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -87,6 +88,8 @@ class PhotosViewController: UIViewController {
         setupCollectionView()
         setupLayouts()
     }
+    
+//MARK: - methods
     
     @objc func loadPhoto() {
         presentImagePicker()

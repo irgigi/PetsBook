@@ -84,7 +84,7 @@ class LogoViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             logoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            logoView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
             logoView.widthAnchor.constraint(equalToConstant: 350),
             logoView.heightAnchor.constraint(equalToConstant: 400),
             
