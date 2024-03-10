@@ -9,15 +9,15 @@ import Photos
 
 
 class ProfileViewController: UIViewController {
+    
+//MARK: - view
 
     let profileTableHeaderView = ProfileTableHeaderView()
-    let photoCollectionService = PhotoCollectionService.shared
     var photosCell = PhotosTableViewCell()
     var postCell = PostTableViewCell()
     
-    let logoViewController = LogoViewController()
-    let usersFeedController = UsersFeedController()
-    
+//MARK: - service
+    let photoCollectionService = PhotoCollectionService.shared
     private let firestoreService = FirestoreService()
     private let authService = AuthService.shared
     private let userService = UserService()
@@ -25,37 +25,35 @@ class ProfileViewController: UIViewController {
     private let subscribeService = SubscribeService.shared
     private let likeService = LikeService()
     
+//MARK: - controllers
+    
+    let logoViewController = LogoViewController()
+    let usersFeedController = UsersFeedController()
+    
+//MARK: - properties
     
     private var userID: String?
     private var ava: UIImage?
     private var name: String?
     
-    private var status: (() -> String)?
+    //для получения статуса
     private var statusText: String?
     
-    private var aboutUser: UserStatus?
-    private var userName: UserUID?
+    //private var status: (() -> String)?
+    //private var aboutUser: UserStatus? //кажется не нужен
+    //private var userName: UserUID?
     
-    enum CellReuseID: String {
-        case base = "BaseTableViewCell_ReuseID"
-        case custom = "CustomTableViewCell_ReuseID"
-        case info = "ElementViewCell_ReuseID"
-    }
-    
-    private enum HeaderFooterReuseID: String {
-        case base = "TableSelectionFooterHeaderView_ReuseID"
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
    
     // MARK: - Data
     
-   // fileprivate let data = PostModel.make()
-    private var userUID = [UserUID]()
-    private var userStatus = [UserStatus]()
-    private var post = [Post]()
+    //private var userUID = [UserUID]()
+    //private var userStatus = [UserStatus]()
+    private var post = [Post]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     private var subscribers = [UserAvatarAndName]() {
         didSet {
             tableView.reloadData()
@@ -64,7 +62,7 @@ class ProfileViewController: UIViewController {
     
     var images: [UIImage] = []
     
-    
+    /*
     var subscribeUsers: [UIImage] = [] {
         didSet {
             tableView.reloadData()
@@ -76,13 +74,30 @@ class ProfileViewController: UIViewController {
             tableView.reloadData()
         }
     }
-
-    var selUser: UserUID?
+     */
+    //var selUser: UserUID?
     
-
+    //для хранения postid
     var likeItem: String?
     
-    // MARK: - table
+    // удаление подписки
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+//MARK: - for table -
+    
+    enum CellReuseID: String {
+        case base = "BaseTableViewCell_ReuseID"
+        case custom = "CustomTableViewCell_ReuseID"
+        case info = "ElementViewCell_ReuseID"
+    }
+    
+    private enum HeaderFooterReuseID: String {
+        case base = "TableSelectionFooterHeaderView_ReuseID"
+    }
+    
+// MARK: - subview table
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView.init(
@@ -123,116 +138,29 @@ class ProfileViewController: UIViewController {
     }()
     
 
- //MARK: - загрузка данных
-    
-    func loadAvatar(_ user: String) {
-        //загружаем аватар, если есть
-        userService.fetchAvatar(user: user) { [weak self] (user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                if let us = user {
-                    self?.userService.getAvaFromURL(from: us.avatar) { img in
-                        if let image = img {
-                            DispatchQueue.main.async {
-                                self?.profileTableHeaderView.imageView.image = image
-                                self?.ava = image
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func loadPost(_ user: String) {
-        postService.getPost(user) { [weak self] allPosts in
-            DispatchQueue.main.async {
-                self?.post = []
-                self?.post.append(contentsOf: allPosts)
-                self?.tableView.reloadData()
-            }
-        }
-    }
-    
-    func loadSubscribeUsers(_ user: String) {
-        subscribers = []
-        subscribeService.getAddedUsers(user) { [self] array in
-         
-            for item in array {
-                /*
-                self.userService.getAvatarAndName(forUser: item.user) { (avatar: String?, name: String?) in
-                    
-                    guard let urlAva = avatar else { return }
-                    guard let name = name else { return }
-                    self.userService.getAvaFromURL(from: urlAva) { [weak self] image in
-                        DispatchQueue.main.async { [weak self] in
-                            if let image = image {
-                                var data = UserAvatarAndName(ava: image, name: name)
-                                self?.data.append(data)
-                                self?.tableView.reloadData()
-                            }
-                        }
-                    }
-                }
-                
-                */
-                self.userService.getListenerhAvatar(user: item.addUser) { userAva, error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        guard let addedUser = userAva?.avatar else { return }
-                        
-                        self.userService.fetchName(user: item.addUser) { [weak self] userName, error in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            } else {
-                                guard let name = userName?.userName else { return }
-                                guard let selectUser = userName?.user else { return }
-                                //self?.names.append(name)
-                                //self?.tableView.reloadData()
-                                //guard let urlAva = userAva else { return }
-                                self?.userService.getAvaFromURL(from: addedUser) { [weak self] image in
-                                    DispatchQueue.main.async { [weak self] in
-                                        if let image = image {
-                                            //self?.subscribeUsers.append(image)
-                                            //guard let id = userName?.user else { return }
-                                            let userInfo = UserUID(user: selectUser, userName: name)
-                                            let info = UserAvatarAndName(user: userInfo, ava: image)
-                                            self?.subscribers.append(info)
-                                            self?.tableView.reloadData()
-                                        }
-                                    }
-                                }
-                            }
-                        }
 
-                    }
-                }
-                
-            }
-        }
-    }
     
 //MARK: - инициализатор принимает юзера
     
     init(user: FireBaseUser) {
         super.init(nibName: nil, bundle: nil)
-
+        //button exit
         forExit()
-        
         userID = user.user.uid
         
         let userMail = user.user.email
         if let id = userID {
             
+            //ава по умолчанию
+            profileTableHeaderView.imageView.image = UIImage(named: "unnamed")
+            
+            
             //для других взаимодействий
-
             authService.getUser(id)
-             
             loadAvatar(id)
-            loadPost(id)
+            
             //loadSubscribeUsers(id)
+            
             // загржаем статус, если есть
             userService.fetchStatus(user: id) {[weak self] (user, error) in
                 if let error = error {
@@ -247,7 +175,7 @@ class ProfileViewController: UIViewController {
                 
             }
             
-            // загружаем имя или мейл
+            // загружаем из бд имя или мейл
             userService.fetchName(user: id) { [weak self] (user, error) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -271,80 +199,167 @@ class ProfileViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
- /*
-    private func reloadTableView2(with userName: UserUID) {
-        self.userName = userName
-        if let us = userName.userName {
-            profileTableHeaderView.nameLabel.text = us
-        }
-        tableView.reloadData()
-    }
     
-    */
     
 //MARK: - life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        view.backgroundColor = Colors.myColorLight
-        title = NSLocalizedString("PROFILE", comment: "")
-        let titleColor = [
-            NSAttributedString.Key.foregroundColor: Colors.myColor
-        ]
-        self.navigationController?.navigationBar.titleTextAttributes = titleColor as [NSAttributedString.Key : Any]
-        //NotificationCenter.default.addObserver(self, selector: #selector(subscribeButtonTapped), name: .subscribeButtonTapped, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(unSubscribeButtonTapped), name: .unSubscribeButtonTapped, object: nil)
-        
-        //NotificationCenter.default.addObserver(self, selector: #selector(deleteButtonTapped), name: .deleteButtonTapped, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(likeButtonTapped), name: .liked, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(buttonTap), name: .customButtonTapped, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: .imageTapped, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: Notification.Name("statusTextChanged"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(addName), name: Notification.Name("NameTapped"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(addAvatar), name: Notification.Name("avaChanged"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(dismissedVC), name: .dissmissedVC, object: nil)
-        
-        tableView.addSubview(profileTableHeaderView)
-        view.addSubview(tableView)
-        //initialFetchEvents()
-        setupConstraints()
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            // Do any additional setup after loading the view.
+            view.backgroundColor = Colors.myColorLight
+            title = NSLocalizedString("PROFILE", comment: "")
+            let titleColor = [
+                NSAttributedString.Key.foregroundColor: Colors.myColor
+            ]
+            self.navigationController?.navigationBar.titleTextAttributes = titleColor as [NSAttributedString.Key : Any]
+            
+            addObservers()
+            
+            
+            //NotificationCenter.default.addObserver(self, selector: #selector(subscribeButtonTapped), name: .subscribeButtonTapped, object: nil)
+            
+            
+            
+            //NotificationCenter.default.addObserver(self, selector: #selector(deleteButtonTapped), name: .deleteButtonTapped, object: nil)
+            
 
-    }
+            
+            tableView.addSubview(profileTableHeaderView)
+            view.addSubview(tableView)
+            //initialFetchEvents()
+            setupConstraints()
+
+        }
+        
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            setupTabBar()
+            loadSavedPhoto()
+            guard let user = userID else { return }
+            loadSubscribeUsers(user)
+            loadPost(user)
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            //navigationController?.setNavigationBarHidden(false, animated: animated)
+            tableView.reloadData()
+        }
+        
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            tableView.reloadData()
+        }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupTabBar()
-        loadSavedPhoto()
-        guard let user = userID else { return }
-        loadSubscribeUsers(user)
-    }
+//MARK: - methods - загрузка данных
+       
+       func loadAvatar(_ user: String) {
+           //загружаем аватар, если есть
+           userService.fetchAvatar(user: user) { [weak self] (user, error) in
+               if let error = error {
+                   print(error.localizedDescription)
+               } else {
+                   if let us = user {
+                       self?.userService.getAvaFromURL(from: us.avatar) { [weak self] img in
+                           if let image = img {
+                               DispatchQueue.main.async {
+                                   self?.profileTableHeaderView.imageView.image = image
+                                   self?.ava = image
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+       }
+       
+       func loadPost(_ user: String) {
+           postService.getPost(user) { [weak self] allPosts in
+               DispatchQueue.main.async {
+                   self?.post = []
+                   self?.post.append(contentsOf: allPosts)
+                   self?.tableView.reloadData()
+               }
+           }
+       }
+       
+       func loadSubscribeUsers(_ user: String) {
+           subscribers = []
+           subscribeService.getAddedUsers(user) { [self] array in
+            
+               for item in array {
+                   /*
+                   self.userService.getAvatarAndName(forUser: item.user) { (avatar: String?, name: String?) in
+                       
+                       guard let urlAva = avatar else { return }
+                       guard let name = name else { return }
+                       self.userService.getAvaFromURL(from: urlAva) { [weak self] image in
+                           DispatchQueue.main.async { [weak self] in
+                               if let image = image {
+                                   var data = UserAvatarAndName(ava: image, name: name)
+                                   self?.data.append(data)
+                                   self?.tableView.reloadData()
+                               }
+                           }
+                       }
+                   }
+                   
+                   */
+                   self.userService.getListenerhAvatar(user: item.addUser) { userAva, error in
+                       if let error = error {
+                           print(error.localizedDescription)
+                       } else {
+                           guard let addedUser = userAva?.avatar else { return }
+                           
+                           self.userService.fetchName(user: item.addUser) { [weak self] userName, error in
+                               if let error = error {
+                                   print(error.localizedDescription)
+                               } else {
+                                   guard let name = userName?.userName else { return }
+                                   guard let selectUser = userName?.user else { return }
+                                   //self?.names.append(name)
+                                   //self?.tableView.reloadData()
+                                   //guard let urlAva = userAva else { return }
+                                   self?.userService.getAvaFromURL(from: addedUser) { [weak self] image in
+                                       DispatchQueue.main.async { [weak self] in
+                                           if let image = image {
+                                               //self?.subscribeUsers.append(image)
+                                               //guard let id = userName?.user else { return }
+                                               let userInfo = UserUID(user: selectUser, userName: name)
+                                               let info = UserAvatarAndName(user: userInfo, ava: image)
+                                               self?.subscribers.append(info)
+                                               self?.tableView.reloadData()
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+
+                       }
+                   }
+                   
+               }
+           }
+       }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //navigationController?.setNavigationBarHidden(false, animated: animated)
-        tableView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.reloadData()
-    }
+
     
 //MARK: -METHODS
     
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: .statusTextChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(unSubscribeButtonTapped), name: .unSubscribeButtonTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(likeButtonTapped), name: .liked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(buttonTap), name: .customButtonTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: .imageTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addName), name: .nameTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addAvatar), name: .avaChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissedVC), name: .dissmissedVC, object: nil)
+    }
     
+   //обновить данные статуса
     private func reloadTableView(with userStatus: UserStatus) {
-        self.aboutUser = userStatus
+        //self.aboutUser = userStatus //кажется не нужен
         if let st = userStatus.status {
             profileTableHeaderView.statusLabel.text = st
         }
@@ -353,12 +368,11 @@ class ProfileViewController: UIViewController {
     
     
     @objc func likeButtonTapped(_ notification: Notification) {
-        print("tap here")
         tableView.reloadData()
     }
    
+    // like/unlike post
     func buttonTapped(at indexPath: IndexPath) {
-        print("tap here2")
         
         likeItem = post[indexPath.row].postID
         guard let idPost = likeItem else { return }
@@ -436,11 +450,12 @@ class ProfileViewController: UIViewController {
     }
      
   */
-    
+    //обновить данные после возвращения со страницы пользователя из подписок
     @objc private func dismissedVC(_ notification: Notification) {
         viewWillAppear(true)
     }
     
+    //открыть страницу пользователя в подписках
     @objc private func unSubscribeButtonTapped(_ notification: Notification) {
         if let newValue = notification.object as? UserUID {
             let openVC = OpenViewController(user: newValue.user)
@@ -485,6 +500,7 @@ class ProfileViewController: UIViewController {
     }
     */
     
+    //добавить пост
     @objc func buttonTap() {
         showAddInfoForPost { [self] descr, img in
             guard let description = descr else { return }
@@ -497,9 +513,8 @@ class ProfileViewController: UIViewController {
             //loadPost(id)
         }
     }
-    
+    //для визуала кнопки выхода
     func forExit() {
-        
         let exitButton = UIBarButtonItem(title: NSLocalizedString("Exit", comment: ""), style: .plain, target: self, action: #selector(exitButtonTapped))
         navigationItem.rightBarButtonItem = exitButton
         navigationItem.rightBarButtonItem?.isHidden = false
@@ -513,10 +528,11 @@ class ProfileViewController: UIViewController {
     
     @objc func addStatus(_ notification: Notification) {
         guard let statusText = notification.object as? String else { return }
-        profileTableHeaderView.statusLabel.text = ""
+        profileTableHeaderView.statusLabel.text = statusText     //""
         self.statusText = statusText
     }
     
+    //добавление имени
     @objc func addName(_ notification: Notification) {
         showAddName { [weak self] name in
             self?.profileTableHeaderView.nameLabel.text = name
@@ -527,12 +543,13 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
+    //добавление аватарки
     @objc func addAvatar(_ notification: Notification) {
         guard let newAva = notification.object as? UIImage else { return }
         ava = newAva
     }
     
+    //при выходе сохраняются/обновляются в бд статус и аватар
     @objc func exitButtonTapped() {
         
         addAva(ava)
@@ -576,11 +593,12 @@ class ProfileViewController: UIViewController {
             }
 
         }
-
+/*
         profileTableHeaderView.statusSaved = { [self] text in
             guard let text = text else { return }
             name = text
         }
+*/
         authService.logoutUser { [weak self] error in
             
             if let logoVC = self?.logoViewController {
@@ -633,7 +651,7 @@ class ProfileViewController: UIViewController {
 
     
 
-    //MARK: - вспомогательные методы
+//MARK: - вспомогательные методы
     
     func resizeImage(_ image: UIImage, targetSize: CGSize) -> UIImage {
         let render = UIGraphicsImageRenderer(size: targetSize)

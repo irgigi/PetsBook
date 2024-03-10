@@ -10,12 +10,18 @@ import UIKit
 
 class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
+//MARK: - properties
+    
     var statusText: String?
     var nameText: String?
-    var statusSaved: ((String?) -> Void)?
+    
+    //для установки статуса похоже лишнее
+    //var statusSaved: ((String?) -> Void)?
+    
+    //для установки статуса
     var newStatus: String? {
         didSet {
-            NotificationCenter.default.post(name: Notification.Name("statusTextChanged"), object: newStatus)
+            NotificationCenter.default.post(name: .statusTextChanged, object: newStatus)
         }
     }
     
@@ -43,7 +49,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         //создание круглой рамки
         image.layer.cornerRadius = 60
         image.layer.borderWidth = 2.0
-        image.layer.borderColor = Colors.almostBroun.cgColor
+        image.layer.borderColor = Colors.primaryColor.cgColor
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
         image.addGestureRecognizer(tapGestureRecognizer)
         
@@ -153,8 +159,12 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
                 return
             } else {
                 statusLabel.text = st
+                
+                //передать статус
                 newStatus = st
-                statusSaved?(st)
+                
+                //передать статус
+                //statusSaved?(st)
                 textField.text = ""
             }
         case bigButton2:

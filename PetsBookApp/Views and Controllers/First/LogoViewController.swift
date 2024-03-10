@@ -7,6 +7,8 @@ import UIKit
 
 class LogoViewController: UIViewController {
     
+//MARK: - subviews
+    
     lazy var logoView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -33,11 +35,12 @@ class LogoViewController: UIViewController {
         return button
     }()
 
+//MARK: - life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
     
-        view.backgroundColor = .white
         if let thisImage = UIImage(named: "petsbook") {
             logoView.image = thisImage
             view.backgroundColor = Colors.myColorLight
@@ -51,6 +54,8 @@ class LogoViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
         navigationItem.setHidesBackButton(true, animated: false)
     }
+    
+//MARK: - methods
     
     @objc func goToRegView() {
         let regViewController = RegViewController()
@@ -69,6 +74,8 @@ class LogoViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .systemBrown
         navigationController?.pushViewController(regViewController, animated: true)
     }
+    
+//MARK: - constraints
     
     private func setupUI() {
         view.addSubview(logoView)

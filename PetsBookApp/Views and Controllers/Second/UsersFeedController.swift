@@ -19,13 +19,16 @@ final class UsersFeedController: UIViewController {
     
 //MARK: -properties
     
-    var post = [Post]()
+    var post = [Post]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     var value: String? {
         didSet {
             if let newValue = value {
                 subscribeService.subUser?(newValue)
-                print("/// - ///", newValue)
             }
         }
     }
@@ -83,16 +86,14 @@ final class UsersFeedController: UIViewController {
         view.addSubview(tableView)
         setupConstraints()
         
-        if let id = authService.currentUserHandler {
-            self.baseUser = id
-            loadPost()
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        if let id = authService.currentUserHandler {
+            self.baseUser = id
+            loadPost()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

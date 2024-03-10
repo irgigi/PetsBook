@@ -216,7 +216,7 @@
 				862A0EAB2B6BAD3F007F7096 /* Services */,
 				869E83C62B8F888000995854 /* Model */,
 				862A0EAF2B6BE202007F7096 /* Extension */,
-				86C539352B821E510066F4FA /* Views */,
+				86C539352B821E510066F4FA /* Views and Controllers */,
 				86BABF952B710BEF004908EC /* ElementsCollectionViewCell.swift */,
 				866BC8B02B67D33F007F3836 /* Assets.xcassets */,
 				866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */,
@@ -272,14 +272,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		86C539352B821E510066F4FA /* Views */ = {
+		86C539352B821E510066F4FA /* Views and Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				86C539362B821EC80066F4FA /* First */,
 				8674287B2B970E28002A6EF1 /* Base */,
 				8674287C2B970EB2002A6EF1 /* Second */,
 			);
-			path = Views;
+			path = "Views and Controllers";
 			sourceTree = "<group>";
 		};
 		86C539362B821EC80066F4FA /* First */ = {

@@ -10,21 +10,30 @@ import FirebaseAuth
 
 class RegViewController: UIViewController {
     
-    private let authService = AuthService()
+//MARK: - services
+    
+    private let authService = AuthService.shared
+    
+//MARK: - properties for authorization/registration
+    
     var completionHandler: (() -> Bool)?
     var isNewUser: Bool?
     var user: ((FireBaseUser?) -> Void)?
     
+    //for tabbar
     func sendNotification(withUser user: FireBaseUser) {
         let data: [String: Any] = ["user": user]
-        NotificationCenter.default.post(name: NSNotification.Name("NotificationName"), object: nil, userInfo: data)
+        NotificationCenter.default.post(name: .forTabbar, object: nil, userInfo: data)
     }
     
+    // удаление наблюдателя
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
+//MARK: - subviews
     
+    //для заголовка
     lazy var headTextLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
@@ -34,39 +43,38 @@ class RegViewController: UIViewController {
         return label
         
     }()
-    
+    //описание
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.font = Fonts.baseTextFont
         label.textColor = Colors.myColor
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        //label.text = "Напишите ваш e-mail и придумайте пароль"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
         
     }()
-    
+    //картинка у первого поля
     lazy var onePawView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "paw1")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
-    
+    //картинка у второго поля
     lazy var secondPawView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "paw2")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
-    
+    //поле логина
     lazy var loginField: UITextField = {
         let text = UITextField()
         text.font = Fonts.baseTextFont
         text.placeholder = NSLocalizedString("email", comment: "")
-        text.text = "test@mail.ru"
+        text.text = "test2@mail.ru"
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
         text.autocapitalizationType = .none
@@ -81,7 +89,7 @@ class RegViewController: UIViewController {
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
-    
+    //поле пароля
     lazy var passwordField: UITextField = {
         let text = UITextField()
         text.font = Fonts.baseTextFont
@@ -102,7 +110,7 @@ class RegViewController: UIViewController {
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
-    
+    //кнопка регистрации или входа
     lazy var regButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = Colors.primaryColor
@@ -111,6 +119,8 @@ class RegViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+//MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,13 +144,11 @@ class RegViewController: UIViewController {
         setupUI()
     }
     
+//MARK: - methods
+    
     @objc func goToAccauntView() {
         
-        guard let login = loginField.text, let password = passwordField.text else {
-            
-            return
-            
-        }
+        guard let login = loginField.text, let password = passwordField.text else { return }
         
         if let comp = completionHandler {
             if comp() {
@@ -172,11 +180,11 @@ class RegViewController: UIViewController {
                         self?.showAllert(message: NSLocalizedString("This user not found!", comment: ""))
                     }
                 }
-                
             }
         }
-
     }
+    
+//MARK: - constraints
     
     private func setupUI() {
         view.addSubview(headTextLabel)
@@ -232,30 +240,17 @@ class RegViewController: UIViewController {
 
 private extension RegViewController {
     
+    //для нового пользователя добавить имя
+    
     func showProfileViewController(user: FireBaseUser) {
         
         self.user?(user)
         
+        //for tabbar
         sendNotification(withUser: user)
         
         let profileVC = ProfileViewController(user: user)
-        /*
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let sceneDelegate = windowScene.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = tabBarController
-        }
-        
-       
-        guard let tabBarController = UIApplication.shared.windows.first?.rootViewController as? UITabBarController else { return }
-        
-        for vc in tabBarController.viewControllers ?? [] {
-            if vc == profileVC {
-                return
-            } else {
-                profileVC.tabBarItem = UITabBarItem()
-                tabBarController.viewControllers?.append(profileVC)
-            }
-        }
-        */
+ 
         if let new = isNewUser {
             if new {
                 
