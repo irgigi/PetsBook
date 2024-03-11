@@ -21,7 +21,7 @@ Pets Book поддерживает локализацию:
 - Русский
 - Английский
 
-<img src="file/screen_01.png" width="200" heigh="600"><img src="file/screen_02.png" width="200" heigh="600"><img src="file/screen_03.png" width="200" heigh="600"><img src="file/screen_04.png" width="200" heigh="600">
+<img src="file/screen_01.png" width="200" heigh="600">  <img src="file/screen_02.png" width="200" heigh="600">  <img src="file/screen_03.png" width="200" heigh="600">  <img src="file/screen_04.png" width="200" heigh="600">
 
 
 ## Хранение данных и технологии:
