@@ -2119,8 +2119,8 @@
             filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "529"
-            endingLineNumber = "529"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "addStatus(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2151,8 +2151,8 @@
             filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "post"
             landmarkType = "24">
          </BreakpointContent>
@@ -2167,8 +2167,8 @@
             filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549"
+            startingLineNumber = "426"
+            endingLineNumber = "426"
             landmarkName = "addAvatar(_:)"
             landmarkType = "7">
             <Locations>
@@ -2215,8 +2215,8 @@
             filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "633"
-            endingLineNumber = "633"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
             landmarkName = "addAva(_:)"
             landmarkType = "7">
          </BreakpointContent>

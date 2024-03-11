@@ -34,9 +34,7 @@ class PostTableViewCell: UITableViewCell {
         image.layer.cornerRadius = 20
         image.layer.borderWidth = 1.0
         image.layer.borderColor = Colors.almostWhite.cgColor
-      /*
-        image.transform = CGAffineTransform(scaleX: UIScreen.main.bounds.width/image.bounds.width, y: UIScreen.main.bounds.width/image.bounds.width)
-       */
+
         return image
     }()
     
@@ -63,18 +61,7 @@ class PostTableViewCell: UITableViewCell {
         button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return button
     }()
-    
-    
-    /*
-    let viewsLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.text = "Likes: "
-        return label
-    }()
-    */
-    
+
     let stackForLabels: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -96,17 +83,12 @@ class PostTableViewCell: UITableViewCell {
             style: .subtitle,
             reuseIdentifier: reuseIdentifier
         )
-        
-        
-        //stackForLabels.addArrangedSubview(viewsLabel)
+
         stackForLabels.addArrangedSubview(likesButton)
         stackForLabels.addArrangedSubview(likesLabel)
         addSubviewInCell()
-        
         consraintInCell()
 
-
-      //  tuneView()
     }
     
     required init?(coder: NSCoder) {
@@ -136,7 +118,6 @@ class PostTableViewCell: UITableViewCell {
 //MARK: - METHODS
     
     @objc func likeButtonTapped() {
-        print("tap cell")
         NotificationCenter.default.post(name: .liked, object: nil)
         likeAction?()
     }
@@ -150,17 +131,6 @@ class PostTableViewCell: UITableViewCell {
         }
         
     }
-/*
-    func update(_ model: PostModel) {
-        
-        autorLabel.text = model.author
-        imagePost.image = UIImage(named: model.image)
-        descriptionLabel.text = model.description
-        likesLabel.text! += String(describing: model.likes)
-        viewsLabel.text! += String(describing: model.views)
-        
-        }
-  */
     
     func update(_ model: Post) {
         autorLabel.text = model.userName
@@ -210,7 +180,6 @@ class PostTableViewCell: UITableViewCell {
             stackForLabels.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
             stackForLabels.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stackForLabels.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            //stackForLabels.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackForLabels.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             stackForLabels.heightAnchor.constraint(equalToConstant: 50),
             stackForLabels.widthAnchor.constraint(equalTo: contentView.widthAnchor),
@@ -225,8 +194,6 @@ class PostTableViewCell: UITableViewCell {
             likesLabel.widthAnchor.constraint(equalToConstant: 50),
             likesLabel.bottomAnchor.constraint(equalTo: stackForLabels.bottomAnchor, constant: -10)
         
-
-      
         ])
         
     }

@@ -14,10 +14,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     var statusText: String?
     var nameText: String?
-    
-    //для установки статуса похоже лишнее
-    //var statusSaved: ((String?) -> Void)?
-    
+
     //для установки статуса
     var newStatus: String? {
         didSet {
@@ -36,8 +33,6 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
             NotificationCenter.default.post(name: Notification.Name("nameChanged"), object: newName)
         }
     }
-    
-    //private var inspector = LoginInspector()
     
     // MARK: - Subviews
     
@@ -162,9 +157,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
                 
                 //передать статус
                 newStatus = st
-                
-                //передать статус
-                //statusSaved?(st)
+
                 textField.text = ""
             }
         case bigButton2:

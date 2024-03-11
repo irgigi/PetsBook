@@ -18,7 +18,6 @@ class ProfileViewController: UIViewController {
     
 //MARK: - service
     let photoCollectionService = PhotoCollectionService.shared
-    //private let firestoreService = FirestoreService()
     private let authService = AuthService.shared
     private let userService = UserService()
     private let postService = PostService()
@@ -40,15 +39,9 @@ class ProfileViewController: UIViewController {
     //для получения статуса
     private var statusText: String?
     
-    //private var status: (() -> String)?
-    //private var aboutUser: UserStatus? //кажется не нужен
-    //private var userName: UserUID?
-    
    
     // MARK: - Data
     
-    //private var userUID = [UserUID]()
-    //private var userStatus = [UserStatus]()
     private var post = [Post]() {
         didSet {
             tableView.reloadData()
@@ -63,20 +56,6 @@ class ProfileViewController: UIViewController {
     
     var images: [UIImage] = []
     
-    /*
-    var subscribeUsers: [UIImage] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
-    var names: [UserUID] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-     */
-    //var selUser: UserUID?
     
     //для хранения postid
     var likeItem: String?
@@ -158,8 +137,7 @@ class ProfileViewController: UIViewController {
             //для других взаимодействий
             authService.getUser(id)
             loadAvatar(id)
-            
-            //loadSubscribeUsers(id)
+
             
             // загржаем статус, если есть
             userService.fetchStatus(user: id) {[weak self] (user, error) in
@@ -214,19 +192,10 @@ class ProfileViewController: UIViewController {
             self.navigationController?.navigationBar.titleTextAttributes = titleColor as [NSAttributedString.Key : Any]
             
             addObservers()
-            
-            
-            //NotificationCenter.default.addObserver(self, selector: #selector(subscribeButtonTapped), name: .subscribeButtonTapped, object: nil)
-            
-            
-            
-            //NotificationCenter.default.addObserver(self, selector: #selector(deleteButtonTapped), name: .deleteButtonTapped, object: nil)
-            
 
             
             tableView.addSubview(profileTableHeaderView)
             view.addSubview(tableView)
-            //initialFetchEvents()
             setupConstraints()
 
         }
@@ -242,7 +211,6 @@ class ProfileViewController: UIViewController {
         
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
-            //navigationController?.setNavigationBarHidden(false, animated: animated)
             tableView.reloadData()
         }
         
@@ -288,23 +256,7 @@ class ProfileViewController: UIViewController {
            subscribeService.getAddedUsers(user) { [self] array in
             
                for item in array {
-                   /*
-                   self.userService.getAvatarAndName(forUser: item.user) { (avatar: String?, name: String?) in
-                       
-                       guard let urlAva = avatar else { return }
-                       guard let name = name else { return }
-                       self.userService.getAvaFromURL(from: urlAva) { [weak self] image in
-                           DispatchQueue.main.async { [weak self] in
-                               if let image = image {
-                                   var data = UserAvatarAndName(ava: image, name: name)
-                                   self?.data.append(data)
-                                   self?.tableView.reloadData()
-                               }
-                           }
-                       }
-                   }
-                   
-                   */
+    
                    self.userService.getListenerhAvatar(user: item.addUser) { userAva, error in
                        if let error = error {
                            print(error.localizedDescription)
@@ -317,14 +269,9 @@ class ProfileViewController: UIViewController {
                                } else {
                                    guard let name = userName?.userName else { return }
                                    guard let selectUser = userName?.user else { return }
-                                   //self?.names.append(name)
-                                   //self?.tableView.reloadData()
-                                   //guard let urlAva = userAva else { return }
                                    self?.userService.getAvaFromURL(from: addedUser) { [weak self] image in
                                        DispatchQueue.main.async { [weak self] in
                                            if let image = image {
-                                               //self?.subscribeUsers.append(image)
-                                               //guard let id = userName?.user else { return }
                                                let userInfo = UserUID(user: selectUser, userName: name)
                                                let info = UserAvatarAndName(user: userInfo, ava: image)
                                                self?.subscribers.append(info)
@@ -359,7 +306,7 @@ class ProfileViewController: UIViewController {
     
    //обновить данные статуса
     private func reloadTableView(with userStatus: UserStatus) {
-        //self.aboutUser = userStatus //кажется не нужен
+        
         if let st = userStatus.status {
             profileTableHeaderView.statusLabel.text = st
         }
@@ -402,54 +349,10 @@ class ProfileViewController: UIViewController {
                     }
                 }
             }
-          
 
-            /*
-            likeService.countLikes(forPostID: idPost) { [weak self] count in
-                self?.postCell.likesLabel.text = String(count)
-                self?.tableView.reloadData()
-            }
-             */
         }
     }
 
-
-    /*
-    //отслеживание подписки на пользователя
-    @objc private func subscribeButtonTapped(_ notification: Notification) {
-        if let id = userID {
-            guard let user = subscribeService.value else { return }
-            let subscibe = Subscribe(user: id, addUser: user)
-            let openVC = OpenViewController(user: user)
-            subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
-                if let error = error {
-                    print(error)
-                }
-                if !result {
-                    
-                    if id == user {
-                        self?.showAllert(message: "На себя подписаться нельзя!")
-                    } else {
-                        self?.subscribeService.addUserToUser(subscibe) { [weak self] error, result  in
-                            if let error = error {
-                                print(error)
-                            }
-                            print("nnn subscribe done")
-                            if (result != nil) {
-                                openVC.openTableHeaderView.button.isSelected = true
-                                self?.tableView.reloadData()
-                            }
-                            
-                        }
-                    }
-                    
-                }
-            }
-            
-        }
-    }
-     
-  */
     //обновить данные после возвращения со страницы пользователя из подписок
     @objc private func dismissedVC(_ notification: Notification) {
         viewWillAppear(true)
@@ -474,31 +377,6 @@ class ProfileViewController: UIViewController {
             present(openVC, animated: true)
         }
     }
-    /*
-    @objc private func deleteButtonTapped(_ notification: Notification) {
-        if let id = userID {
-            print("nnn 1")
-            guard let user = subscribeService.value else { return }
-            let subscibe = Subscribe(user: id, addUser: user)
-            print("nnn 2")
-            subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
-                if let error = error {
-                    print(error)
-                }
-                print("nnn 3")
-                if result {
-                    self?.subscribeService.deleteSubscribe(subscibe) { error in
-                        if let error = error {
-                            print(error)
-                        }
-                        print("nnn 4")
-                    }
-                }
-            }
-            
-        }
-    }
-    */
     
     //добавить пост
     @objc func buttonTap() {
@@ -510,7 +388,6 @@ class ProfileViewController: UIViewController {
             postService.uploadPost(image, id, description, name) { [weak self] _,_  in
                 self?.tableView.reloadData()
             }
-            //loadPost(id)
         }
     }
     //для визуала кнопки выхода
@@ -593,12 +470,7 @@ class ProfileViewController: UIViewController {
             }
 
         }
-/*
-        profileTableHeaderView.statusSaved = { [self] text in
-            guard let text = text else { return }
-            name = text
-        }
-*/
+
         authService.logoutUser { [weak self] error in
             
             if let logoVC = self?.logoViewController {
@@ -733,10 +605,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let selectedView = UIView()
             selectedView.backgroundColor = Colors.myColorLight
             cell.selectedBackgroundView = selectedView
-            
-            //cell.collectionView.reloadData()
-            //cell.names = names
-            //cell.update(data[indexPath.row])
+
             NotificationCenter.default.post(name: .dataButtonTapped, object: userModel.data)
             cell.info = subscribers
             cell.contentView.frame.size.width = tableView.frame.width
@@ -807,11 +676,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        /*
-        if section == 0 {
-            return "test"
-        }
-         */
+
         return " "
     }
     

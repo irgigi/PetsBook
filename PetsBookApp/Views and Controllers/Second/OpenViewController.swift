@@ -37,13 +37,8 @@ class OpenViewController: UIViewController {
 
     
 // MARK: - Data
-    
-   // private var userUID = [UserUID]()
-   // private var userStatus = [UserStatus]()
+
     private var post = [Post]()
-    
-   // var images: [UIImage] = []
-    
     var updateData: (() -> Void)?
     
     // MARK: - table
@@ -83,11 +78,11 @@ class OpenViewController: UIViewController {
         
         return tableView
     }()
-   /*
+   
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    */
+    
 //MARK: - init
     
     init(user: String?) {
@@ -247,67 +242,6 @@ class OpenViewController: UIViewController {
                 }
             }
         }
-        
-        /*
-        
-        if openTableHeaderView.button.isSelected {
-            if let id = user {
-                print("nnn from", id)
-                guard let user = fromUser else { return }
-                let subscibe = Subscribe(user: user, addUser: id)
-                print("nnn 2")
-                subscribeService.checkSubscribe(user, addUser: id) { [weak self] result, error in
-                    if let error = error {
-                        print(error)
-                    }
-                    print("nnn 3")
-                    if result {
-                        self?.subscribeService.deleteSubscribe(subscibe) { [weak self] error in
-                            if let error = error {
-                                print(error)
-                            }
-                            print("nnn 4")
-                            self?.openTableHeaderView.button.isSelected = false
-                        }
-                    }
-                }
-            }
-            
-            //NotificationCenter.default.post(name: .deleteButtonTapped, object: nil)
-        } else {
-            //NotificationCenter.default.post(name: .subscribeButtonTapped, object: nil)
-            if let id = fromUser {
-                guard let user = user else { return }
-                let subscibe = Subscribe(user: id, addUser: user)
-                let openVC = OpenViewController(user: user)
-                subscribeService.checkSubscribe(id, addUser: user) { [weak self] result, error in
-                    if let error = error {
-                        print(error)
-                    }
-                    if !result {
-                        
-                        if id == user {
-                            self?.showAllert(message: "На себя подписаться нельзя!")
-                        } else {
-                            self?.subscribeService.addUserToUser(subscibe) { [weak self] error, result  in
-                                if let error = error {
-                                    print(error)
-                                }
-                                print("nnn subscribe done")
-                                if (result != nil) {
-                                    openVC.openTableHeaderView.button.isSelected = true
-                                    self?.tableView.reloadData()
-                                }
-                                
-                            }
-                        }
-                        
-                    }
-                }
-                
-            }
-        }
-         */
     }
         
     func loadAvatar(_ user: String) {
@@ -392,14 +326,6 @@ class OpenViewController: UIViewController {
                     }
                 }
             }
-          
-
-            /*
-            likeService.countLikes(forPostID: idPost) { [weak self] count in
-                self?.postCell.likesLabel.text = String(count)
-                self?.tableView.reloadData()
-            }
-             */
         }
     }
     
@@ -536,8 +462,8 @@ extension OpenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let selectedItem = post[indexPath.row]
-        //let photoService = PhotoService()
         photoService.getPhotoFromURL(from: selectedItem.image) { [weak self] image in
             DispatchQueue.main.async { [weak self] in
                 guard let image = image else { return }

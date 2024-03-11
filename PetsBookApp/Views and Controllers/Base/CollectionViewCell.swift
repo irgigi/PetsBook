@@ -21,8 +21,6 @@ class CollectionViewCell: UICollectionViewCell {
         image.layer.borderWidth = 5.0
         image.layer.borderColor = Colors.almostWhite.cgColor
         image.translatesAutoresizingMaskIntoConstraints = false
-       // let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(userTapped))
-       // image.addGestureRecognizer(tapGestureRecognizer)
         return image
     }()
     
@@ -62,8 +60,7 @@ class CollectionViewCell: UICollectionViewCell {
     
   
     @objc func userTapped() {
-        print("nnn", "tap user")
-        //NotificationCenter.default.post(name: .unSubscribeButtonTapped, object: nil)
+        
     }
 
     
@@ -71,21 +68,16 @@ class CollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            //nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            //nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             nameLabel.bottomAnchor.constraint(equalTo: userCollection.topAnchor, constant: -5),
             nameLabel.widthAnchor.constraint(equalTo: userCollection.widthAnchor),
             nameLabel.centerXAnchor.constraint(equalTo: userCollection.centerXAnchor),
             nameLabel.heightAnchor.constraint(equalToConstant: 10),
             
-            //userCollection.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
             userCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 12),
             userCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             userCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             userCollection.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            //userCollection.heightAnchor.constraint(equalTo: contentView.widthAnchor)
-            
-        
+
         ])
     }
 }

@@ -31,9 +31,6 @@ class PhotosViewController: UIViewController {
         button.backgroundColor = Colors.primaryColor
         button.setTitleColor(Colors.almostWhite, for: .normal)
         button.layer.cornerRadius = 5
-        //button.layer.shadowColor = Colors.almostWhite.cgColor
-        //button.layer.shadowOpacity = 0.7
-        //button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.addTarget(self, action: #selector(loadPhoto), for: .touchUpInside)
     
         return(button)
@@ -59,23 +56,11 @@ class PhotosViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //загрузка своих фото в массив
-        /*
-        for i in 0...profile.count-1 {
-            photos.append(UIImage(imageLiteralResourceName: profile[i].img))
-        }
-         */
-        //подготовка перед отображением
-        //imagePublisherFacade.subscribe(self) //подписка
-        //imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: 21, userImages: photos) //загрузка с задержкой
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        //завершающие операции,когда представление исчезло с экрана
-        //imagePublisherFacade.removeSubscription(for: self) //удаление подписки
-        //imagePublisherFacade.rechargeImageLibrary() //очистка библиотеки загруженных фото
         
     }
     
@@ -139,9 +124,7 @@ class PhotosViewController: UIViewController {
     }
 }
 
-extension PhotosViewController:  UICollectionViewDataSource, UICollectionViewDelegateFlowLayout { //ImageLibrarySubscriber {
-    
-    
+extension PhotosViewController:  UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func receive(images: [UIImage]) {
         self.photos = images //загружаем в массив полученные фото
@@ -149,13 +132,11 @@ extension PhotosViewController:  UICollectionViewDataSource, UICollectionViewDel
     
     }
     
-    
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
         photos.count // количество ячеек в секции
-        //profile.count - было
     }
     
     func collectionView(
@@ -165,9 +146,7 @@ extension PhotosViewController:  UICollectionViewDataSource, UICollectionViewDel
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: CellID.base.rawValue,
             for: indexPath) as! PhotosCollectionViewCell
-        
-        //let prof = profile[indexPath.row]
-        //cell.setup(with: prof)
+
         cell.profileImageView.image = photos[indexPath.row]  //размещение картинок
         return cell
     }
@@ -218,7 +197,7 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let picImage = info[.originalImage] as? UIImage {
-            //profileTableHeaderView.setImage(picImage)
+            
             photoCollectionService.addCollectionPhoto(image: picImage, to: &photos)
             if let fileURL = photoCollectionService.savePhotoToFileSystem(image: picImage) {
                 fileURLs.append(fileURL)

@@ -66,16 +66,11 @@ class ElementTabelViewCell: UITableViewCell {
             
             infoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             infoLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            //infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             infoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-           // infoLabel.widthAnchor.constraint(equalToConstant: 100),
-          //  infoLabel.heightAnchor.constraint(equalToConstant: 50),
             
             arrowButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             arrowButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
-            arrowButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-           // arrowButton.widthAnchor.constraint(equalToConstant: 100),
-           // arrowButton.heightAnchor.constraint(equalToConstant: 50)
+            arrowButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         
         ])
     }

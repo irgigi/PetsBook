@@ -26,15 +26,7 @@ final class UsersFeedController: UIViewController {
             tableView.reloadData()
         }
     }
-    /*
-    var value: String? {
-        didSet {
-            if let newValue = value {
-                subscribeService.subUser?(newValue)
-            }
-        }
-    }
-    */
+
     var likeItem: String?
     var likeUser: String?
     var baseUser: String?
@@ -76,7 +68,6 @@ final class UsersFeedController: UIViewController {
         
         title = NSLocalizedString("Posts", comment: "")
         
-       // NotificationCenter.default.addObserver(self, selector: #selector(liked), name: .liked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dismissedVC), name: .dissmissedVC, object: nil)
 
         view.addSubview(tableView)
@@ -100,24 +91,7 @@ final class UsersFeedController: UIViewController {
 
     
 // MARK: - methods -
-    
-   /*
-    @objc func liked(_ notification: NSNotification) {
-        guard let idPost = likeItem else { return }
-        guard let idUser = likeUser else { return }
-        
-        if !postCell.likesButton.isSelected {
-            likeService.likePost(idPost, idUser) { [weak self] error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-                self?.postCell.likesButton.isSelected = true
-            }
-        }
 
-    }
-    */
-    
     @objc private func dismissedVC(_ notification: Notification) {
         tableView.reloadData()
     }
@@ -162,13 +136,6 @@ final class UsersFeedController: UIViewController {
                 }
             }
             
-
-            /*
-            likeService.countLikes(forPostID: idPost) { [weak self] count in
-                self?.postCell.likesLabel.text = String(count)
-                self?.tableView.reloadData()
-            }
-             */
         }
         
     }
@@ -215,7 +182,6 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         cell.selectedBackgroundView = selectedView
         
         cell.update(post[indexPath.row])
-        //cell.contentView.frame.size.width = tableView.frame.width
         
         cell.likeAction = { [weak self] in
             self?.buttonTapped(at: indexPath)
@@ -248,8 +214,6 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         
         let selectedItem = post[indexPath.row]
    
-        
-        //subscribeService.subUser?(selectedItem.user)
         subscribeService.value = selectedItem.user
         
         likeItem = selectedItem.postID

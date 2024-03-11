@@ -42,18 +42,7 @@ class OpenTableView: ProfileTableHeaderView {
     @objc func buttonTapped() {
         
         NotificationCenter.default.post(name: .tapped, object: nil)
-    
-      /*
-        if let result = isSelect {
-            if result {
-                print("nnn selected")
-                NotificationCenter.default.post(name: .deleteButtonTapped, object: nil)
-            } else {
-                print("nnn unselected")
-                NotificationCenter.default.post(name: .subscribeButtonTapped, object: nil)
-            }
-        }
-      */
+        
     }
     
     func setup() {

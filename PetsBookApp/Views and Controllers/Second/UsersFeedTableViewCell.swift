@@ -32,7 +32,6 @@ class UsersFeedTableViewCell: PostTableViewCell {
 //MARK: - methods
     
     @objc func buttonPressed() {
-        //NotificationCenter.default.post(name: .liked, object: nil)
         likeAction?()
     }
     
