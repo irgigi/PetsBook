@@ -1,0 +1,2257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "54C08FBB-EDD0-49B0-B284-B8E54B50D4E5"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2B842AA3-84A0-49C1-B039-6505574F0138"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/RegViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "loginField"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "04D7DB88-1E8F-4B93-932E-8DD5237CA31C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/RegViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "headTextLabel"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "04D7DB88-1E8F-4B93-932E-8DD5237CA31C - 207fe7d27bb3941f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.RegViewController.headTextLabel.getter : __C.UILabel"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/RegViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "150">
+               </Location>
+               <Location
+                  uuid = "04D7DB88-1E8F-4B93-932E-8DD5237CA31C - 84e9aa32958cef5c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; __C.UILabel in PetsBookApp.RegViewController.headTextLabel.getter : __C.UILabel"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/RegViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "25">
+               </Location>
+               <Location
+                  uuid = "04D7DB88-1E8F-4B93-932E-8DD5237CA31C - 5ffdcc6d53b86ce7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.RegViewController.headTextLabel.setter : __C.UILabel"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/RegViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "04D7DB88-1E8F-4B93-932E-8DD5237CA31C - e008337afb064605"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.RegViewController.headTextLabel.modify : __C.UILabel"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/RegViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "04D7DB88-1E8F-4B93-932E-8DD5237CA31C - 68ce8d80f7801e43"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.RegViewController.headTextLabel.modify : __C.UILabel with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A86C1539-D463-4D78-B4F2-FAA88DC3B989"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "615"
+            endingLineNumber = "615"
+            landmarkName = "presentImagePicker()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileTableHeaderView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "ProfileTableHeaderView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5 - 4322a4bad718f278"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.statusText.getter : Swift.Optional&lt;() -&gt; Swift.String&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5 - 3228207130baea0c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.statusText.setter : Swift.Optional&lt;() -&gt; Swift.String&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5 - 6e6b047b738c0eae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.statusText.modify : Swift.Optional&lt;() -&gt; Swift.String&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5 - b04f7a5fa957869b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.statusText.modify : Swift.Optional&lt;() -&gt; Swift.String&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5 - 7cef88d78fc6b30f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.init(reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.ProfileTableHeaderView"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "141">
+               </Location>
+               <Location
+                  uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5 - d984ad678f258b24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;PetsBookApp.ProfileTableHeaderView&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5 - 7cef88d78fc6b30f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.init(reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.ProfileTableHeaderView"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "151">
+               </Location>
+               <Location
+                  uuid = "ECC4A7D2-9770-4080-9036-FC0BCF8C1FA5 - d984ad678f258b24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;PetsBookApp.ProfileTableHeaderView&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84506C67-61B9-42AB-9BE2-EF1056106317"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
+            landmarkName = "exitButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "316F1745-04CB-4278-9958-6E19434041F4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileTableHeaderView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "ProfileTableHeaderView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "316F1745-04CB-4278-9958-6E19434041F4 - d0242b321b98b8da"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.statusSaved.getter : Swift.Optional&lt;(Swift.Optional&lt;Swift.String&gt;) -&gt; ()&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "316F1745-04CB-4278-9958-6E19434041F4 - 871767d67e7000ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.statusSaved.setter : Swift.Optional&lt;(Swift.Optional&lt;Swift.String&gt;) -&gt; ()&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  uuid = "316F1745-04CB-4278-9958-6E19434041F4 - 1cebfc251d027cca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.statusSaved.modify : Swift.Optional&lt;(Swift.Optional&lt;Swift.String&gt;) -&gt; ()&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "316F1745-04CB-4278-9958-6E19434041F4 - 2b661020d391ed02"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.statusSaved.modify : Swift.Optional&lt;(Swift.Optional&lt;Swift.String&gt;) -&gt; ()&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  uuid = "316F1745-04CB-4278-9958-6E19434041F4 - 7cef88d78fc6b3cd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.init(reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.ProfileTableHeaderView"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "185">
+               </Location>
+               <Location
+                  uuid = "316F1745-04CB-4278-9958-6E19434041F4 - d984ad678f258be6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;PetsBookApp.ProfileTableHeaderView&gt;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "165">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E0AB89ED-8610-4C1D-9117-8017BD7D5444"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "reloadTableView(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "98D03306-C624-4A90-82C5-4773EADE2BC4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "init(user:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "98D03306-C624-4A90-82C5-4773EADE2BC4 - 785cbebcc8b436e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.init(user: PetsBookApp.FireBaseUser) -&gt; PetsBookApp.ProfileViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "1424">
+               </Location>
+               <Location
+                  uuid = "98D03306-C624-4A90-82C5-4773EADE2BC4 - 868e42f66d0a6589"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (PetsBookApp.UserStatus) -&gt; () in PetsBookApp.ProfileViewController.init(user: PetsBookApp.FireBaseUser) -&gt; PetsBookApp.ProfileViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "101">
+               </Location>
+               <Location
+                  uuid = "98D03306-C624-4A90-82C5-4773EADE2BC4 - 785cbebcc8b436e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.init(user: PetsBookApp.FireBaseUser) -&gt; PetsBookApp.ProfileViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "1693">
+               </Location>
+               <Location
+                  uuid = "98D03306-C624-4A90-82C5-4773EADE2BC4 - 868e42f66d0a6589"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (PetsBookApp.UserStatus) -&gt; () in PetsBookApp.ProfileViewController.init(user: PetsBookApp.FireBaseUser) -&gt; PetsBookApp.ProfileViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "131">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5AACE754-07B4-4D26-91A4-3229035F6F65"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
+            landmarkName = "addAva(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5AACE754-07B4-4D26-91A4-3229035F6F65 - f8b92798c3a58440"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.addAva(Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "261"
+                  endingLineNumber = "261"
+                  offsetFromSymbolStart = "217">
+               </Location>
+               <Location
+                  uuid = "5AACE754-07B4-4D26-91A4-3229035F6F65 - f4b3d5bb75650eb2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in PetsBookApp.ProfileViewController.addAva(Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "261"
+                  endingLineNumber = "261"
+                  offsetFromSymbolStart = "220">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B2BB282E-80E3-4F13-8292-F4C37CC9A6AA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "600"
+            endingLineNumber = "600"
+            landmarkName = "addAva(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B1B1F96-F104-4D0A-8A9C-7979B0669C10"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "596"
+            endingLineNumber = "596"
+            landmarkName = "addAva(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4628371D-2C44-490A-86A8-5C98904C65B0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "598"
+            endingLineNumber = "598"
+            landmarkName = "addAva(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D66B79E-94B8-457C-A29F-FEA96D6AD6F0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/First/RegViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "showProfileViewController(user:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54C46771-80B0-43B5-B07B-F0ECD85FF11D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Main/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "handleNotification(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "54C46771-80B0-43B5-B07B-F0ECD85FF11D - 3a853648f9860a28"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.SceneDelegate.handleNotification(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Main/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "555">
+               </Location>
+               <Location
+                  uuid = "54C46771-80B0-43B5-B07B-F0ECD85FF11D - cd06a27d9ab14c32"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRUser) -&gt; () in PetsBookApp.SceneDelegate.handleNotification(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Main/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "125">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0B7A742-AFC6-4A4F-A633-570B26372F61"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Main/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "handleNotification(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A8F4CA85-228D-4E7E-992C-8C817B2297DD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Main/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "handleNotification(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A07369A1-927B-46EE-A02A-FB7524A670B9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Main/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "handleNotification(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3A27CB68-8DB0-4CBE-AC40-88B5A325408B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
+            landmarkName = "buttonTap()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3A27CB68-8DB0-4CBE-AC40-88B5A325408B - aeaa8488206249ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.buttonPressed() -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "270"
+                  endingLineNumber = "270"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "3A27CB68-8DB0-4CBE-AC40-88B5A325408B - b8c834d6477eda36"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.buttonTapped() -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "270"
+                  endingLineNumber = "270"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3A27C3E9-F9B3-4534-B824-2C5ABEB7A570"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
+            landmarkName = "buttonTap()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B61F1885-AD36-48CC-A02E-93D487370BE9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/UsersFeedController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5692766B-6500-46BD-84E6-EB1CC66A859D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "loadPost(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B705415B-9946-4E0F-9C35-995F9C302345"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "loadPost(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F8074C10-3C81-4982-9FFD-D63610FBECA6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileTableHeaderView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "bigButton"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "F8074C10-3C81-4982-9FFD-D63610FBECA6 - 4fbb285450998127"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.bigButton.getter : __C.UIButton"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "154">
+               </Location>
+               <Location
+                  uuid = "F8074C10-3C81-4982-9FFD-D63610FBECA6 - b89102e40949a1d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; __C.UIButton in PetsBookApp.ProfileTableHeaderView.bigButton.getter : __C.UIButton"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "F8074C10-3C81-4982-9FFD-D63610FBECA6 - b5a078afb40ad1db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.bigButton.setter : __C.UIButton"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "F8074C10-3C81-4982-9FFD-D63610FBECA6 - 102481c132cda514"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.bigButton.modify : __C.UIButton"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileTableHeaderView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "F8074C10-3C81-4982-9FFD-D63610FBECA6 - 14fc3ad26a5b3679"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileTableHeaderView.bigButton.modify : __C.UIButton with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "95385DFA-C502-4F9B-84FE-BEC5190D441E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "888C84CA-B017-4754-9B0B-539DCADF29E8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "624C4448-AD1F-472D-9C8E-83CAC4923147"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/UsersFeedController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89176ADF-78A2-4212-AA34-D1FCB32EB323"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/UsersFeedController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EC864CA1-0A8E-415F-84F7-8DB79DD73BD3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/UsersFeedController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "value"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3839F429-8E61-47F4-8026-1DDA156A0DC2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/UsersFeedController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "value"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6EA22E8A-E4CE-4865-8FFC-F69A9823CFE6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "loadSubscribeUsers(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6EA22E8A-E4CE-4865-8FFC-F69A9823CFE6 - 2a3c05858dd35bf3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;PetsBookApp.Subscribe&gt;) -&gt; () in PetsBookApp.ProfileViewController.loadSubscribeUsers(Swift.String) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "427">
+               </Location>
+               <Location
+                  uuid = "6EA22E8A-E4CE-4865-8FFC-F69A9823CFE6 - f67c94d511fef586"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;PetsBookApp.UserAvatar&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Array&lt;PetsBookApp.Subscribe&gt;) -&gt; () in PetsBookApp.ProfileViewController.loadSubscribeUsers(Swift.String) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "279">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "166DBBA8-936A-4359-9202-91D0B22C1D2A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
+            landmarkName = "unSubscribeButtonTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7DDB3CAB-4E29-408F-BCCF-BA2B2EA56E87"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C3C2715B-B131-492A-9135-B2788AE7CC34"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
+            landmarkName = "unSubscribeButtonTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EC227DA-2127-4A64-87A7-B35317A98BF1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/PhotosTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E3D796A3-AA7C-4919-9B04-17EE9929409E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/PhotosTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4378321F-2DB2-4D67-B07C-51B9017F86C4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
+            landmarkName = "init(user:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4378321F-2DB2-4D67-B07C-51B9017F86C4 - 785cbebcc8b405e9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.init(user: PetsBookApp.FireBaseUser) -&gt; PetsBookApp.ProfileViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "2612">
+               </Location>
+               <Location
+                  uuid = "4378321F-2DB2-4D67-B07C-51B9017F86C4 - 785cbebcc8b405e9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.init(user: PetsBookApp.FireBaseUser) -&gt; PetsBookApp.ProfileViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "2619">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F5390318-D15F-40F4-8586-2D1828150EA4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "F5390318-D15F-40F4-8586-2D1828150EA4 - 9638217313605088"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.ProfileViewController.deleteButtonTapped(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "351"
+                  endingLineNumber = "351"
+                  offsetFromSymbolStart = "583">
+               </Location>
+               <Location
+                  uuid = "F5390318-D15F-40F4-8586-2D1828150EA4 - 770a7a51b9cd27b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.ProfileViewController.deleteButtonTapped(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "352"
+                  endingLineNumber = "352"
+                  offsetFromSymbolStart = "55">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "98E9E734-776C-488C-9508-726A84E30251"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "458"
+            endingLineNumber = "458"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "98E9E734-776C-488C-9508-726A84E30251 - fe1297dc97691fbe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.deleteButtonTapped(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "346"
+                  endingLineNumber = "346"
+                  offsetFromSymbolStart = "443">
+               </Location>
+               <Location
+                  uuid = "98E9E734-776C-488C-9508-726A84E30251 - 963821731360536d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.ProfileViewController.deleteButtonTapped(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "346"
+                  endingLineNumber = "346"
+                  offsetFromSymbolStart = "209">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F90C4031-D14F-4721-933A-7130C1F7D58E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E6472FC-9B93-4ABC-B966-476DC7CF80DE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "451"
+            endingLineNumber = "451"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "848E661B-A055-41CE-A3DE-271144DF8BEC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "init(user:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "848E661B-A055-41CE-A3DE-271144DF8BEC - 5b309878640d2cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.OpenViewController.init(user: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.OpenViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "593">
+               </Location>
+               <Location
+                  uuid = "848E661B-A055-41CE-A3DE-271144DF8BEC - 5b309878640d2cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.OpenViewController.init(user: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.OpenViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "608">
+               </Location>
+               <Location
+                  uuid = "848E661B-A055-41CE-A3DE-271144DF8BEC - 5b309878640d209"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.OpenViewController.init(user: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.OpenViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "608">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "70A54C91-B63B-4C53-A428-85FD052528B4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "init(user:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "70A54C91-B63B-4C53-A428-85FD052528B4 - 5b309878640d247"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.OpenViewController.init(user: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.OpenViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "129"
+                  endingLineNumber = "129"
+                  offsetFromSymbolStart = "835">
+               </Location>
+               <Location
+                  uuid = "70A54C91-B63B-4C53-A428-85FD052528B4 - 5b309878640d3a6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.OpenViewController.init(user: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.OpenViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "1044">
+               </Location>
+               <Location
+                  uuid = "70A54C91-B63B-4C53-A428-85FD052528B4 - 5b309878640d3e4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.OpenViewController.init(user: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.OpenViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
+                  offsetFromSymbolStart = "1044">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0071032-CF76-4B45-9F2A-147281B9AB92"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "405"
+            endingLineNumber = "405"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "A0071032-CF76-4B45-9F2A-147281B9AB92 - 79e1cfce74905b76"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.subscribeButtonTapped(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "308"
+                  endingLineNumber = "308"
+                  offsetFromSymbolStart = "443">
+               </Location>
+               <Location
+                  uuid = "A0071032-CF76-4B45-9F2A-147281B9AB92 - 2375fc75469f11df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.ProfileViewController.subscribeButtonTapped(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "308"
+                  endingLineNumber = "308"
+                  offsetFromSymbolStart = "209">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D26DFEE1-3B0A-4A7E-A650-5942BF5941A9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "init(user:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D26DFEE1-3B0A-4A7E-A650-5942BF5941A9 - 829abbe8ea356319"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.OpenViewController.__allocating_init(user: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.OpenViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "29">
+               </Location>
+               <Location
+                  uuid = "D26DFEE1-3B0A-4A7E-A650-5942BF5941A9 - b32cc5156ec5b88d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.OpenViewController.init(user: Swift.Optional&lt;Swift.String&gt;) -&gt; PetsBookApp.OpenViewController"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "190">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D2CE956D-D0E2-469C-8680-779451D448C1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "button"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "D2CE956D-D0E2-469C-8680-779451D448C1 - c7063e9804247944"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.OpenTableView.button.getter : __C.UIButton"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenTableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10"
+                  offsetFromSymbolStart = "154">
+               </Location>
+               <Location
+                  uuid = "D2CE956D-D0E2-469C-8680-779451D448C1 - 97bc8477d8bfaa77"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; __C.UIButton in PetsBookApp.OpenTableView.button.getter : __C.UIButton"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenTableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  uuid = "D2CE956D-D0E2-469C-8680-779451D448C1 - 7490e03778536950"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.OpenTableView.button.setter : __C.UIButton"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenTableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "D2CE956D-D0E2-469C-8680-779451D448C1 - 8c307e76fdf48d47"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.OpenTableView.button.modify : __C.UIButton"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/OpenTableView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "D2CE956D-D0E2-469C-8680-779451D448C1 - d632283344d97cc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.OpenTableView.button.modify : __C.UIButton with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3BDD6E44-B622-46A2-85DC-5C32F3E1B676"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "buttonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F975A81F-F7B3-46FC-ACE7-ACF3D074F076"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "tapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E617B320-5513-4532-9189-B10BF994EFDE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
+            landmarkName = "tapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FFE29626-633E-47B7-A913-C68F7E287C6D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
+            landmarkName = "tapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53259090-1E3A-4FE7-8752-01218DDA11E9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "buttonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8653FFF9-D6BB-4D2D-8BD5-2F270042EFC3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "8653FFF9-D6BB-4D2D-8BD5-2F270042EFC3 - 2375fc75469f1086"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.ProfileViewController.subscribeButtonTapped(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "317"
+                  endingLineNumber = "317"
+                  offsetFromSymbolStart = "1004">
+               </Location>
+               <Location
+                  uuid = "8653FFF9-D6BB-4D2D-8BD5-2F270042EFC3 - 673668f85d782eca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PetsBookApp.ProfileViewController.subscribeButtonTapped(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "318"
+                  endingLineNumber = "318"
+                  offsetFromSymbolStart = "55">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "80D3E355-FF1E-4208-B0E8-18DA862FAF96"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "tapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54F0721A-10D2-4642-BEDA-085A6F9B25A4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "loadSubscribeUsers(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "54F0721A-10D2-4642-BEDA-085A6F9B25A4 - 4319e88a3729ebe9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.loadSubscribeUsers(Swift.String) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "465">
+               </Location>
+               <Location
+                  uuid = "54F0721A-10D2-4642-BEDA-085A6F9B25A4 - 2a3c05858dd35900"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;PetsBookApp.Subscribe&gt;) -&gt; () in PetsBookApp.ProfileViewController.loadSubscribeUsers(Swift.String) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "109">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A83EEB2-3547-4CA9-838E-14685EC2D6ED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "loadSubscribeUsers(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2EFC5579-F865-46BD-B1D5-8EF022628430"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "443"
+            endingLineNumber = "443"
+            landmarkName = "unSubscribeButtonTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "93668F31-4D0F-4E0A-895D-269A9C976B60"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
+            landmarkName = "unSubscribeButtonTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AA208C16-7710-4D5A-ADDA-1ED939376F28"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/ElementTabelViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "constraints()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "167416DA-19AD-4545-8154-394C0D762987"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "767"
+            endingLineNumber = "767"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E25D8CDB-28CB-4ECF-8FF3-04466E73F8AF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/OpenTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "OpenTableViewCell"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "194DE8BF-78CF-44B8-A222-DB13C75E8B43"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/UsersFeedTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "UsersFeedTableViewCell"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6C296860-42C7-4F9C-9DFE-1CDA833638CF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/UsersFeedTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "buttonPressed()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2FF56CCF-C686-45DB-BD3E-A6CFAD71E961"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "707"
+            endingLineNumber = "707"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2DDFC3BA-7725-45E6-AB14-FFB57B4F47EF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/PostTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "likeButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A66D290D-5515-4ABC-8C0A-4D5D259E7767"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/UsersFeedController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA8A7924-743E-4699-9A88-22B226361CB6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/Second/UsersFeedController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EA8A7924-743E-4699-9A88-22B226361CB6 - c63f11cd85bdd5c9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.UsersFeedController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/Second/UsersFeedController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "215"
+                  endingLineNumber = "215"
+                  offsetFromSymbolStart = "1648">
+               </Location>
+               <Location
+                  uuid = "EA8A7924-743E-4699-9A88-22B226361CB6 - 7ada941a263de541"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Int) -&gt; () in PetsBookApp.UsersFeedController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views/Second/UsersFeedController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216"
+                  offsetFromSymbolStart = "47">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "934A6AD3-9E25-4CBE-9A2B-56C095BD700B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/Second/UsersFeedController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "07434743-6B0F-48BC-8510-22323A93B0FC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/Second/OpenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "viewDidDisappear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "22C754C9-CDD6-4F32-AD06-4EE4F5E7726F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/Base/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "subscribers"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2D92A57A-BECC-4374-A7D8-B385385F1F2C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/Base/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC4AB925-8891-474A-8BC6-7BB5F465E6DD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views/Base/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D31BE5D6-98AD-4921-93E5-86F256BDE463"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "529"
+            endingLineNumber = "529"
+            landmarkName = "addStatus(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6188B7F4-0CDB-4EC9-80C5-23017FBEDB68"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Main/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "scene(_:willConnectTo:options:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AD9A64A2-F39F-42D4-9B13-43148AA78792"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "post"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "323A5586-0617-4B8E-BD82-9CB34426263C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
+            landmarkName = "addAvatar(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "323A5586-0617-4B8E-BD82-9CB34426263C - 48a4eca59a3c024"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.addAvatar(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views%20and%20Controllers/Base/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "549"
+                  endingLineNumber = "549"
+                  offsetFromSymbolStart = "307">
+               </Location>
+               <Location
+                  uuid = "323A5586-0617-4B8E-BD82-9CB34426263C - 48a4eca59a3c1cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PetsBookApp.ProfileViewController.addAvatar(Foundation.Notification) -&gt; ()"
+                  moduleName = "PetsBookApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mamula/Desktop/PetsBookApp/PetsBookApp/Views%20and%20Controllers/Base/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "548"
+                  endingLineNumber = "548"
+                  offsetFromSymbolStart = "307">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "45207EC7-1E41-4D87-8F36-0108888B2FBB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "633"
+            endingLineNumber = "633"
+            landmarkName = "addAva(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "06479092-F43E-456F-9D58-70828FBB985D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Services/UserService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
+            landmarkName = "updateUserAvatar(_:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "122B6097-6FAF-4E71-B20A-32F0F770BF9A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PetsBookApp/Services/UserService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
+            landmarkName = "updateUserAvatar(_:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
