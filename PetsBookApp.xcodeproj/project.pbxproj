@@ -110,6 +110,7 @@
 		86BABF932B710B9B004908EC /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		86BC1B992B831EDE00D65DD3 /* UsersFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFeedTableViewCell.swift; sourceTree = "<group>"; };
 		86BC1B9B2B83A1BC00D65DD3 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		86BC475F2B9ED5BA007BA079 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		86C185A62B89F23400EE1293 /* SubscribeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeService.swift; sourceTree = "<group>"; };
 		86C539372B821FA70066F4FA /* OpenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenViewController.swift; sourceTree = "<group>"; };
 		86C539392B82236E0066F4FA /* UsersFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFeedController.swift; sourceTree = "<group>"; };
@@ -220,6 +221,7 @@
 				866BC8B52B67D33F007F3836 /* Info.plist */,
 				862A0EA92B6BAB40007F7096 /* GoogleService-Info.plist */,
 				866FC3522B99C07B009A74E6 /* Localizable.xcstrings */,
+				86BC475F2B9ED5BA007BA079 /* README.md */,
 			);
 			path = PetsBookApp;
 			sourceTree = "<group>";
