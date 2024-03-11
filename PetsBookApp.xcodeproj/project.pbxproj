@@ -159,6 +159,7 @@
 		862A0EAB2B6BAD3F007F7096 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				866BC8B02B67D33F007F3836 /* Assets.xcassets */,
 				862A0EAC2B6BAD60007F7096 /* AuthService.swift */,
 				8658668D2B74C9B100B94BEA /* UserService.swift */,
 				865689842B7F7F1000FBD796 /* PhotoService.swift */,
@@ -216,7 +217,6 @@
 				869E83C62B8F888000995854 /* Model */,
 				862A0EAF2B6BE202007F7096 /* Extension */,
 				86C539352B821E510066F4FA /* Views and Controllers */,
-				866BC8B02B67D33F007F3836 /* Assets.xcassets */,
 				866BC8B22B67D33F007F3836 /* LaunchScreen.storyboard */,
 				866BC8B52B67D33F007F3836 /* Info.plist */,
 				862A0EA92B6BAB40007F7096 /* GoogleService-Info.plist */,
