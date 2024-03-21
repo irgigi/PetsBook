@@ -21,16 +21,18 @@ final class UsersFeedController: UIViewController {
     
     let postCell = PostTableViewCell()
     
-    var post = [Post]() {
+    var post = [Post]() 
+    /*
+    {
         didSet {
-            tableView.reloadData()
+            //tableView.reloadData()
         }
     }
-
+    */
     var likeItem: String?
     var likeUser: String?
     var baseUser: String?
-
+    var indexPath: IndexPath?
     
 // MARK: - table -
     
@@ -119,7 +121,7 @@ final class UsersFeedController: UIViewController {
                             print(error.localizedDescription)
                         } else {
                             self?.postCell.likesButton.isSelected = false
-                            self?.tableView.reloadData()
+                            self?.updateCell(at: indexPath)
                             print("... unliked!")
                         }
                     }
@@ -129,7 +131,7 @@ final class UsersFeedController: UIViewController {
                             print(error.localizedDescription)
                         } else {
                             self?.postCell.likesButton.isSelected = true
-                            self?.tableView.reloadData()
+                            self?.updateCell(at: indexPath)
                             print("... liked!")
                         }
                     }
@@ -138,6 +140,23 @@ final class UsersFeedController: UIViewController {
             
         }
         
+    }
+    
+    func updateCell(at indexPath: IndexPath) {
+        //tableView.reloadRows(at: [indexPath], with: .automatic)
+        guard let postID = post[indexPath.row].postID else { return }
+        guard let id = baseUser else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) as? UsersFeedTableViewCell else { return }
+        likeService.countLikes(forPostID: postID) { count in
+            cell.updateLikes(newLikeCount: count)
+        }
+        likeService.checkLike(postID, id) { result in
+            if result {
+                cell.likesButton.isSelected = true
+            } else {
+                cell.likesButton.isSelected = false
+            }
+        }
     }
     
 // MARK: - constraint -
@@ -180,7 +199,7 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         let selectedView = UIView()
         selectedView.backgroundColor = Colors.myColorLight
         cell.selectedBackgroundView = selectedView
-        
+        self.indexPath = indexPath
         cell.update(post[indexPath.row])
         
         cell.likeAction = { [weak self] in
@@ -190,13 +209,12 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         guard let id = baseUser else { return cell }
         guard let post = post[indexPath.row].postID else { return cell }
         
-        
             
         likeService.countLikes(forPostID: post) { count in
-            cell.likesLabel.text = String(count)
+            
+            cell.updateLikes(newLikeCount: count)
+            
         }
-        
-        
         
        
         likeService.checkLike(post, id) { result in
@@ -206,7 +224,7 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
                 cell.likesButton.isSelected = false
             }
         }
-        
+
         return cell
     }
     
@@ -218,8 +236,6 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         
         likeItem = selectedItem.postID
         likeUser = selectedItem.user
-        
-        print("... didset", indexPath)
         
         let openVC = OpenViewController(user: selectedItem.user)
         present(openVC, animated: true)

@@ -8,7 +8,7 @@ import Photos
 
 
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, PostTableViewDelegate {
     
 //MARK: - view
 
@@ -42,12 +42,14 @@ class ProfileViewController: UIViewController {
    
     // MARK: - Data
     
-    private var post = [Post]() {
+    private var post = [Post]() 
+    /*
+    {
         didSet {
             tableView.reloadData()
         }
     }
-    
+    */
     private var subscribers = [UserAvatarAndName]() {
         didSet {
             tableView.reloadData()
@@ -296,7 +298,7 @@ class ProfileViewController: UIViewController {
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: .statusTextChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(unSubscribeButtonTapped), name: .unSubscribeButtonTapped, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(likeButtonTapped), name: .liked, object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTap), name: .customButtonTapped, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: .imageTapped, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addName), name: .nameTapped, object: nil)
@@ -313,11 +315,6 @@ class ProfileViewController: UIViewController {
         tableView.reloadData()
     }
     
-    
-    @objc func likeButtonTapped(_ notification: Notification) {
-        tableView.reloadData()
-    }
-   
     // like/unlike post
     func buttonTapped(at indexPath: IndexPath) {
         
@@ -333,8 +330,8 @@ class ProfileViewController: UIViewController {
                             print(error.localizedDescription)
                         }
                         print("... unliked!")
-                        self?.postCell.likesButton.isSelected = true
-                        self?.tableView.reloadData()
+                        self?.reloadLike(for: indexPath)
+
                     }
                 } else {
                     self?.likeService.addLike(idPost, id) { [weak self] error in
@@ -342,8 +339,8 @@ class ProfileViewController: UIViewController {
                             print(error.localizedDescription)
                         } else {
                             print("... liked!")
-                            self?.postCell.likesButton.isSelected = true
-                            self?.tableView.reloadData()
+                            self?.reloadLike(for: indexPath)
+
                         }
                         
                     }
@@ -520,8 +517,33 @@ class ProfileViewController: UIViewController {
         present(imagePicker, animated: true)
     }
     
+    //делегат для обновления лайков
+    func didLikeButtonTapped(for cell: PostTableViewCell) {
+        
+        if let indexPath = tableView.indexPath(for: cell) {
+            guard let postID = post[indexPath.row].postID else { return }
+            guard let id = userID else { return }
+            
+            likeService.countLikes(forPostID: postID) { count in
+                cell.updateLikes(newLikeCount: count)
+            }
+            
+            likeService.checkLike(postID, id) { result in
+                if result {
+                    cell.likesButton.isSelected = true
+                } else {
+                    cell.likesButton.isSelected = false
+                }
+            }
+        }
+    }
+    //обновление лайков
+    func reloadLike(for indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? PostTableViewCell {
+            cell.delegate?.didLikeButtonTapped(for: cell)
+        }
+    }
 
-    
 
 //MARK: - вспомогательные методы
     
@@ -624,7 +646,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let selectedView = UIView()
             selectedView.backgroundColor = Colors.myColorLight
             cell.selectedBackgroundView = selectedView
-            
+            cell.delegate = self
             cell.likeAction = { [weak self] in
                 self?.buttonTapped(at: indexPath)
             }
@@ -638,7 +660,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             
             likeService.countLikes(forPostID: post) { count in
-                cell.likesLabel.text = String(count)
+                cell.updateLikes(newLikeCount: count)
             }
             
             

@@ -2119,10 +2119,10 @@
             filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
-            landmarkName = "addStatus(_:)"
-            landmarkType = "7">
+            startingLineNumber = "403"
+            endingLineNumber = "403"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2151,10 +2151,10 @@
             filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "post"
-            landmarkType = "24">
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2167,8 +2167,8 @@
             filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "426"
-            endingLineNumber = "426"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "addAvatar(_:)"
             landmarkType = "7">
             <Locations>
@@ -2215,8 +2215,8 @@
             filePath = "PetsBookApp/Views and Controllers/Base/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "505"
-            endingLineNumber = "505"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
             landmarkName = "addAva(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2231,24 +2231,8 @@
             filePath = "PetsBookApp/Services/UserService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
-            landmarkName = "updateUserAvatar(_:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "122B6097-6FAF-4E71-B20A-32F0F770BF9A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PetsBookApp/Services/UserService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "413"
-            endingLineNumber = "413"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "updateUserAvatar(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>

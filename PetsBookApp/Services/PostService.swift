@@ -98,23 +98,7 @@ class PostService {
         listenRegistration?.remove()
     }
     
-   /*
-   // Загрузка постов с отслеживанием
-    func addObserverForPost(completion: @escaping ([Post]) -> Void) {
-        removeListener()
-        dataBase.collection(.collectionPost).addSnapshotListener { snapshot, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            // ответ приходит в главном потоке
-            
-            let post = snapshot?.documents.compactMap({ snapshot in
-                try? snapshot.data(as: Post.self)
-            }) ?? []
-            completion(post)
-        }
-    }
-    */
+
     // Загрузка постов без отслеживания
      func addForPost(completion: @escaping ([Post]) -> Void) {
          dataBase.collection(.collectionPost).getDocuments { snapshot, error in
