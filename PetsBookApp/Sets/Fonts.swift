@@ -4,7 +4,7 @@
 
 import UIKit
 
-struct Fonts {
+enum Fonts {
     
     static let baseTextFont = UIFont.systemFont(ofSize: 16, weight: .regular)
     static let italicTextFont = UIFont.italicSystemFont(ofSize: 16)

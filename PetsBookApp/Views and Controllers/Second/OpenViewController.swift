@@ -310,7 +310,7 @@ class OpenViewController: UIViewController {
                         }
                         print("... unliked!")
                         //self?.openCell.likesButton.isSelected = true
-                        self?.updateCell(at: indexPath)
+                        self?.reloadLike(for: indexPath)
                     }
                 } else {
                     self?.likeService.addLike(idPost, id) { [weak self] error in
@@ -319,7 +319,7 @@ class OpenViewController: UIViewController {
                         } else {
                             print("... liked!")
                             //self?.openCell.likesButton.isSelected = true
-                            self?.updateCell(at: indexPath)
+                            self?.reloadLike(for: indexPath)
                         }
                         
                     }
@@ -340,22 +340,26 @@ class OpenViewController: UIViewController {
         return resizedImage
     }
     
-    func updateCell(at indexPath: IndexPath) {
-        //tableView.reloadRows(at: [indexPath], with: .automatic)
+    //обновление лайков
+    func reloadLike(for indexPath: IndexPath) {
         guard let postID = post[indexPath.row].postID else { return }
         guard let id = baseUser else { return }
-        guard let cell = tableView.cellForRow(at: indexPath) as? OpenTableViewCell else { return }
-        likeService.countLikes(forPostID: postID) { count in
-            cell.updateLikes(newLikeCount: count)
-        }
-        likeService.checkLike(postID, id) { result in
-            if result {
-                cell.likesButton.isSelected = true
-            } else {
-                cell.likesButton.isSelected = false
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? OpenTableViewCell {
+            
+            likeService.countLikes(forPostID: postID) { count in
+                cell.updateLikes(newLikeCount: count)
+            }
+            likeService.checkLike(postID, id) { result in
+                if result {
+                    cell.likesButton.isSelected = true
+                } else {
+                    cell.likesButton.isSelected = false
+                }
             }
         }
     }
+
     
     //MARK: - layout
     
@@ -411,18 +415,18 @@ extension OpenViewController: UITableViewDelegate, UITableViewDataSource {
         cell.likeAction = { [weak self] in
             self?.buttonTapped(at: indexPath)
         }
-        self.indexPath = indexPath
+        
         cell.update(post[indexPath.row])
         
         guard let id = baseUser else { return cell }
-        guard let post = post[indexPath.row].postID else { return cell }
+        guard let postID = post[indexPath.row].postID else { return cell }
         
-        likeService.countLikes(forPostID: post) { count in
+        likeService.countLikes(forPostID: postID) { count in
             cell.updateLikes(newLikeCount: count)
         }
         
         
-        likeService.checkLike(post, id) { result in
+        likeService.checkLike(postID, id) { result in
             if result {
                 cell.likesButton.isSelected = true
             } else {

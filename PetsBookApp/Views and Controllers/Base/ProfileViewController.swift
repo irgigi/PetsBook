@@ -8,7 +8,7 @@ import Photos
 
 
 
-class ProfileViewController: UIViewController, PostTableViewDelegate {
+class ProfileViewController: UIViewController {
     
 //MARK: - view
 
@@ -43,13 +43,7 @@ class ProfileViewController: UIViewController, PostTableViewDelegate {
     // MARK: - Data
     
     private var post = [Post]() 
-    /*
-    {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    */
+
     private var subscribers = [UserAvatarAndName]() {
         didSet {
             tableView.reloadData()
@@ -378,10 +372,10 @@ class ProfileViewController: UIViewController, PostTableViewDelegate {
     //добавить пост
     @objc func buttonTap() {
         showAddInfoForPost { [self] descr, img in
-            guard let description = descr else { return }
-            guard let image = img else { return }
-            guard let id = userID else { return }
-            guard let name = profileTableHeaderView.nameLabel.text else { return }
+            guard let description = descr,
+                  let image = img,
+                  let id = userID,
+                  let name = profileTableHeaderView.nameLabel.text else { return }
             postService.uploadPost(image, id, description, name) { [weak self] _,_  in
                 self?.tableView.reloadData()
             }
@@ -517,17 +511,16 @@ class ProfileViewController: UIViewController, PostTableViewDelegate {
         present(imagePicker, animated: true)
     }
     
-    //делегат для обновления лайков
-    func didLikeButtonTapped(for cell: PostTableViewCell) {
+    //обновление лайков
+    func reloadLike(for indexPath: IndexPath) {
+        guard let postID = post[indexPath.row].postID else { return }
+        guard let id = userID else { return }
         
-        if let indexPath = tableView.indexPath(for: cell) {
-            guard let postID = post[indexPath.row].postID else { return }
-            guard let id = userID else { return }
+        if let cell = tableView.cellForRow(at: indexPath) as? PostTableViewCell {
             
             likeService.countLikes(forPostID: postID) { count in
                 cell.updateLikes(newLikeCount: count)
             }
-            
             likeService.checkLike(postID, id) { result in
                 if result {
                     cell.likesButton.isSelected = true
@@ -535,12 +528,6 @@ class ProfileViewController: UIViewController, PostTableViewDelegate {
                     cell.likesButton.isSelected = false
                 }
             }
-        }
-    }
-    //обновление лайков
-    func reloadLike(for indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? PostTableViewCell {
-            cell.delegate?.didLikeButtonTapped(for: cell)
         }
     }
 
@@ -646,7 +633,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let selectedView = UIView()
             selectedView.backgroundColor = Colors.myColorLight
             cell.selectedBackgroundView = selectedView
-            cell.delegate = self
+            
             cell.likeAction = { [weak self] in
                 self?.buttonTapped(at: indexPath)
             }
@@ -655,16 +642,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             
             guard let id = userID else { return cell }
-            guard let post = post[indexPath.row].postID else { return cell }
+            guard let postID = post[indexPath.row].postID else { return cell }
             
             
             
-            likeService.countLikes(forPostID: post) { count in
+            likeService.countLikes(forPostID: postID) { count in
                 cell.updateLikes(newLikeCount: count)
             }
             
             
-            likeService.checkLike(post, id) { result in
+            likeService.checkLike(postID, id) { result in
                 if result {
                     cell.likesButton.isSelected = true
                 } else {

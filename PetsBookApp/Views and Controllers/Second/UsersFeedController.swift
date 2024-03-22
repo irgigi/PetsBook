@@ -22,17 +22,11 @@ final class UsersFeedController: UIViewController {
     let postCell = PostTableViewCell()
     
     var post = [Post]() 
-    /*
-    {
-        didSet {
-            //tableView.reloadData()
-        }
-    }
-    */
+  
     var likeItem: String?
     var likeUser: String?
     var baseUser: String?
-    var indexPath: IndexPath?
+   
     
 // MARK: - table -
     
@@ -120,8 +114,8 @@ final class UsersFeedController: UIViewController {
                         if let error = error {
                             print(error.localizedDescription)
                         } else {
-                            self?.postCell.likesButton.isSelected = false
-                            self?.updateCell(at: indexPath)
+                            //self?.postCell.likesButton.isSelected = false
+                            self?.reloadLike(for: indexPath)
                             print("... unliked!")
                         }
                     }
@@ -130,8 +124,8 @@ final class UsersFeedController: UIViewController {
                         if let error = error {
                             print(error.localizedDescription)
                         } else {
-                            self?.postCell.likesButton.isSelected = true
-                            self?.updateCell(at: indexPath)
+                            //self?.postCell.likesButton.isSelected = true
+                            self?.reloadLike(for: indexPath)
                             print("... liked!")
                         }
                     }
@@ -142,19 +136,22 @@ final class UsersFeedController: UIViewController {
         
     }
     
-    func updateCell(at indexPath: IndexPath) {
-        //tableView.reloadRows(at: [indexPath], with: .automatic)
+    //обновление лайков
+    func reloadLike(for indexPath: IndexPath) {
         guard let postID = post[indexPath.row].postID else { return }
         guard let id = baseUser else { return }
-        guard let cell = tableView.cellForRow(at: indexPath) as? UsersFeedTableViewCell else { return }
-        likeService.countLikes(forPostID: postID) { count in
-            cell.updateLikes(newLikeCount: count)
-        }
-        likeService.checkLike(postID, id) { result in
-            if result {
-                cell.likesButton.isSelected = true
-            } else {
-                cell.likesButton.isSelected = false
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? UsersFeedTableViewCell {
+            
+            likeService.countLikes(forPostID: postID) { count in
+                cell.updateLikes(newLikeCount: count)
+            }
+            likeService.checkLike(postID, id) { result in
+                if result {
+                    cell.likesButton.isSelected = true
+                } else {
+                    cell.likesButton.isSelected = false
+                }
             }
         }
     }
@@ -199,7 +196,7 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         let selectedView = UIView()
         selectedView.backgroundColor = Colors.myColorLight
         cell.selectedBackgroundView = selectedView
-        self.indexPath = indexPath
+       
         cell.update(post[indexPath.row])
         
         cell.likeAction = { [weak self] in
@@ -207,17 +204,17 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         }
         
         guard let id = baseUser else { return cell }
-        guard let post = post[indexPath.row].postID else { return cell }
+        guard let postID = post[indexPath.row].postID else { return cell }
         
             
-        likeService.countLikes(forPostID: post) { count in
+        likeService.countLikes(forPostID: postID) { count in
             
             cell.updateLikes(newLikeCount: count)
             
         }
         
        
-        likeService.checkLike(post, id) { result in
+        likeService.checkLike(postID, id) { result in
             if result {
                 cell.likesButton.isSelected = true
             } else {

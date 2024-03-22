@@ -5,15 +5,11 @@
 
 import UIKit
 
-protocol PostTableViewDelegate: AnyObject {
-    func didLikeButtonTapped(for cell: PostTableViewCell)
-}
 
 class PostTableViewCell: UITableViewCell {
     
  //MARK: - properties
     
-    weak var delegate: PostTableViewDelegate?
     let profileTableHeaderView = ProfileTableHeaderView()
     let post = [Post]()
     let postService = PostService()
@@ -124,7 +120,6 @@ class PostTableViewCell: UITableViewCell {
     
     @objc func likeButtonTapped() {
         likeAction?()
-        delegate?.didLikeButtonTapped(for: self)
     }
 
     
