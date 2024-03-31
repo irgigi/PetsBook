@@ -93,6 +93,7 @@ class LikeService {
             .whereField("userFrom", isEqualTo: userFrom)
             .getDocuments { snapshot, error in
                 if let error = error {
+                    print("error check", error.localizedDescription)
                     completion(false)
                     return
                 }

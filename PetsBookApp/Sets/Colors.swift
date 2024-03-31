@@ -5,7 +5,7 @@
 
 import UIKit
 
-struct Colors {
+enum Colors {
     
     static let primaryColor = UIColor.systemBrown
     static let secondaryColor = UIColor.brown

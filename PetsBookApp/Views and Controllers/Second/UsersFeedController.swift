@@ -21,16 +21,12 @@ final class UsersFeedController: UIViewController {
     
     let postCell = PostTableViewCell()
     
-    var post = [Post]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
+    var post = [Post]() 
+  
     var likeItem: String?
     var likeUser: String?
     var baseUser: String?
-
+   
     
 // MARK: - table -
     
@@ -118,8 +114,8 @@ final class UsersFeedController: UIViewController {
                         if let error = error {
                             print(error.localizedDescription)
                         } else {
-                            self?.postCell.likesButton.isSelected = false
-                            self?.tableView.reloadData()
+                            //self?.postCell.likesButton.isSelected = false
+                            self?.reloadLike(for: indexPath)
                             print("... unliked!")
                         }
                     }
@@ -128,8 +124,8 @@ final class UsersFeedController: UIViewController {
                         if let error = error {
                             print(error.localizedDescription)
                         } else {
-                            self?.postCell.likesButton.isSelected = true
-                            self?.tableView.reloadData()
+                            //self?.postCell.likesButton.isSelected = true
+                            self?.reloadLike(for: indexPath)
                             print("... liked!")
                         }
                     }
@@ -138,6 +134,26 @@ final class UsersFeedController: UIViewController {
             
         }
         
+    }
+    
+    //обновление лайков
+    func reloadLike(for indexPath: IndexPath) {
+        guard let postID = post[indexPath.row].postID else { return }
+        guard let id = baseUser else { return }
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? UsersFeedTableViewCell {
+            
+            likeService.countLikes(forPostID: postID) { count in
+                cell.updateLikes(newLikeCount: count)
+            }
+            likeService.checkLike(postID, id) { result in
+                if result {
+                    cell.likesButton.isSelected = true
+                } else {
+                    cell.likesButton.isSelected = false
+                }
+            }
+        }
     }
     
 // MARK: - constraint -
@@ -180,7 +196,7 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         let selectedView = UIView()
         selectedView.backgroundColor = Colors.myColorLight
         cell.selectedBackgroundView = selectedView
-        
+       
         cell.update(post[indexPath.row])
         
         cell.likeAction = { [weak self] in
@@ -188,25 +204,24 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         }
         
         guard let id = baseUser else { return cell }
-        guard let post = post[indexPath.row].postID else { return cell }
-        
+        guard let postID = post[indexPath.row].postID else { return cell }
         
             
-        likeService.countLikes(forPostID: post) { count in
-            cell.likesLabel.text = String(count)
+        likeService.countLikes(forPostID: postID) { count in
+            
+            cell.updateLikes(newLikeCount: count)
+            
         }
         
-        
-        
        
-        likeService.checkLike(post, id) { result in
+        likeService.checkLike(postID, id) { result in
             if result {
                 cell.likesButton.isSelected = true
             } else {
                 cell.likesButton.isSelected = false
             }
         }
-        
+
         return cell
     }
     
@@ -218,8 +233,6 @@ extension UsersFeedController: UITableViewDelegate, UITableViewDataSource {
         
         likeItem = selectedItem.postID
         likeUser = selectedItem.user
-        
-        print("... didset", indexPath)
         
         let openVC = OpenViewController(user: selectedItem.user)
         present(openVC, animated: true)

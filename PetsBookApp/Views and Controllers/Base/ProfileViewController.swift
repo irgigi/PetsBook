@@ -42,12 +42,8 @@ class ProfileViewController: UIViewController {
    
     // MARK: - Data
     
-    private var post = [Post]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
+    private var post = [Post]() 
+
     private var subscribers = [UserAvatarAndName]() {
         didSet {
             tableView.reloadData()
@@ -296,7 +292,7 @@ class ProfileViewController: UIViewController {
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(addStatus), name: .statusTextChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(unSubscribeButtonTapped), name: .unSubscribeButtonTapped, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(likeButtonTapped), name: .liked, object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(buttonTap), name: .customButtonTapped, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(imageTapped), name: .imageTapped, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addName), name: .nameTapped, object: nil)
@@ -313,11 +309,6 @@ class ProfileViewController: UIViewController {
         tableView.reloadData()
     }
     
-    
-    @objc func likeButtonTapped(_ notification: Notification) {
-        tableView.reloadData()
-    }
-   
     // like/unlike post
     func buttonTapped(at indexPath: IndexPath) {
         
@@ -333,8 +324,8 @@ class ProfileViewController: UIViewController {
                             print(error.localizedDescription)
                         }
                         print("... unliked!")
-                        self?.postCell.likesButton.isSelected = true
-                        self?.tableView.reloadData()
+                        self?.reloadLike(for: indexPath)
+
                     }
                 } else {
                     self?.likeService.addLike(idPost, id) { [weak self] error in
@@ -342,8 +333,8 @@ class ProfileViewController: UIViewController {
                             print(error.localizedDescription)
                         } else {
                             print("... liked!")
-                            self?.postCell.likesButton.isSelected = true
-                            self?.tableView.reloadData()
+                            self?.reloadLike(for: indexPath)
+
                         }
                         
                     }
@@ -381,10 +372,10 @@ class ProfileViewController: UIViewController {
     //добавить пост
     @objc func buttonTap() {
         showAddInfoForPost { [self] descr, img in
-            guard let description = descr else { return }
-            guard let image = img else { return }
-            guard let id = userID else { return }
-            guard let name = profileTableHeaderView.nameLabel.text else { return }
+            guard let description = descr,
+                  let image = img,
+                  let id = userID,
+                  let name = profileTableHeaderView.nameLabel.text else { return }
             postService.uploadPost(image, id, description, name) { [weak self] _,_  in
                 self?.tableView.reloadData()
             }
@@ -520,8 +511,26 @@ class ProfileViewController: UIViewController {
         present(imagePicker, animated: true)
     }
     
+    //обновление лайков
+    func reloadLike(for indexPath: IndexPath) {
+        guard let postID = post[indexPath.row].postID else { return }
+        guard let id = userID else { return }
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? PostTableViewCell {
+            
+            likeService.countLikes(forPostID: postID) { count in
+                cell.updateLikes(newLikeCount: count)
+            }
+            likeService.checkLike(postID, id) { result in
+                if result {
+                    cell.likesButton.isSelected = true
+                } else {
+                    cell.likesButton.isSelected = false
+                }
+            }
+        }
+    }
 
-    
 
 //MARK: - вспомогательные методы
     
@@ -633,16 +642,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             
             guard let id = userID else { return cell }
-            guard let post = post[indexPath.row].postID else { return cell }
+            guard let postID = post[indexPath.row].postID else { return cell }
             
             
             
-            likeService.countLikes(forPostID: post) { count in
-                cell.likesLabel.text = String(count)
+            likeService.countLikes(forPostID: postID) { count in
+                cell.updateLikes(newLikeCount: count)
             }
             
             
-            likeService.checkLike(post, id) { result in
+            likeService.checkLike(postID, id) { result in
                 if result {
                     cell.likesButton.isSelected = true
                 } else {

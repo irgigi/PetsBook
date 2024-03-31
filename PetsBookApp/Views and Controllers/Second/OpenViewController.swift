@@ -34,7 +34,7 @@ class OpenViewController: UIViewController {
     var baseUser: String?
     var thisUser: String?
     var likeItem: String?
-
+    var indexPath: IndexPath?
     
 // MARK: - Data
 
@@ -266,7 +266,7 @@ class OpenViewController: UIViewController {
     
     func loadPost(_ user: String) {
         postService.getPost(user) { [weak self] allPosts in
-            //self?.post = []
+            self?.post = []
             self?.post.append(contentsOf: allPosts)
             self?.tableView.reloadData()
         }
@@ -296,7 +296,6 @@ class OpenViewController: UIViewController {
     }
     
     func buttonTapped(at indexPath: IndexPath) {
-        print("tap here2")
         
         likeItem = post[indexPath.row].postID
         guard let idPost = likeItem else { return }
@@ -310,8 +309,8 @@ class OpenViewController: UIViewController {
                             print(error.localizedDescription)
                         }
                         print("... unliked!")
-                        self?.openCell.likesButton.isSelected = true
-                        self?.tableView.reloadData()
+                        //self?.openCell.likesButton.isSelected = true
+                        self?.reloadLike(for: indexPath)
                     }
                 } else {
                     self?.likeService.addLike(idPost, id) { [weak self] error in
@@ -319,8 +318,8 @@ class OpenViewController: UIViewController {
                             print(error.localizedDescription)
                         } else {
                             print("... liked!")
-                            self?.openCell.likesButton.isSelected = true
-                            self?.tableView.reloadData()
+                            //self?.openCell.likesButton.isSelected = true
+                            self?.reloadLike(for: indexPath)
                         }
                         
                     }
@@ -340,6 +339,27 @@ class OpenViewController: UIViewController {
         }
         return resizedImage
     }
+    
+    //обновление лайков
+    func reloadLike(for indexPath: IndexPath) {
+        guard let postID = post[indexPath.row].postID else { return }
+        guard let id = baseUser else { return }
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? OpenTableViewCell {
+            
+            likeService.countLikes(forPostID: postID) { count in
+                cell.updateLikes(newLikeCount: count)
+            }
+            likeService.checkLike(postID, id) { result in
+                if result {
+                    cell.likesButton.isSelected = true
+                } else {
+                    cell.likesButton.isSelected = false
+                }
+            }
+        }
+    }
+
     
     //MARK: - layout
     
@@ -398,18 +418,15 @@ extension OpenViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.update(post[indexPath.row])
         
-        
         guard let id = baseUser else { return cell }
-        guard let post = post[indexPath.row].postID else { return cell }
+        guard let postID = post[indexPath.row].postID else { return cell }
         
-        
-        
-        likeService.countLikes(forPostID: post) { count in
-            cell.likesLabel.text = String(count)
+        likeService.countLikes(forPostID: postID) { count in
+            cell.updateLikes(newLikeCount: count)
         }
         
         
-        likeService.checkLike(post, id) { result in
+        likeService.checkLike(postID, id) { result in
             if result {
                 cell.likesButton.isSelected = true
             } else {

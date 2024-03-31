@@ -10,7 +10,7 @@ extension Notification.Name {
     static let statusTextChanged = Notification.Name("StatusTextChanged")
     static let forTabbar = Notification.Name("ForTabbar")
     static let unSubscribeButtonTapped = Notification.Name("UnSubscribeButtonTapped")
-    static let liked = Notification.Name("Liked")
+   
     static let nameTapped = Notification.Name("NameTapped")
     static let avaChanged = Notification.Name("AvaChanged")
     static let dissmissedVC = Notification.Name("DissmissedVC")

@@ -5,6 +5,7 @@
 
 import UIKit
 
+
 class PostTableViewCell: UITableViewCell {
     
  //MARK: - properties
@@ -17,7 +18,7 @@ class PostTableViewCell: UITableViewCell {
     
 // MARK: - Subview
     
-    let autorLabel: UILabel = {
+    lazy var autorLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.secondaryColor
         label.font = Fonts.boldTextFont
@@ -25,7 +26,7 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let imagePost: UIImageView = {
+    lazy var imagePost: UIImageView = {
         let image = UIImageView()
         let screenWidth = UIScreen.main.bounds.width
         image.backgroundColor = Colors.almostWhite
@@ -38,7 +39,7 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    let descriptionLabel: UILabel = {
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = Fonts.italicTextFont
         label.textColor = Colors.secondaryColor
@@ -46,7 +47,7 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let likesLabel: UILabel = {
+    lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.secondaryColor
         label.font = Fonts.baseTextFont
@@ -62,7 +63,7 @@ class PostTableViewCell: UITableViewCell {
         return button
     }()
 
-    let stackForLabels: UIStackView = {
+    lazy var stackForLabels: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .leading
@@ -118,7 +119,6 @@ class PostTableViewCell: UITableViewCell {
 //MARK: - METHODS
     
     @objc func likeButtonTapped() {
-        NotificationCenter.default.post(name: .liked, object: nil)
         likeAction?()
     }
 
@@ -130,6 +130,10 @@ class PostTableViewCell: UITableViewCell {
             contentView.addSubview(subview)
         }
         
+    }
+    
+    func updateLikes(newLikeCount: Int) {
+        likesLabel.text = "\(newLikeCount)"
     }
     
     func update(_ model: Post) {
@@ -152,7 +156,6 @@ class PostTableViewCell: UITableViewCell {
         imagePost.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
-       // viewsLabel.translatesAutoresizingMaskIntoConstraints = false
         stackForLabels.translatesAutoresizingMaskIntoConstraints = false
         likesButton.translatesAutoresizingMaskIntoConstraints = false
         

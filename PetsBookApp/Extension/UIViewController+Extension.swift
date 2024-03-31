@@ -31,21 +31,6 @@ extension UIViewController {
         present(alertController, animated: true)
     }
     
-    //test
-    /*
-    func showAddPost(_ user: String, _ image: String, completion: @escaping (Post) -> Void) {
-        let alertController = UIAlertController(title: "Создать описание", message: nil, preferredStyle: .alert)
-        alertController.addTextField()
-        alertController.addTextField()
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            let post = Post(user: user, image: image, descript: alertController.textFields?[0].text ?? "", userName: alertController.textFields?[1].text ?? "")
-            completion(post)
-        }
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
-    }
-    */
     //for create post
     public func showAddInfoForPost(completion: @escaping (String?, UIImage?) -> Void) {
         let alertController = UIAlertController(title: NSLocalizedString("Create description", comment: ""), message: nil, preferredStyle: .alert)
@@ -67,16 +52,7 @@ extension UIViewController {
             alertController.view.widthAnchor.constraint(equalToConstant: 300),
             alertController.view.heightAnchor.constraint(equalToConstant: 400)
         ])
-        /*
-        alertController.addTextField { (textField) in
-            let heihtConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
-            
-            textField.textAlignment = .left
-            textField.contentVerticalAlignment = .top
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            textField.addConstraint(heihtConstraint)
-        }
-        */
+
         let addPhotoAction = UIAlertAction(title: NSLocalizedString("Add photo", comment: ""), style: .default) { _ in
             self.openPhotoVC { img in
                 //let description = alertController.textFields?[0].text ?? ""
